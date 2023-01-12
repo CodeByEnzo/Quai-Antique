@@ -1,3 +1,4 @@
+import React from 'react';
 import Site from './containers/site/Site';
 import './App.css';
 import { BrowserRouter } from "react-router-dom";

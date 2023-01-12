@@ -5,11 +5,11 @@ class Home extends Component {
     render() {
         return (
             <div>
-                Home
+                <p>home</p>
             </div>
 
         );
     }
 }
 
-export default Home
+export default Home;
