@@ -1,3 +1,16 @@
+/*
+********************COLORS********************
+
+#48330a Cafe noir
+#be9837 Satin sheen gold
+#f2f8f4 Mint Cream
+#353c46 Charcoal
+#4f6d7a Cadet
+
+**********************************************
+*/
+@import url('https://fonts.cdnfonts.com/css/edwardian-scr-alt-itc-tt');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +18,9 @@
 }
 
 body {
-    background: #f2f8f4;
+    background: #353c46;
+    position: relative;
+    color: #f2f8f4;
 }
 
 .navlink:hover {

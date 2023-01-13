@@ -1,0 +1,150 @@
+/*
+********************COLORS********************
+
+#48330a Cafe noir
+#be9837 Satin sheen gold
+#f2f8f4 Mint Cream
+#353c46 Charcoal
+#4f6d7a Cadet
+
+**********************************************
+*/
+@import url('https://fonts.cdnfonts.com/css/edwardian-scr-alt-itc-tt');
+
+.Home {
+    background: #f2f8f4;
+}
+
+.banner {
+    position: relative;
+    height: 60vh;
+    top: 0;
+    z-index: 0;
+}
+
+.img-banner {
+    background-image: url(./img-banner.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(50%);
+}
+
+.text-banner {
+    position: absolute;
+    color: #f2f8f4;
+    text-align: center;
+    width: 100%;
+    height: 50%;
+    left: 50%;
+    top: 25%;
+    transform: translate(-50%);
+    z-index: 100;
+
+}
+
+.title-banner {
+    font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+    font-size: 6rem;
+    color: #be9837;
+}
+
+.under-text-banner {
+    text-transform: uppercase;
+    font-size: 1.3rem;
+}
+
+
+
+
+/* .home-content {
+    width: 100%;
+}
+*/
+.card-container {
+    height: 300px;
+} 
+
+
+.card-img-container {
+    position: relative;
+    border: 2px solid #be9837;
+    height: 300px;
+
+}
+
+.card-img {
+    position: absolute;
+    background-image: url(./img-banner.jpg);
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    top: 10%;
+    left: 5%;
+}
+.card-desc {
+    color: #48330a;
+}
+
+/* .card::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    
+    border: 3px solid #be9837;
+    right: 40px;
+    bottom: 20px;
+
+} */
+@media screen and (max-width: 640px) {
+    .banner {
+        height: 100vh;
+    }
+
+    .img-banner {
+        background-image: url(./img-banner.jpg);
+        background-position: center;
+        background-size: cover;
+        width: 100%;
+        height: 100%;
+        filter: brightness(50%);
+    }
+
+    .text-banner {
+        position: absolute;
+        color: #f2f8f4;
+        text-align: center;
+        left: 50%;
+        top: 25%;
+        transform: translate(-50%);
+        z-index: 100;
+
+    }
+
+    .title-banner {
+        font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+        font-size: 5rem;
+        color: #be9837;
+    }
+
+    .under-text-banner {
+        text-transform: uppercase;
+        font-size: 1.3rem;
+        margin-top: -5%;
+    }
+
+
+}
+@media screen and (max-width: 770px) {
+    .card-img {
+        position: relative;
+        display: block;
+        top: 0;
+        left: 0;
+    }
+
+
+}

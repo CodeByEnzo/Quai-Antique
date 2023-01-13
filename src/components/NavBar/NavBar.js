@@ -4,30 +4,31 @@ import { NavLink } from "react-router-dom";
 
 const navbar = (props) => (
     <>
-        <nav className="navbar navbar-expand-lg">
+        <nav className="navbar navbar-expand-sm position-absolute z-3 w-100" data-bs-theme="dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">
+                <a className="navbar-brand " href="/">
                     <img src={logo} alt="logo du quai antique" width='70px' />
                 </a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <button className="navbar-toggler bg-light text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarNav">
+                <div className="collapse navbar-collapse text-light" id="navbarNav">
 
-                    <ul className="navbar-nav ms-auto text-center">
+                    <ul className="navbar-nav ms-auto text-end me-sm-5">
                         <li className="nav-item">
-                            <NavLink to="/" className="nav-link">Home</NavLink>
+                            <NavLink to="/" className="nav-link fw-bold">Home</NavLink>
                         </li>
                         <li className="nav-item">
-                            <NavLink to="/Contact" className="nav-link">Contact</NavLink>
-
-
+                            <NavLink to="/Menu" className="nav-link fw-bold">Menu</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">Pricing</a>
+                            <NavLink to="/Contact" className="nav-link fw-bold">Horaires</NavLink>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">About</a>
+                            <NavLink to="/Contact" className="nav-link fw-bold">Contact</NavLink>
+                        </li>
+                        <li className="nav-item">
+                            <a href="/" className="nav-link fw-bold">Log in</a>
                         </li>
                         {/* <li className="nav-item dropdown">
                             <a className="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
