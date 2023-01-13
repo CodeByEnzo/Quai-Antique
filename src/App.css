@@ -26,3 +26,12 @@ body {
 .navlink:hover {
     background: #000;
 }
+
+.site {
+    min-height: 100vh;
+}
+
+footer{
+    height: 140px;
+    background: #353c46;
+}

@@ -15,19 +15,19 @@ const navbar = (props) => (
                 <div className="collapse navbar-collapse text-light" id="navbarNav">
 
                     <ul className="navbar-nav ms-auto text-end me-sm-5">
-                        <li className="nav-item">
+                        <li className="nav-item mt-5 mt-sm-0">
                             <NavLink to="/" className="nav-link fw-bold">Home</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to="/Menu" className="nav-link fw-bold">Menu</NavLink>
+                        <li className="nav-item mt-5 mt-sm-0">
+                            <NavLink to="/menu" className="nav-link fw-bold">Menu</NavLink>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item mt-5 mt-sm-0">
                             <NavLink to="/Contact" className="nav-link fw-bold">Horaires</NavLink>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item mt-5 mt-sm-0">
                             <NavLink to="/Contact" className="nav-link fw-bold">Contact</NavLink>
                         </li>
-                        <li className="nav-item">
+                        <li className="nav-item mt-5 mt-sm-0">
                             <a href="/" className="nav-link fw-bold">Log in</a>
                         </li>
                         {/* <li className="nav-item dropdown">
