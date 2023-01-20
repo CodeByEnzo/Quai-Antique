@@ -22,10 +22,10 @@ const navbar = (props) => (
                             <NavLink to="/menu" className="nav-link fw-bold">Menu</NavLink>
                         </li>
                         <li className="nav-item mt-5 mt-sm-0">
-                            <NavLink to="/Contact" className="nav-link fw-bold">Horaires</NavLink>
+                            <NavLink to="/Horaires" className="nav-link fw-bold">Horaires</NavLink>
                         </li>
                         <li className="nav-item mt-5 mt-sm-0">
-                            <NavLink to="/Contact" className="nav-link fw-bold">Contact</NavLink>
+                            <NavLink to="/RGPD" className="nav-link fw-bold">Contact</NavLink>
                         </li>
                         <li className="nav-item mt-5 mt-sm-0">
                             <a href="/" className="nav-link fw-bold">Log in</a>

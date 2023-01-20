@@ -1,4 +1,13 @@
 .menu {
-    text-align: center;
     padding-top: 150px;
+}
+.h2Menu, .h1Menu {
+    font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+    color: #be9837;
+    font-size: 3.5rem;
+}
+
+.h1Menu{
+    font-size: 4rem;
+    text-align: center;
 }

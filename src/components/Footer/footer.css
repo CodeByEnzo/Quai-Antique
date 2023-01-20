@@ -1,3 +1,23 @@
+/*
+********************COLORS********************
+
+#48330a Cafe noir
+#be9837 Satin sheen gold
+#f2f8f4 Mint Cream
+#353c46 Charcoal
+#4f6d7a Cadet
+
+**********************************************
+*/
+
 .socials {
     height: 75px;
+}
+
+.footer {
+    height: 150px;
+    background: #4f6d7a;
+    margin-top: 50px;
+    bottom: 0px;
+
 }

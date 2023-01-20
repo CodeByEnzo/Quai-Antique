@@ -21,6 +21,8 @@ body {
     background: #353c46;
     position: relative;
     color: #f2f8f4;
+    overflow-x: hidden;
+    min-height: 100vh;
 }
 
 .navlink:hover {
@@ -31,7 +33,9 @@ body {
     min-height: 100vh;
 }
 
-footer{
-    height: 140px;
-    background: #353c46;
+
+
+.test {
+    padding-top: 100px;
+    text-align: center;
 }
