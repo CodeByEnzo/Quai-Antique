@@ -39,3 +39,7 @@ body {
     padding-top: 100px;
     text-align: center;
 }
+
+h1, h2 {
+        font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+}
