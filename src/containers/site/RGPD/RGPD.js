@@ -2,8 +2,6 @@ import "./RGPD.css"
 import React from 'react';
 
 const RGPD = () => {
-
-
     return (
         <div className='RGPD container px-5'>
 
