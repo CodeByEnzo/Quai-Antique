@@ -48,6 +48,9 @@ class Home extends Component {
                         }
                     </div>
                 </div>
+                    <div className='container-fluid d-flex justify-content-center p-5'>
+                    <a href=''><button className='book-btn'>Réservez maintenant</button></a>
+                    </div>
             </div>
         );
     }

@@ -1,11 +1,11 @@
 import React from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
+import "../Contact.css"
 
 const Form = (props) => (
     <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center">
-        <form id="contactForm" className="border rounded p-3 row d-flex justify-content-center col-xl-5">
-
+        <form id="contactForm" className="form-border rounded p-3 row d-flex justify-content-center col-xl-5">
 
             <div className="mb-3 col-12 col-md-10">
                 <label className="form-label" for="name">Name</label>
@@ -18,9 +18,7 @@ const Form = (props) => (
                 {
                     props.touched.name && props.errors.name && <span style={{color:"red"}}>{props.errors.name}</span>
                 }
-
             </div>
-
 
             <div className="mb-3 col-12 col-md-10">
                 <label className="form-label" for="email">Email Address</label>
@@ -52,7 +50,7 @@ const Form = (props) => (
 
 
             <div className="d-grid col-12 col-md-10">
-                <button className="btn btn-primary btn-lg" type="submit" onClick={props.handleSubmit}>Submit</button>
+                <button className="btn sub-btn btn-lg" type="submit" onClick={props.handleSubmit}>ENVOYER</button>
             </div>
 
         </form>

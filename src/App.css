@@ -17,6 +17,12 @@
     box-sizing: border-box;
 }
 
+.main-margin{
+    padding-top: 150px;
+    margin-bottom: 150px;
+    min-height: 60vh;
+}
+
 body {
     background: #353c46;
     position: relative;
@@ -24,6 +30,21 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
 }
+
+.sub-btn {
+    color: #be9837;
+    border: 1px solid #be9837;
+}
+
+.form-border {
+    border: 1px solid #be9837;
+}
+.sub-btn:hover {
+    color: #be9837;
+    background: #f2f8f4;
+    border: 1px solid #f2f8f4;
+}
+
 
 .navlink:hover {
     background: #000;
@@ -40,6 +61,74 @@ body {
     text-align: center;
 }
 
-h1, h2 {
+h1 {
         font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+        color: #be9837;
+        font-size: 4rem;
+       
+}
+h2 {
+            font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+                color: #be9837;
+                font-size: 3rem;
+}
+
+/* TABS/USERS--------------------*/
+.card-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.card .border-info .mb-3 {
+    max-width: 20rem;
+}
+
+.card-container .card {
+    margin: 0 1%;
+}
+
+div.tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tabs .tabs-pane {
+    margin: 1%;
+    padding-bottom: 0.5%;
+    cursor: pointer;
+    list-style: none;
+}
+
+.tabs .tabs-pane span {
+    color: cadetblue;
+    font-size: 1.5rem;
+}
+
+.tabs .tabs-pane.active {
+    border-bottom: 1px solid #f2f8f4;
+}
+
+.tab-content {
+    width: 50%;
+    margin: auto;
+}
+
+
+form fieldset {
+    border: 1px solid;
+    padding: 5%;
+    border-radius: 5px;
+}
+
+form fieldset legend {
+    padding: 0 1%;
+    width: auto;
+}
+
+.tabs ul {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
 }
