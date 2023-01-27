@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import NavBar from "../../components/NavBar/NavBar";
 import Home from "./Home/Home";
 import Menu from './menu/Menu';
@@ -10,38 +10,48 @@ import Footer from '../../components/Footer/Footer';
 import RGPD from './RGPD/RGPD';
 import Login from '../users/Login';
 import Account from '../users/Account';
-import Profile from '../users/Profile';
 import Register from '../users/Register';
 import Reservation from './Reservation/Reservation';
+import Reserved from './Reservation/Reserved';
+import { hasAuthenticated } from '../../services/AuthApi';
+import Auth from '../../contexts/Auth';
+import AuthenticatedRoute from '../../components/AuthenticatedRoute';
 
 
-class Site extends Component {
-    render() {
-        return (
-            <div>
-                <NavBar />
-                <Routes>
-                    <Route path='/' element={<Home />} />
+function Site() {
 
-                    <Route path='/Login' element={<Login />} />
-                    <Route path='/Account' element={<Account />} />
-                    <Route path='/Profile' element={<Profile />} />
-                    <Route path='/Register' element={<Register />} />
-                    <Route path='/Reservation' element={<Reservation />} />
+    const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
 
-                    <Route path='/menu' element={<Menu />} />
-                    <Route path='/Contact' element={<Contact />} />
-                    <Route path='/RGPD' element={<RGPD />} />
-                    <Route path='/test' element={<Test />} />
-                    <Route path='*' element={<NotFound />} />
-                </Routes>
-                <Footer />
+    return (
+        <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+            <NavBar />
+            <Routes>
+                <Route path='/' element={<Home />} />
 
-            </div>
+                <Route path='/Login' element={<Login />} />
+                <Route path='/Register' element={<Register />} />
+                <Route path='/Reservation' element={<Reservation />} />
+                <Route path='/Reserved' element={<Reserved />} />
+                <Route path='/menu' element={<Menu />} />
+                <Route path='/Contact' element={<Contact />} />
+                <Route path='/RGPD' element={<RGPD />} />
+                <Route path='/test' element={<Test />} />
+                <Route path='*' element={<NotFound />} />
 
-        );
-    }
+                <Route path='/Account'
+                    element={
+                        <AuthenticatedRoute>
+                            <Account />
+                        </AuthenticatedRoute>
+                    }
+                />
+            </Routes>
 
+            <Footer />
+        </Auth.Provider >
+
+    );
 }
+
 
 export default Site;

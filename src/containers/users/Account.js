@@ -1,13 +1,13 @@
 import "./users.css"
 import React, { useState } from "react";
 import Profile from "./Profile"
-import Reservation from "../site/Reservation/Reservation"
+import Reserved from "../site/Reservation/Reserved";
 
 const Account = (props) => {
     const [currentTab, setcurrentTab] = useState({ name: "profile" })
     const [tabs] = useState([
         { tabKey: 'profile', tabTitle: "Mon profile" },
-        { tabKey: 'reservation', tabTitle: "Mes réservation" },
+        { tabKey: 'reservation', tabTitle: "Mes réservations" },
 
     ]);
     const handleTabs = (name) => {
@@ -26,7 +26,7 @@ const Account = (props) => {
             </main>
             <div className="tabs-content">
                 {currentTab.name === "profile" && <Profile />}
-                {currentTab.name === "reservation" && <Reservation />}
+                {currentTab.name === "reservation" && <Reserved />}
             </div>
         </>
     )

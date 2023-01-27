@@ -30,7 +30,12 @@ body {
     overflow-x: hidden;
     min-height: 100vh;
 }
-
+.nav-item:hover {
+    background: #f8f2f4;
+}
+.nav-link:hover{
+    color: #be9837 !important;
+}
 .sub-btn {
     color: #be9837;
     border: 1px solid #be9837;
@@ -101,7 +106,7 @@ div.tabs {
 }
 
 .tabs .tabs-pane span {
-    color: cadetblue;
+    color: rgb(0, 0, 0);
     font-size: 1.5rem;
 }
 

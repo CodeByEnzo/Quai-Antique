@@ -1,6 +1,10 @@
-import React, { useState, useEffect, Component } from 'react';
+import React, { Component } from 'react';
 import axios from 'axios';
 import "./Home.css";
+
+
+const hostname = "https://quai-antique.ec-bootstrap.com/"
+// const hostname = "http://localhost/SERVEURQUAI/"
 
 class Home extends Component {
     state = {
@@ -8,7 +12,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost/SERVEURQUAI/front/gallerys")
+        axios.get(`${hostname}front/gallerys`)
             .then(res => {
                 const gallerys = res.data;
                 this.setState({ gallerys });
@@ -32,11 +36,11 @@ class Home extends Component {
                                 return (
                                     <div className={` row col-12 col-xl-10 mt-5 ${index % 2 === 0 ? "flex-row-reverse" : ""}`}>
                                         <div className='card-img-container col-8 col-md-6 mx-auto'>
-                                   
+
                                             <div className='border-img'>
-                                                <img src={item.gallery_img} className='card-img'></img>
+                                                <img src={item.gallery_img} className='card-img' alt={item.gallery_content}></img>
                                             </div>
-                                        
+
                                         </div>
                                         <div className='card-desc col-8 col-md-6 mx-auto mt-md-5'>
                                             <h2 className={index % 2 === 0 ? "text-end h2Home" : "text-start h2Home"}>{item.gallery_title}</h2>
@@ -48,9 +52,9 @@ class Home extends Component {
                         }
                     </div>
                 </div>
-                    <div className='container-fluid d-flex justify-content-center p-5'>
-                    <a href=''><button className='book-btn'>Réservez maintenant</button></a>
-                    </div>
+                <div className='container-fluid d-flex justify-content-center p-5'>
+                    {/* <a href=''><button className='book-btn'>Réservez maintenant</button></a> */}
+                </div>
             </div>
         );
     }

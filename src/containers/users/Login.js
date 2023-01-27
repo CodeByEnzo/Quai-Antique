@@ -1,15 +1,28 @@
 import "./users.css";
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import Auth from "../../contexts/Auth";
 
 
-const Login = (props) => {
+
+const Login = ({  }) => {
+// const Login = ({ history }) => {
+    const { isAuthenticated } = useContext(Auth);
     const [usernameOrEmail, setUsernameOrEmail] = useState('');
     const [password, setPassword] = useState('');
 
+
     const handleSubmit = (event) => {
         event.preventDefault();
+        const { name, value } = event
+        console.log(name, value)
         // Envoyer les informations de l'utilisateur à votre backend pour vérifier les informations de connexion
     }
+
+    // useEffect(() => {
+    //     if (isAuthenticated) {
+    //         history.replace('/Account')
+    //     }
+    // },[])
 
     return (
         <main className="main-margin">
@@ -18,11 +31,23 @@ const Login = (props) => {
                 <form onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
                     <div className="form-group mt-3">
                         <label htmlFor="usernameOrEmail">Nom d'utilisateur ou adresse e-mail</label>
-                        <input type="text" className="form-control" value={usernameOrEmail} onChange={e => setUsernameOrEmail(e.target.value)} id="usernameOrEmail" placeholder="Entrez votre nom d'utilisateur ou adresse e-mail" />
+                        <input
+                            type="text"
+                            name="username"
+                            className="form-control"
+                            value={usernameOrEmail}
+                            onChange={e => setUsernameOrEmail(e.target.value)} id="usernameOrEmail"
+                            placeholder="Entrez votre nom d'utilisateur ou adresse e-mail" />
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="password">Mot de passe</label>
-                        <input type="password" className="form-control" value={password} onChange={e => setPassword(e.target.value)} id="password" placeholder="Entrez votre mot de passe" />
+                        <input
+                            type="password"
+                            name="password"
+                            className="form-control"
+                            value={password}
+                            onChange={e => setPassword(e.target.value)} id="password"
+                            placeholder="Entrez votre mot de passe" />
                     </div>
                     <div className='d-flex justify-content-center mt-3'>
                         <button type="submit" className="btn sub-btn btn-lg">SE CONNECTER</button>

@@ -1,26 +1,33 @@
-import './menu.css'
-import React, { useEffect, useState } from 'react';
+import "./menu.css";
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const Menu = () => {
+const hostname = "https://quai-antique.ec-bootstrap.com/"
+// const hostname = "http://localhost/SERVEURQUAI/"
+
+function Menu() {
     const [entrees, setEntrees] = useState([]);
     const [plats, setPlats] = useState([]);
     const [desserts, setDesserts] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost/SERVEURQUAI/front/products')
-            .then(res => {
-                const products = Object.values(res.data);
-                setEntrees(products.filter(product => product.category_id === 1));
-                setPlats(products.filter(product => product.category_id === 2));
-                setDesserts(products.filter(product => product.category_id === 3));
-            });
-    }, []);
+        const fetchData = async () => {
+            const result = await axios.get(`${hostname}front/products`);
+            console.log(result.data);
+            const products = Object.values(result.data);
+            console.log(products);
+            setEntrees(products.filter(product => product.category_id == 1));
+            setPlats(products.filter(product => product.category_id == 2));
+            setDesserts(products.filter(product => product.category_id == 3));
+        };
+        fetchData();
+    }, [])
 
     return (
         <div className='menu container px-5'>
             <h1 className='text-center'>La carte</h1>
             <h2 className='h2Menu row mt-5'>Entrées</h2>
+            {console.log(entrees)}
             {entrees.map((product, index) => (
                 <div className='row container border-bottom align-items-center' key={index}>
                     <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}<br /><small>{product.content}</small></p>
@@ -28,7 +35,7 @@ const Menu = () => {
                 </div>
             ))}
 
-            <h2 className='h2Menu row git add . mt-5'>Plats</h2>
+            <h2 className='h2Menu row mt-5'>Plats</h2>
             {plats.map((product, index) => (
                 <div className='row container border-bottom align-items-center' key={index}>
                     <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}<br /><small>{product.content}</small></p>
@@ -39,12 +46,13 @@ const Menu = () => {
             <h2 className='h2Menu row mt-5'>Desserts</h2>
             {desserts.map((product, index) => (
                 <div className='row container border-bottom align-items-center' key={index}>
-                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}<br /><small>{product.content}</small></p>
+                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}<br /><small>{product.content}</small>
+                    </p>
                     <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>{product.prix}€</p>
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
 
-export default Menu
+export default Menu;
