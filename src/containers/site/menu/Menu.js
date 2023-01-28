@@ -2,8 +2,8 @@ import "./menu.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-const hostname = "https://quai-antique.ec-bootstrap.com/"
-// const hostname = "http://localhost/SERVEURQUAI/"
+// const hostname = "https://quai-antique.ec-bootstrap.com/"
+const hostname = "http://localhost/SERVEURQUAI/"
 
 function Menu() {
     const [entrees, setEntrees] = useState([]);

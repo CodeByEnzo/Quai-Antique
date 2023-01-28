@@ -3,8 +3,8 @@ import axios from 'axios';
 import "./Home.css";
 
 
-const hostname = "https://quai-antique.ec-bootstrap.com/"
-// const hostname = "http://localhost/SERVEURQUAI/"
+// const hostname = "https://quai-antique.ec-bootstrap.com/"
+const hostname = "http://localhost/SERVEURQUAI/"
 
 class Home extends Component {
     state = {

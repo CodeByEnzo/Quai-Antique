@@ -32,11 +32,11 @@ function Site() {
                 <Route path='/Register' element={<Register />} />
                 <Route path='/Reservation' element={<Reservation />} />
                 <Route path='/Reserved' element={<Reserved />} />
+                
                 <Route path='/menu' element={<Menu />} />
                 <Route path='/Contact' element={<Contact />} />
                 <Route path='/RGPD' element={<RGPD />} />
-                <Route path='/test' element={<Test />} />
-                <Route path='*' element={<NotFound />} />
+                {/* <Route path='/test' element={<Test />} /> */}
 
                 <Route path='/Account'
                     element={
@@ -45,6 +45,8 @@ function Site() {
                         </AuthenticatedRoute>
                     }
                 />
+                
+                <Route path='*' element={<NotFound />} />
             </Routes>
 
             <Footer />
