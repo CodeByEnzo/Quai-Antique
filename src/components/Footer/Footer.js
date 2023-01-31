@@ -21,12 +21,12 @@ const Footer = (props) => (
                 </div>
                 <div className='col-3'>
                     <div className="nav-item mt-5 mt-sm-0">
-                        <NavLink to="/RGPD" className="nav-link fw-bold">Contact</NavLink>
+                        <NavLink to="/Contact" className="nav-link fw-bold">Contact</NavLink>
                     </div>
                 </div>
                 <div className='col-3'>
                     <div className="nav-item mt-5 mt-sm-0">
-                        <NavLink to="/Contact" className="nav-link fw-bold">Politique de confidentialité</NavLink>
+                        <NavLink to="/RGPD" className="nav-link fw-bold">Politique de confidentialité</NavLink>
                     </div>
                 </div>
             </div>

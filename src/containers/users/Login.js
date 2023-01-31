@@ -1,28 +1,37 @@
 import "./users.css";
-import React, { useState, useEffect, useContext } from "react";
-import Auth from "../../contexts/Auth";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/Auth";
 
 
+const Login = () => {
+    const [credentials, setCredentials] = useState({
+        login: '',
+        password: ''
+    });
+    const { login, setLogin } = useAuth();
+    const navigate = useNavigate();
 
-const Login = ({  }) => {
-// const Login = ({ history }) => {
-    const { isAuthenticated } = useContext(Auth);
-    const [usernameOrEmail, setUsernameOrEmail] = useState('');
-    const [password, setPassword] = useState('');
-
-
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        const { name, value } = event
-        console.log(name, value)
-        // Envoyer les informations de l'utilisateur à votre backend pour vérifier les informations de connexion
-    }
-
-    // useEffect(() => {
-    //     if (isAuthenticated) {
-    //         history.replace('/Account')
-    //     }
-    // },[])
+        try {
+            const response = await fetch('/api/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(credentials)
+            });
+            const data = await response.json();
+            if (data.success) {
+                setLogin(true);
+                navigate.replace('/Account');
+            } else {
+                // Afficher une erreur à l'utilisateur si les informations de connexion sont incorrectes
+                console.error(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
     return (
         <main className="main-margin">
@@ -30,14 +39,16 @@ const Login = ({  }) => {
             <div className="container-fluid d-flex justify-content-center">
                 <form onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
                     <div className="form-group mt-3">
-                        <label htmlFor="usernameOrEmail">Nom d'utilisateur ou adresse e-mail</label>
+                        <label htmlFor="login">Nom d'utilisateur ou adresse e-mail</label>
                         <input
                             type="text"
-                            name="username"
+                            name="login"
                             className="form-control"
-                            value={usernameOrEmail}
-                            onChange={e => setUsernameOrEmail(e.target.value)} id="usernameOrEmail"
-                            placeholder="Entrez votre nom d'utilisateur ou adresse e-mail" />
+                            value={credentials.login}
+                            onChange={e => setCredentials({ ...credentials, [e.target.name]: e.target.value })}
+                            id="login"
+                            placeholder="Entrez votre nom d'utilisateur ou adresse e-mail"
+                        />
                     </div>
                     <div className="form-group mt-3">
                         <label htmlFor="password">Mot de passe</label>
@@ -45,19 +56,17 @@ const Login = ({  }) => {
                             type="password"
                             name="password"
                             className="form-control"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)} id="password"
-                            placeholder="Entrez votre mot de passe" />
+                            value={credentials.password}
+                            onChange={e => setCredentials({ ...credentials, [e.target.name]: e.target.value })}
+                            id="password"
+                            placeholder="Entrez votre mot de passe"
+                        />
                     </div>
-                    <div className='d-flex justify-content-center mt-3'>
-                        <button type="submit" className="btn sub-btn btn-lg">SE CONNECTER</button>
-                    </div>
+                    <button type="submit" className="btn sub-btn btn-lg d-block mx-auto mt-3">Se connecter</button>
                 </form>
             </div>
-
         </main>
-
     );
-}
+};
 
 export default Login;
