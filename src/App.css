@@ -17,10 +17,19 @@
     box-sizing: border-box;
 }
 
-.main-margin{
+.main-margin {
     padding-top: 150px;
-    margin-bottom: 150px;
     min-height: 60vh;
+}
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex-grow: 1;
 }
 
 body {
@@ -29,13 +38,18 @@ body {
     color: #f2f8f4;
     overflow-x: hidden;
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
+
 .nav-item:hover {
     background: #f8f2f4;
 }
-.nav-link:hover{
+
+.nav-link:hover {
     color: #be9837 !important;
 }
+
 .sub-btn {
     color: #be9837;
     border: 1px solid #be9837;
@@ -44,6 +58,7 @@ body {
 .form-border {
     border: 1px solid #be9837;
 }
+
 .sub-btn:hover {
     color: #be9837;
     background: #f2f8f4;
@@ -67,15 +82,16 @@ body {
 }
 
 h1 {
-        font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
-        color: #be9837;
-        font-size: 4rem;
-       
+    font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+    color: #be9837;
+    font-size: 4rem;
+
 }
+
 h2 {
-            font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
-                color: #be9837;
-                font-size: 3rem;
+    font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+    color: #be9837;
+    font-size: 3rem;
 }
 
 /* TABS/USERS--------------------*/

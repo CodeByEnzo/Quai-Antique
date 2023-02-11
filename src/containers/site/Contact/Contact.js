@@ -22,10 +22,10 @@ class Contact extends Component {
 
     render() {
         return (
-            <div className="contact container-fluid">
+            <main className="contact container-fluid main-margin">
                 <h1 className="text-center">Contactez nous !</h1>
                 <Form sendMail={this.handleSendMail} />
-            </div>
+            </main>
         )
     }
 }

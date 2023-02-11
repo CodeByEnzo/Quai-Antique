@@ -16,6 +16,7 @@ const Login = () => {
 
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    
 
     const handleSubmit = async event => {
         event.preventDefault();
@@ -31,6 +32,17 @@ const Login = () => {
 
             if (data.status === 'success') {
                 setIsAuthenticated(true);
+                addItem("user", data.user);// Stocker les données de l'utilisateur dans le local storage
+                const userData = window.localStorage.getItem("user");
+                if (userData) {
+                    try {
+                        const user = JSON.parse(userData);
+                        // utilisez l'objet 'user' ici
+                    } catch (error) {
+                        console.error(error);
+                    }
+                }
+                console.log(addItem)
                 navigate('/Account');
 
             } else if(data.status === 'error') {

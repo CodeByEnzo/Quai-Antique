@@ -9,22 +9,22 @@ const Footer = (props) => (
     <>
         <footer className='text-center footer'>
             <div className='row no-gutters align-items-center text-center p-3'>
-                <div className='col-3'>
+                <div className='col-6 col-md-3 p-3'>
                     <a href='www.facebook.com' className='d-block ' target="_blank">
                         <img src={FB} alt='facebook' className='socials' />
                     </a>
                 </div>
-                <div className='col-3'>
+                <div className='col-6 col-md-3 p-3'>
                     <a href='www.instagram.com' className='d-block ' target="_blank">
                         <img src={insta} alt='instagram' className='socials' />
                     </a>
                 </div>
-                <div className='col-3'>
+                <div className='col-6 col-md-3 p-3'>
                     <div className="nav-item mt-5 mt-sm-0">
                         <NavLink to="/Contact" className="nav-link fw-bold">Contact</NavLink>
                     </div>
                 </div>
-                <div className='col-3'>
+                <div className='col-6 col-md-3 p-3'>
                     <div className="nav-item mt-5 mt-sm-0">
                         <NavLink to="/RGPD" className="nav-link fw-bold">Politique de confidentialité</NavLink>
                     </div>

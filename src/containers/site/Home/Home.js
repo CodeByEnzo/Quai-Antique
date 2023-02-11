@@ -10,7 +10,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        axios.get(`${hostname}front/gallerys`)
+        axios.get(`${hostname}/front/gallerys`)
             .then(res => {
                 const gallerys = res.data;
                 this.setState({ gallerys });

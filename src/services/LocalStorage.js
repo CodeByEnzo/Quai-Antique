@@ -9,7 +9,8 @@ export function getItem(item) {
 }
 
 export function addItem(localStorageName, newItem) {
-    return window.localStorage.setItem(localStorageName, newItem);
+    window.localStorage.setItem(localStorageName, JSON.stringify(newItem));
+    console.log(newItem);
 
 }
 
