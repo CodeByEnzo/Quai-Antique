@@ -14,8 +14,8 @@ const Account = (props) => {
         setcurrentTab({ name });
     };
     return (
-        <>
-            <main className="tabs account">
+        <main className="main-margin">
+            <div className="tabs account">
                 <ul>
                     {tabs.map((tab, index) => (
                         <li key={index} className={`tabs-pane ${currentTab.name === tab.tabKey ? "active" : ""}`}>
@@ -23,12 +23,12 @@ const Account = (props) => {
                         </li>)
                     )}
                 </ul>
-            </main>
+            </div>
             <div className="tabs-content">
                 {currentTab.name === "profile" && <Profile />}
                 {currentTab.name === "reservation" && <Reserved />}
             </div>
-        </>
+        </main>
     )
 
 

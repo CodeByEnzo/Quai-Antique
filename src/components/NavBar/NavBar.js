@@ -5,7 +5,11 @@ import Auth from '../../contexts/Auth';
 
 const Navbar = (props) => {
     const [navbarOpen, setNavbarOpen] = useState(false);
-    const { isAuthenticated } = useContext(Auth);
+    const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
+
+    const handleLogin = () => {
+        setIsAuthenticated(false);
+    };
 
     return (
         <>
@@ -59,7 +63,7 @@ const Navbar = (props) => {
                                             <NavLink to="/Account" className="nav-link fw-bold text-light">Mon compte</NavLink>
                                         </li>
                                         <li className="mt-5 mt-sm-0">
-                                            <button className="btn btn-danger">Deconnexion</button>
+                                            <button className="btn btn-danger" onClick={handleLogin}>Deconnexion</button>
                                         </li>
                                     </>
                                 )}

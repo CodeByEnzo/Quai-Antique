@@ -20,6 +20,9 @@ const Profile = (props) => {
                                 {/* {props.user.email} */}
                             </p>
                         </div>
+                        <div className='d-flex justify-content-center mt-3'>
+                            <button type="submit" className="btn sub-btn">Modifier</button>
+                        </div>
                     </div>
                 </div>
             </div>

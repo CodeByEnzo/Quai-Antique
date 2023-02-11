@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { hostname } from '../../config';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -12,9 +13,8 @@ function Register() {
         event.preventDefault();
         setError(null);
         setSuccess(false);
-
         try {
-            const response = await axios.post('http://localhost/SERVEURQUAI/front/register', {
+                const response = await axios.post(`${hostname}front/register`, {
                 username,
                 email,
                 password

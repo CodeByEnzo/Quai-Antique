@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import "./Home.css";
+import { hostname } from '../../../config';
 
-
-// const hostname = "https://quai-antique.ec-bootstrap.com/"
-const hostname = "http://localhost/SERVEURQUAI/"
 
 class Home extends Component {
     state = {

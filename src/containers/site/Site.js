@@ -4,7 +4,7 @@ import Home from "./Home/Home";
 import Menu from './menu/Menu';
 import { Route, Routes } from "react-router-dom";
 import NotFound from '../../components/404/NotFound';
-import Test from './test';
+// import Test from './test';
 import Contact from "./Contact/Contact";
 import Footer from '../../components/Footer/Footer';
 import RGPD from './RGPD/RGPD';
@@ -13,14 +13,14 @@ import Account from '../users/Account';
 import Register from '../users/Register';
 import Reservation from './Reservation/Reservation';
 import Reserved from './Reservation/Reserved';
-import { hasAuthenticated } from '../../services/AuthApi';
+import IsInitialAuthenticated from '../../services/AuthApi';
 import Auth from '../../contexts/Auth';
 import AuthenticatedRoute from '../../components/AuthenticatedRoute';
 
-
 function Site() {
 
-    const [isAuthenticated, setIsAuthenticated] = useState(hasAuthenticated());
+    const [isAuthenticated, setIsAuthenticated] = useState(IsInitialAuthenticated());
+
 
     return (
         <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
@@ -38,7 +38,8 @@ function Site() {
                 <Route path='/RGPD' element={<RGPD />} />
                 {/* <Route path='/test' element={<Test />} /> */}
 
-                <Route path='/Account'
+                <Route
+                    path='/Account'
                     element={
                         <AuthenticatedRoute>
                             <Account />

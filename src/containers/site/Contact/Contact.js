@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import './Contact.css';
 import Form from "./Form/Form";
 import axios from "axios";
-
-const hostname = "http://http://le-quai-antique.ec-bootstrap.com/server/"
-// const hostname = "http://localhost/SERVEURQUAI/front/gallerys/"
+import { hostname } from "../../../config";
 
 class Contact extends Component {
     componentDidMount = () => {

@@ -1,15 +1,15 @@
 export function removeItem(itemToRemove) {
-    window.localStorage.removeItem(itemToRemove);
+    return window.localStorage.removeItem(itemToRemove);
 
 }
 
 export function getItem(item) {
-    window.localStorage.getItem(item);
+    return window.localStorage.getItem(item);
 
 }
 
 export function addItem(localStorageName, newItem) {
-    window.localStorage.setItem(localStorageName, newItem);
+    return window.localStorage.setItem(localStorageName, newItem);
 
 }
 
