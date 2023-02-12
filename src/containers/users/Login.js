@@ -29,20 +29,20 @@ const Login = () => {
                 body: JSON.stringify(credentials)
             });
             const data = await response.json();
-
+            console.log(data)
             if (data.status === 'success') {
                 setIsAuthenticated(true);
-                addItem("user", data.user);// Stocker les données de l'utilisateur dans le local storage
-                const userData = window.localStorage.getItem("user");
-                if (userData) {
+                addItem("token", data.data.token);// Stocker les données de l'utilisateur dans le local storage
+                console.log(data.data.token)
+                const tokenData = window.localStorage.getItem("token");
+                if (tokenData) {
                     try {
-                        const user = JSON.parse(userData);
+                        const token = JSON.parse(tokenData);
                         // utilisez l'objet 'user' ici
                     } catch (error) {
                         console.error(error);
                     }
                 }
-                console.log(addItem)
                 navigate('/Account');
 
             } else if(data.status === 'error') {
