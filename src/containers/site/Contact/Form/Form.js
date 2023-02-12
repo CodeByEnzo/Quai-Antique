@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
-import "../Contact.css"
+import "../Contact.css";
 
 const Form = (props) => (
-    <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center">
+    <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
         <form id="contactForm" className="form-border rounded p-3 row d-flex justify-content-center col-xl-5">
 
             <div className="mb-3 col-12 col-md-10">
-                <label className="form-label" for="name">Name</label>
+                <label htmlFor="name" className="form-label">Name</label>
                 <input className="form-control" id="name" type="text" placeholder="Name"
                     name="name"
                     onChange={props.handleChange}
@@ -16,12 +16,11 @@ const Form = (props) => (
                     Blur={props.handleBlur}
                 />
                 {
-                    props.touched.name && props.errors.name && <span style={{color:"red"}}>{props.errors.name}</span>
+                    props.touched.name && props.errors.name && <span style={{ color: "red" }}>{props.errors.name}</span>
                 }
             </div>
-
             <div className="mb-3 col-12 col-md-10">
-                <label className="form-label" for="email">Email Address</label>
+                <label htmlFor="email" className="form-label">Email Address</label>
                 <input className="form-control" id="email" type="email" placeholder="Email Address"
                     name="email"
                     onChange={props.handleChange}
@@ -30,25 +29,21 @@ const Form = (props) => (
 
                 />
                 {
-                    props.touched.email && props.errors.email && <span className="text-danger">{ props.errors.email }</span>   
+                    props.touched.email && props.errors.email && <span className="text-danger">{props.errors.email}</span>
                 }
             </div>
-
-
             <div className="mb-3 col-12 col-md-10">
-                <label className="form-label" for="message">Message</label>
+                <label htmlFor="message" className="form-label">Message</label>
                 <textarea className="form-control" id="message" type="text" placeholder="Message"
                     name="message"
                     onChange={props.handleChange}
                     value={props.values.message}
                     Blur={props.handleBlur}
                 ></textarea>
-            {
-                props.touched.message && props.errors.message && <span className="text-danger">{props.errors.message}</span>
-            }
+                {
+                    props.touched.message && props.errors.message && <span className="text-danger">{props.errors.message}</span>
+                }
             </div>
-
-
             <div className="d-grid col-12 col-md-10">
                 <button className="btn sub-btn btn-lg" type="submit" onClick={props.handleSubmit}>ENVOYER</button>
             </div>
@@ -74,12 +69,13 @@ export default withFormik({
             .min(50, "Votre message doit contenir plus de 50 caractères")
             .max(250, "Votre message doit contenir moins de 250 caractères")
     }),
-    handleSubmit: (values, {props}) => {
+    handleSubmit: (values, { props, resetForm }) => {
         const message = {
             name: values.name,
             email: values.email,
             content: values.message
-        }
+        };
         props.sendMail(message);
+        resetForm();
     }
 })(Form); 
