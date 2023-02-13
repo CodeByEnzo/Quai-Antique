@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { hostname } from '../../config';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -15,7 +15,7 @@ function Register() {
         setError(null);
         setSuccess(false);
         try {
-                const response = await axios.post(`${hostname}front/register`, {
+            const response = await axios.post(`${hostname}front/register`, {
                 username,
                 email,
                 password
@@ -31,31 +31,38 @@ function Register() {
         }
     }
 
+    //page transitions
+    const [isVisible, setIsVisible] = useState(true);
+    const handleExitComplete = () => {
+        setIsVisible(false);
+    };
 
-    return (
-        <motion.main
-            className='main-margin'
+    return isVisible ? (
+        <AnimatePresence onExitComplete={handleExitComplete}>
+            <motion.main
+                className='main-margin'
 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+            >
             <h1 className='text-center'>Créer un comtpe</h1>
             <div className='container-fluid d-flex justify-content-center'>
-                    <form method='post' onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
-                <div className='col-12'>
+                <form method='post' onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
+                    <div className='col-12'>
 
-                    {error && (
-                        <div className="alert alert-danger text-center" role="alert">
-                            {error}
-                        </div>
-                    )}
-                    {success && (
-                        <div className="alert alert-success text-center" role="alert">
-                            Inscription réussie !
-                        </div>
-                    )}
-                </div>
+                        {error && (
+                            <div className="alert alert-danger text-center" role="alert">
+                                {error}
+                            </div>
+                        )}
+                        {success && (
+                            <div className="alert alert-success text-center" role="alert">
+                                Inscription réussie !
+                            </div>
+                        )}
+                    </div>
                     <div className="form-group my-3">
                         <label>Nom d'utilisateur:</label>
                         <input className="form-control" name='username' type="text" value={username} onChange={e => setUsername(e.target.value)} required />
@@ -73,8 +80,9 @@ function Register() {
                     </div>
                 </form>
             </div>
-        </motion.main>
-    )
+            </motion.main>
+        </AnimatePresence>
+    ) : null;
 }
 
 export default Register;

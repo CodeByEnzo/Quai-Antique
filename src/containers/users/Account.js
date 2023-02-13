@@ -2,7 +2,7 @@ import "./users.css"
 import React, { useState } from "react";
 import Profile from "./Profile"
 import Reserved from "../site/Reservation/Reserved";
-import { motion } from "framer-motion";
+import { motion,AnimatePresence } from "framer-motion";
 
 const Account = (props) => {
     const [currentTab, setcurrentTab] = useState({ name: "profile" })
@@ -14,14 +14,22 @@ const Account = (props) => {
     const handleTabs = (name) => {
         setcurrentTab({ name });
     };
-    return (
-        <motion.main
-            className="main-margin"
-            
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+    //page transitions
+    const [isVisible, setIsVisible] = useState(true);
+    const handleExitComplete = () => {
+        setIsVisible(false);
+    };
+
+    return isVisible ? (
+        <AnimatePresence onExitComplete={handleExitComplete}>
+            <motion.main
+                className='main-margin'
+
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+            >
             <div className="tabs account">
                 <ul>
                     {tabs.map((tab, index) => (
@@ -35,8 +43,9 @@ const Account = (props) => {
                 {currentTab.name === "profile" && <Profile />}
                 {currentTab.name === "reservation" && <Reserved />}
             </div>
-        </motion.main>
-    )
+            </motion.main>
+        </AnimatePresence>
+    ) : null
 
 
 };

@@ -4,9 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import { addItem } from "../../services/LocalStorage";
 import { hostname } from "../../config";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Login = () => {
+    
     const [credentials, setCredentials] = useState({
         email: "",
         password: ""
@@ -18,11 +19,10 @@ const Login = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     
-
+    //treat the token
     const handleSubmit = async event => {
         event.preventDefault();
         setIsLoading(true);
-
         try {
             const response = await fetch(`${hostname}front/userLogin`, {
                 method: "POST",
@@ -33,7 +33,7 @@ const Login = () => {
             console.log(data)
             if (data.status === 'success') {
                 setIsAuthenticated(true);
-                addItem("token", data.data.token);// Stocker les données de l'utilisateur dans le local storage
+                addItem("token", data.data.token);
                 addItem("email", credentials.email);
                 console.log(data.data.token)
 
@@ -49,14 +49,22 @@ const Login = () => {
         }
     };
     
-    return (
-        <motion.main
-            className="main-margin"
-            
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-        >
+    //page transitions
+    const [isVisible, setIsVisible] = useState(true);
+    const handleExitComplete = () => {
+        setIsVisible(false);
+    };
+
+    return isVisible ? (
+        <AnimatePresence onExitComplete={handleExitComplete}>
+            <motion.main
+                className='main-margin'
+
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1 }}
+            >
             <h1 className="text-center">Connexion</h1>
             <div className="container-fluid d-flex justify-content-center">
                 <form onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
@@ -90,8 +98,9 @@ const Login = () => {
                     <button type="submit" className="btn sub-btn btn-lg d-block mx-auto mt-3">Se connecter</button>
                 </form>
             </div>
-        </motion.main>
-    );
+            </motion.main>
+        </AnimatePresence>
+    ) : null;
 };
 export default Login;
 

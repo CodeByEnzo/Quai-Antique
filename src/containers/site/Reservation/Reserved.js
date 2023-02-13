@@ -28,7 +28,8 @@ function Reserved() {
             className='mb-5 pb-5'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}        
+            exit={{ opacity: 0 }}     
+            transition={{ duration: 1 }}
         >
             <h3 className='text-center'> Réservation </h3>
             <div className='container-fluid d-flex justify-content-center'>
