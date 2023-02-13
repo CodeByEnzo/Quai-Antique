@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/Auth";
 import { addItem } from "../../services/LocalStorage";
 import { hostname } from "../../config";
+import { motion } from "framer-motion";
 
 const Login = () => {
     const [credentials, setCredentials] = useState({
@@ -33,16 +34,9 @@ const Login = () => {
             if (data.status === 'success') {
                 setIsAuthenticated(true);
                 addItem("token", data.data.token);// Stocker les données de l'utilisateur dans le local storage
+                addItem("email", credentials.email);
                 console.log(data.data.token)
-                const tokenData = window.localStorage.getItem("token");
-                if (tokenData) {
-                    try {
-                        const token = JSON.parse(tokenData);
-                        // utilisez l'objet 'user' ici
-                    } catch (error) {
-                        console.error(error);
-                    }
-                }
+
                 navigate('/Account');
 
             } else if(data.status === 'error') {
@@ -56,7 +50,13 @@ const Login = () => {
     };
     
     return (
-        <main className="main-margin">
+        <motion.main
+            className="main-margin"
+            
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <h1 className="text-center">Connexion</h1>
             <div className="container-fluid d-flex justify-content-center">
                 <form onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
@@ -90,7 +90,7 @@ const Login = () => {
                     <button type="submit" className="btn sub-btn btn-lg d-block mx-auto mt-3">Se connecter</button>
                 </form>
             </div>
-        </main>
+        </motion.main>
     );
 };
 export default Login;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./reservation.css";
+import { motion } from 'framer-motion';
 
 function Reserved() {
     // const [reservation, setReservation] = useState(null);
@@ -23,7 +24,12 @@ function Reserved() {
     // }
 
     return (
-        <main className='mb-5 pb-5'>
+        <motion.main
+            className='mb-5 pb-5'
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}        
+        >
             <h3 className='text-center'> Réservation </h3>
             <div className='container-fluid d-flex justify-content-center'>
                 <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
@@ -51,7 +57,7 @@ function Reserved() {
                     </div>
                 </div>
             </div>
-        </main>
+        </motion.main>
     );
 }
 

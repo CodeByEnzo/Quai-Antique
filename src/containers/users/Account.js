@@ -2,6 +2,7 @@ import "./users.css"
 import React, { useState } from "react";
 import Profile from "./Profile"
 import Reserved from "../site/Reservation/Reserved";
+import { motion } from "framer-motion";
 
 const Account = (props) => {
     const [currentTab, setcurrentTab] = useState({ name: "profile" })
@@ -14,7 +15,13 @@ const Account = (props) => {
         setcurrentTab({ name });
     };
     return (
-        <main className="main-margin">
+        <motion.main
+            className="main-margin"
+            
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <div className="tabs account">
                 <ul>
                     {tabs.map((tab, index) => (
@@ -28,7 +35,7 @@ const Account = (props) => {
                 {currentTab.name === "profile" && <Profile />}
                 {currentTab.name === "reservation" && <Reserved />}
             </div>
-        </main>
+        </motion.main>
     )
 
 

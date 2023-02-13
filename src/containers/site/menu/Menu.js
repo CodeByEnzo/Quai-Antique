@@ -2,6 +2,8 @@ import "./menu.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { hostname } from "../../../config";
+import { motion } from "framer-motion";
+
 
 function Menu() {
     const [entrees, setEntrees] = useState([]);
@@ -20,7 +22,13 @@ function Menu() {
     }, [])
 
     return (
-        <div className='menu container px-5'>
+        <motion.main
+            className='menu container px-5'
+        
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <h1 className='text-center'>La carte</h1>
             <h2 className='h2Menu row mt-5'>Entrées</h2>
             {entrees.map((product, index) => (
@@ -46,7 +54,7 @@ function Menu() {
                     <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>{product.prix}€</p>
                 </div>
             ))}
-        </div>
+        </motion.main>
     )
 }
 

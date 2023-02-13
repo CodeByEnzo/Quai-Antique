@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "./Home.css";
 import { hostname } from '../../../config';
+import { motion } from 'framer-motion';
 
 
 class Home extends Component {
@@ -19,7 +20,13 @@ class Home extends Component {
 
     render() {
         return (
-            <div className='Home'>
+            <motion.div
+                className='Home'
+
+                initial={{opacity:0} }
+                animate={{ opacity: 1 } }
+                exit={{ opacity: 0 }}
+            >
                 <div className='banner'>
                     <div className='img-banner'></div>
                     <div className='text-banner'>
@@ -53,7 +60,7 @@ class Home extends Component {
                 <div className='container-fluid d-flex justify-content-center p-5'>
                     {/* <a href=''><button className='book-btn'>Réservez maintenant</button></a> */}
                 </div>
-            </div>
+            </motion.div>
         );
     }
 }

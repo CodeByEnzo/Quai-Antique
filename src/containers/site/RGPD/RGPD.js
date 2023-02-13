@@ -1,9 +1,16 @@
 import "./RGPD.css"
 import React from 'react';
+import { motion } from "framer-motion";
 
 const RGPD = () => {
     return (
-        <div className='RGPD container px-5'>
+        <motion.main
+            className='RGPD container px-5'
+        
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
 
             <h1 className="text-center pb-5">Mentions légales et politique de confidentialité</h1>
             <p>
@@ -176,7 +183,7 @@ const RGPD = () => {
 
                 Ces mentions légales et politique de confidentialité ont été créées sur le site Rocket Lawyer.
             </p>
-        </div>
+        </motion.main>
     );
 };
 

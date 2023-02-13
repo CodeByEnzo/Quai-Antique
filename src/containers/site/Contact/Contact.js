@@ -3,10 +3,11 @@ import './Contact.css';
 import Form from "./Form/Form";
 import axios from "axios";
 import { hostname } from "../../../config";
+import { motion } from "framer-motion";
 
 class Contact extends Component {
     state = {
-        messageSent: true
+        messageSent: false
     }
 
     componentDidMount = () => {
@@ -25,11 +26,17 @@ class Contact extends Component {
 
     render() {
         return (
-            <main className="contact container-fluid main-margin">
+            <motion.main
+                className="contact container-fluid"
+            
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+            >
                 <h1 className="text-center">Contactez nous !</h1>
                 {this.state.messageSent && <div className="alert alert-success col-9 text-center mx-auto">Votre message à été envoyé !</div>}
                 <Form sendMail={this.handleSendMail} />
-            </main>
+            </motion.main>
         )
     }
 }

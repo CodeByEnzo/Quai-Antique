@@ -2,8 +2,7 @@ import "./users.css";
 import React from "react";
 
 const Profile = (props) => {
-
-    
+    const userData = JSON.parse(localStorage.getItem("userData"));
 
     
     return (
@@ -21,7 +20,7 @@ const Profile = (props) => {
                         <div className="col-12">
                             <p>
                                 <strong>Adresse e-mail :</strong>
-                                {/* {props.user.email} */}
+                                {/* {props.user.email}: */}
                             </p>
                         </div>
                         <div className='d-flex justify-content-center mt-3'>

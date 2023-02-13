@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import "./reservation.css";
+import { motion } from 'framer-motion';
 
 function Reservation() {
     const [date, setDate] = useState('');
@@ -13,7 +14,13 @@ function Reservation() {
     }
 
     return (
-        <main className='main-margin'>
+        <motion.main
+            className='main-margin'
+
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+        >
             <h1 className='text-center'> Réservation </h1>
             <div className='container-fluid d-flex justify-content-center'>
                 <form onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
@@ -40,7 +47,7 @@ function Reservation() {
                     </div>
                 </form>
             </div>
-        </main>
+        </motion.main>
 
     );
 }
