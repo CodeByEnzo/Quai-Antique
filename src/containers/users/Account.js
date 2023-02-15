@@ -2,7 +2,7 @@ import "./users.css"
 import React, { useState } from "react";
 import Profile from "./Profile"
 import Reserved from "../site/Reservation/Reserved";
-import { motion,AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Account = (props) => {
     const [currentTab, setcurrentTab] = useState({ name: "profile" })

@@ -30,7 +30,7 @@ class Home extends Component {
         return isVisible ? (
             <AnimatePresence onExitComplete={this.handleExitComplete}>
                 <motion.main
-                    className='Home'
+                    id='Home'
 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

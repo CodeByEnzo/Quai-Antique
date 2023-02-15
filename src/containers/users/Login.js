@@ -35,7 +35,6 @@ const Login = () => {
                 setIsAuthenticated(true);
                 addItem("token", data.data.token);
                 addItem("email", credentials.email);
-                console.log(data.data.token)
 
                 navigate('/Account');
 

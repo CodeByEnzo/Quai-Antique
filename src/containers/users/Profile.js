@@ -1,16 +1,32 @@
 import "./users.css";
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getItem } from "../../services/LocalStorage"
+import { hostname } from "../../config";
+
 
 const Profile = (props) => {
 
-    const userData = JSON.parse(localStorage.getItem("userData"));
-
+    const email = getItem("email");
+    console.log(email);
     //page transitions
     const [isVisible, setIsVisible] = useState(true);
     const handleExitComplete = () => {
         setIsVisible(false);
     };
+
+    const token = localStorage.getItem("token");
+    console.log(token)
+    fetch(`${hostname}/front/getUser`, {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data);
+        });
+
 
     return isVisible ? (
         <AnimatePresence onExitComplete={handleExitComplete}>
@@ -34,8 +50,7 @@ const Profile = (props) => {
                                 </div>
                                 <div className="col-12">
                                     <p>
-                                        <strong>Adresse e-mail :</strong>
-                                        {/* {props.user.email}: */}
+                                        <strong>Adresse e-mail :</strong> {email}
                                     </p>
                                 </div>
                                 <div className='d-flex justify-content-center mt-3'>
