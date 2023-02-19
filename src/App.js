@@ -10,7 +10,7 @@ function App() {
         setTimeout(() => {
             loader.style.display = "none";
             setLoading(false);
-        }, 1500);
+        }, 2000);
     }
     return (
         !loading && (

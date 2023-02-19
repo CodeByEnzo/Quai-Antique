@@ -1,5 +1,5 @@
 import "./users.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { getItem } from "../../services/LocalStorage"
 import { hostname } from "../../config";
@@ -7,25 +7,39 @@ import { hostname } from "../../config";
 
 const Profile = (props) => {
 
-    const email = getItem("email");
-    console.log(email);
+
     //page transitions
     const [isVisible, setIsVisible] = useState(true);
     const handleExitComplete = () => {
         setIsVisible(false);
     };
-
-    const token = localStorage.getItem("token");
-    console.log(token)
-    fetch(`${hostname}/front/getUser`, {
-        headers: {
-            "Authorization": `Bearer ${token}`
+    const email = getItem("email");
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log(token)
+        if (token) {
+            fetch(`${hostname}front/authenticate`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    try {
+                        setUserData(data);
+                    } catch (error) {
+                        console.error("Error parsing JSON data", error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching user data", error);
+                });
         }
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        });
+    }, []);
+
 
 
     return isVisible ? (
@@ -38,27 +52,26 @@ const Profile = (props) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                    <div className="container">
-                        <h3 className="text-center">Profil de l'utilisateur</h3>
-                        <div className='container-fluid d-flex justify-content-center'>
-                            <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
-                                <div className="col-12">
-                                    <p>
-                                        <strong>Nom d'utilisateur :</strong>
-                                        {/* {props.user.username} */}
-                                    </p>
-                                </div>
-                                <div className="col-12">
-                                    <p>
-                                        <strong>Adresse e-mail :</strong> {email}
-                                    </p>
-                                </div>
-                                <div className='d-flex justify-content-center mt-3'>
-                                    <button type="submit" className="btn sub-btn">Modifier</button>
-                                </div>
+                <div className="container">
+                    <h3 className="text-center">Profil de l'utilisateur</h3>
+                    <div className='container-fluid d-flex justify-content-center'>
+                        <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
+                            <div className="col-12">
+                                <p>
+                                    <strong>Nom d'utilisateur :</strong> {userData && userData.username}
+                                </p>
+                            </div>
+                            <div className="col-12">
+                                <p>
+                                    <strong>Adresse e-mail :</strong> {email}
+                                </p>
+                            </div>
+                            <div className='d-flex justify-content-center mt-3'>
+                                <button type="submit" className="btn sub-btn">Modifier</button>
                             </div>
                         </div>
                     </div>
+                </div>
             </motion.main>
         </AnimatePresence>
     ) : null;
