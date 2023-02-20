@@ -52,7 +52,7 @@ class Home extends Component {
                         <div className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
                             <p className='text-dark'>Pas encore de compte ? Crée un compte et résèrve une table dès maintenant !</p>
                             <button className='book-btn'>
-                                <NavLink to="/reservation" className="text-light text-decoration-none">Créer un compte</NavLink>
+                                <NavLink to="/register" className="text-light text-decoration-none">Créer un compte</NavLink>
                             </button>
                             
                         </div>

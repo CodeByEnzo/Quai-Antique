@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
 import { hostname } from '../../../config';
-
+import { NavLink } from 'react-router-dom';
 
 function Reserved() {
     const [userData, setUserData] = useState(null);
@@ -88,7 +88,7 @@ function Reserved() {
                 </div>
             </div>
             <div className='d-flex justify-content-center my-2'>
-                <button className="btn sub-btn mx-2">Ajouter</button>
+                <NavLink to="/reservation" className="btn sub-btn mx-2">Ajouter</NavLink>
             </div>
 
         </motion.main>
