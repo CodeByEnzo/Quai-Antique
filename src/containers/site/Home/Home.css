@@ -6,6 +6,7 @@
 #f2f8f4 Mint Cream
 #353c46 Charcoal
 #4f6d7a Cadet
+#212529 Dark (same as bootstrap)
 
 **********************************************
 */
@@ -145,7 +146,7 @@
     border-radius: 7px;
     color: #f2f8f4;
     font-weight: bold;
-    background: #4f6d7a;
+    background: #212529;
     height: 75px;
     width: 220px;
         transition: all 0.2s ease-in-out;

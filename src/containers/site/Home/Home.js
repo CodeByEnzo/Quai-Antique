@@ -3,13 +3,16 @@ import axios from 'axios';
 import "./Home.css";
 import { hostname } from '../../../config';
 import { motion, AnimatePresence } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
 
 
 class Home extends Component {
+    //Display pictures with their descriptions
     state = {
         gallerys: [],
         isVisible: true
     }
+    
 
     //Get the pictures on the back end
     componentDidMount() {
@@ -26,12 +29,12 @@ class Home extends Component {
 
     render() {
         const { isVisible } = this.state;
+        const isLoggedIn = !!localStorage.getItem('email');
 
         return isVisible ? (
             <AnimatePresence onExitComplete={this.handleExitComplete}>
                 <motion.main
                     id='Home'
-
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -44,12 +47,25 @@ class Home extends Component {
                             <p className='under-text-banner'>Spécialités savoyardes </p>
                         </div>
                     </div>
+                    {/* Div will show only if user is not connected */}
+                    {!isLoggedIn &&
+                        <div className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
+                            <p className='text-dark'>Pas encore de compte ? Crée un compte et résèrve une table dès maintenant !</p>
+                            <button className='book-btn'>
+                                <NavLink to="/reservation" className="text-light text-decoration-none">Créer un compte</NavLink>
+                            </button>
+                            
+                        </div>
+                    }
                     <div className='home-content d-flex justify-content-center'>
                         <div className='card-container row d-flex flex-wrap justify-content-around p-5'>
                             {
-                                Object.values(this.state.gallerys).filter(item => item.gallery_img && item.gallery_img !== '').map((item, index) => {
+                                Object
+                                    .values(this.state.gallerys)
+                                    .filter(item => item.gallery_img && item.gallery_img !== '')
+                                    .map((item, index) => {
                                     return (
-                                        <div className={` row col-12 col-xl-10 mt-5 ${index % 2 === 0 ? "flex-row-reverse" : ""}`}>
+                                        <div key={item.gallery_id} className={` row col-12 col-xl-10 mt-5 ${index % 2 === 0 ? "flex-row-reverse" : ""}`}>
                                             <div className='card-img-container col-8 col-md-6 mx-auto'>
 
                                                 <div className='border-img'>
@@ -67,9 +83,7 @@ class Home extends Component {
                             }
                         </div>
                     </div>
-                    <div className='container-fluid d-flex justify-content-center p-5'>
-                        {/* <a href=''><button className='book-btn'>Réservez maintenant</button></a> */}
-                    </div>
+
                 </motion.main>
             </AnimatePresence >
         ) : null;

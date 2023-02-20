@@ -5,29 +5,26 @@ import { hostname } from '../../../config';
 
 
 function Reserved() {
-     const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState(null);
     useEffect(() => {
         const token = localStorage.getItem("token");
-        console.log(token)
         if (token) {
-            fetch(`${hostname}front/authenticate`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    try {
-                        setUserData(data);
-                    } catch (error) {
-                        console.error("Error parsing JSON data", error);
-                    }
-                })
-                .catch(error => {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch(`${hostname}front/authenticate`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    const data = await response.json();
+                    setUserData(data);
+                } catch (error) {
                     console.error("Error fetching user data", error);
-                });
+                }
+            };
+            fetchUserData();
         }
     }, []);
 
@@ -36,7 +33,7 @@ function Reserved() {
             className='mb-5 pb-5'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}     
+            exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
             <h3 className='text-center'> Réservation </h3>
@@ -45,19 +42,43 @@ function Reserved() {
                     <div className="container ">
                         <div className="form-group mt-3">
                             <label>Date :</label>
-                            <p>{userData.reservations[0].date}</p>
+                            <div>
+                                {userData ? (
+                                    <p>{userData.reservations[0].date}</p>
+                                ) : (
+                                    <p>Loading...</p>
+                                )}
+                            </div>
                         </div>
                         <div className="form-group mt-3">
                             <label>Heure :</label>
-                            <p>{userData.reservations[0].time}</p>
+                            <div>
+                                {userData ? (
+                                    <p>{userData.reservations[0].time}</p>
+                                ) : (
+                                    <p>Loading...</p>
+                                )}
+                            </div>
                         </div>
                         <div className="form-group mt-3">
                             <label>Nombre de personnes :</label>
-                            <p>{userData.reservations[0].number_of_people}</p>
+                            <div>
+                                {userData ? (
+                                    <p>{userData.reservations[0].number_of_people}</p>
+                                ) : (
+                                    <p>Loading...</p>
+                                )}
+                            </div>
                         </div>
                         <div className="form-group mt-3">
                             <label>Commentaires :</label>
-                            <p>{userData.reservations[0].comments}</p>
+                            <div>
+                                {userData ? (
+                                    <p>{userData.reservations[0].comments}</p>
+                                ) : (
+                                    <p>Loading...</p>
+                                )}
+                            </div>
                         </div>
                         <div className='d-flex justify-content-center mt-3'>
                             <button className="btn sub-btn mx-2">Modifier</button>
@@ -66,6 +87,10 @@ function Reserved() {
                     </div>
                 </div>
             </div>
+            <div className='d-flex justify-content-center my-2'>
+                <button className="btn sub-btn mx-2">Ajouter</button>
+            </div>
+
         </motion.main>
     );
 }

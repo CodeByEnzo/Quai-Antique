@@ -11,9 +11,9 @@ const RGPD = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-
+            {/* TODO=> text miss the "<p></p>" tag */}
             <h1 className="text-center pb-5">Mentions légales et politique de confidentialité</h1>
-            <p>
+            <p className="pb-5">
                 La société Le Quai Antique, soucieuse des droits des individus, notamment au regard des traitements automatisés et dans une volonté de transparence avec ses clients, a mis en place une politique reprenant l’ensemble de ces traitements, des finalités poursuivies par ces derniers ainsi que des moyens d’actions à la disposition des individus afin qu’ils puissent au mieux exercer leurs droits.
                 Pour toute information complémentaire sur la protection des données personnelles, nous vous invitons à consulter le site : https://www.cnil.fr/
 
@@ -180,8 +180,6 @@ const RGPD = () => {
 
                 Pour toute question, information sur les produits présentés sur le site, ou concernant le site lui-même, vous pouvez laisser un message à l'adresse suivante : Lequaiantique@exemple.com.
 
-
-                Ces mentions légales et politique de confidentialité ont été créées sur le site Rocket Lawyer.
             </p>
         </motion.main>
     );

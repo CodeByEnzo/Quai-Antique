@@ -30,7 +30,6 @@ const Login = () => {
                 body: JSON.stringify(credentials)
             });
             const data = await response.json();
-            console.log(data)
             if (data.status === 'success') {
                 setIsAuthenticated(true);
                 addItem("token", data.data.token);

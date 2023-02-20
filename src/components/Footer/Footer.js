@@ -20,14 +20,10 @@ const Footer = (props) => (
                     </a>
                 </div>
                 <div className='col-6 col-md-3 p-3'>
-                    <div className="nav-item mt-5 mt-sm-0">
-                        <NavLink to="/Contact" className="nav-link fw-bold">Contact</NavLink>
-                    </div>
+                        <NavLink to="/Contact" className="nav-link fw-bold d-inline">Contact</NavLink>
                 </div>
                 <div className='col-6 col-md-3 p-3'>
-                    <div className="nav-item mt-5 mt-sm-0">
-                        <NavLink to="/RGPD" className="nav-link fw-bold">Politique de confidentialité</NavLink>
-                    </div>
+                        <NavLink to="/RGPD" className="nav-link fw-bold d-inline">Politique de confidentialité</NavLink>
                 </div>
             </div>
             <p className='text-center'>Le Quai Antique - Tout droits réservés</p>

@@ -13,7 +13,7 @@ const Form = (props) => (
                     name="name"
                     onChange={props.handleChange}
                     value={props.values.name}
-                    Blur={props.handleBlur}
+                    onBlur={props.handleBlur}
                 />
                 {
                     props.touched.name && props.errors.name && <span style={{ color: "red" }}>{props.errors.name}</span>
@@ -25,7 +25,7 @@ const Form = (props) => (
                     name="email"
                     onChange={props.handleChange}
                     value={props.values.email}
-                    Blur={props.handleBlur}
+                    onBlur={props.handleBlur}
 
                 />
                 {
@@ -38,7 +38,7 @@ const Form = (props) => (
                     name="message"
                     onChange={props.handleChange}
                     value={props.values.message}
-                    Blur={props.handleBlur}
+                    onBlur={props.handleBlur}
                 ></textarea>
                 {
                     props.touched.message && props.errors.message && <span className="text-danger">{props.errors.message}</span>

@@ -17,7 +17,6 @@ const Profile = (props) => {
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         const token = localStorage.getItem("token");
-        console.log(token)
         if (token) {
             fetch(`${hostname}front/authenticate`, {
                 method: "POST",
@@ -58,17 +57,38 @@ const Profile = (props) => {
                         <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
                             <div className="col-12">
                                 <p>
-                                    <strong>Nom d'utilisateur :</strong> {userData && userData.user.username}
+                                    <strong>Nom d'utilisateur :</strong> 
+                                    <div>
+                                        {userData ? (
+                                            <p>{userData.user.username}</p>
+                                        ) : (
+                                            <p>Loading...</p>
+                                        )}
+                                    </div>
                                 </p>
                             </div>
                             <div className="col-12">
                                 <p>
-                                    <strong>Adresse e-mail :</strong> {email}
+                                    <strong>Adresse e-mail :</strong>
+                                    <div>
+                                        {userData ? (
+                                            <p>{userData.user.email}</p>
+                                        ) : (
+                                            <p>Loading...</p>
+                                        )}
+                                    </div>
                                 </p>
                             </div>
                             <div className="col-12">
                                 <p>
-                                    <strong>Créé le  :</strong> {userData && userData.user.created_at}
+                                    <strong>Créé le  :</strong>
+                                    <div>
+                                        {userData ? (
+                                            <p>{userData.user.created_at}</p>
+                                        ) : (
+                                            <p>Loading...</p>
+                                        )}
+                                    </div>
                                 </p>
                             </div>
                             <div className='d-flex justify-content-center mt-3'>
