@@ -12,7 +12,7 @@ class Home extends Component {
         gallerys: [],
         isVisible: true
     }
-    
+
 
     //Get the pictures on the back end
     componentDidMount() {
@@ -54,7 +54,7 @@ class Home extends Component {
                             <button className='book-btn'>
                                 <NavLink to="/register" className="text-light text-decoration-none">Créer un compte</NavLink>
                             </button>
-                            
+
                         </div>
                     }
                     <div className='home-content d-flex justify-content-center'>
@@ -64,22 +64,22 @@ class Home extends Component {
                                     .values(this.state.gallerys)
                                     .filter(item => item.gallery_img && item.gallery_img !== '')
                                     .map((item, index) => {
-                                    return (
-                                        <div key={item.gallery_id} className={` row col-12 col-xl-10 mt-5 ${index % 2 === 0 ? "flex-row-reverse" : ""}`}>
-                                            <div className='card-img-container col-8 col-md-6 mx-auto'>
+                                        return (
+                                            <div key={item.gallery_id} className={` row col-12 col-xl-10 mt-5 ${index % 2 === 0 ? "flex-row-reverse" : ""}`}>
+                                                <div className='card-img-container col-8 col-md-6 mx-auto'>
 
-                                                <div className='border-img'>
-                                                    <img src={item.gallery_img} className='card-img' alt={item.gallery_content}></img>
+                                                    <div className='border-img'>
+                                                        <img src={item.gallery_img} className='card-img' alt={item.gallery_content}></img>
+                                                    </div>
+
                                                 </div>
-
+                                                <div className='card-desc col-8 col-md-6 mx-auto mt-md-5'>
+                                                    <h2 className={index % 2 === 0 ? "text-end h2Home" : "text-start h2Home"}>{item.gallery_title}</h2>
+                                                    <p className={index % 2 === 0 ? "text-end" : "text-start "}>{item.gallery_content}</p>
+                                                </div>
                                             </div>
-                                            <div className='card-desc col-8 col-md-6 mx-auto mt-md-5'>
-                                                <h2 className={index % 2 === 0 ? "text-end h2Home" : "text-start h2Home"}>{item.gallery_title}</h2>
-                                                <p className={index % 2 === 0 ? "text-end" : "text-start "}>{item.gallery_content}</p>
-                                            </div>
-                                        </div>
-                                    )
-                                })
+                                        )
+                                    })
                             }
                         </div>
                     </div>

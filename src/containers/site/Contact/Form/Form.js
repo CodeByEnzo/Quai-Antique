@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import "../Contact.css";
@@ -16,7 +16,7 @@ const Form = (props) => (
                     onBlur={props.handleBlur}
                 />
                 {
-                    props.touched.name && props.errors.name && <span style={{ color: "red" }}>{props.errors.name}</span>
+                    props.touched.name && props.errors.name && <span className="text-danger">{props.errors.name}</span>
                 }
             </div>
             <div className="mb-3 col-12 col-md-10">

@@ -10,7 +10,7 @@ class Contact extends Component {
         messageSent: false,
         isVisible: true
     }
-
+    //Transition page
     handleExitComplete = () => {
         this.setState({ isVisible: false });
     };
