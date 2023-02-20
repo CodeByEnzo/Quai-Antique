@@ -58,12 +58,17 @@ const Profile = (props) => {
                         <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
                             <div className="col-12">
                                 <p>
-                                    <strong>Nom d'utilisateur :</strong> {userData && userData.username}
+                                    <strong>Nom d'utilisateur :</strong> {userData && userData.user.username}
                                 </p>
                             </div>
                             <div className="col-12">
                                 <p>
                                     <strong>Adresse e-mail :</strong> {email}
+                                </p>
+                            </div>
+                            <div className="col-12">
+                                <p>
+                                    <strong>Créé le  :</strong> {userData && userData.user.created_at}
                                 </p>
                             </div>
                             <div className='d-flex justify-content-center mt-3'>

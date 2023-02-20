@@ -1,27 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
+import { hostname } from '../../../config';
+
 
 function Reserved() {
-    // const [reservation, setReservation] = useState(null);
-
-    // useEffect(() => {
-    //     // Appeler l'API pour récupérer les informations de réservation du client connecté
-    //     const fetchReservation = async () => {
-    //         try {
-    //             const response = await fetch("/api/reservations/current");
-    //             const data = await response.json();
-    //             setReservation(data);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-    //     fetchReservation();
-    // }, []);
-
-    // if (!reservation) {
-    //     return <p>Loading...</p>;
-    // }
+     const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        console.log(token)
+        if (token) {
+            fetch(`${hostname}front/authenticate`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    try {
+                        setUserData(data);
+                    } catch (error) {
+                        console.error("Error parsing JSON data", error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching user data", error);
+                });
+        }
+    }, []);
 
     return (
         <motion.main
@@ -37,19 +45,19 @@ function Reserved() {
                     <div className="container ">
                         <div className="form-group mt-3">
                             <label>Date :</label>
-                            {/* <p>{reservation.date}</p> */}
+                            <p>{userData.reservations[0].date}</p>
                         </div>
                         <div className="form-group mt-3">
                             <label>Heure :</label>
-                            {/* <p>{reservation.time}</p> */}
+                            <p>{userData.reservations[0].time}</p>
                         </div>
                         <div className="form-group mt-3">
                             <label>Nombre de personnes :</label>
-                            {/* <p>{reservation.number_of_people}</p> */}
+                            <p>{userData.reservations[0].number_of_people}</p>
                         </div>
                         <div className="form-group mt-3">
                             <label>Commentaires :</label>
-                            {/* <p>{reservation.comments}</p> */}
+                            <p>{userData.reservations[0].comments}</p>
                         </div>
                         <div className='d-flex justify-content-center mt-3'>
                             <button className="btn sub-btn mx-2">Modifier</button>
