@@ -79,7 +79,7 @@ const ReservationForm = (props) => (
                 <button
                     className="btn sub-btn btn-lg"
                     type="submit"
-                    onClick={props.handleSubmit}>
+                    onClick={props.handleReservation}>
                     ENVOYER
                 </button>
             </div>
@@ -134,7 +134,7 @@ export default withFormik({
             .min(10, "Votre message doit contenir plus de 50 caractères")
             .max(250, "Votre message doit contenir moins de 250 caractères")
     }),
-    handleSubmit: (values, { props, resetForm }) => {
+    handleReservation: (values, { props, resetForm }) => {
         const message = {
             date: values.name,
             time: values.time,

@@ -2,6 +2,7 @@ import "./users.css"
 import React, { useState } from "react";
 import Profile from "./Profile"
 import Reserved from "../site/Reservation/Reserved";
+import Reservation from "../site/Reservation/Reservation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Account = (props) => {
@@ -9,6 +10,7 @@ const Account = (props) => {
     const [tabs] = useState([
         { tabKey: 'profile', tabTitle: "Mon profile" },
         { tabKey: 'reservation', tabTitle: "Mes réservations" },
+        { tabKey: 'reserved', tabTitle: "Faire une réservation" },
 
     ]);
     const handleTabs = (name) => {
@@ -42,6 +44,7 @@ const Account = (props) => {
             <div className="tabs-content">
                 {currentTab.name === "profile" && <Profile />}
                 {currentTab.name === "reservation" && <Reserved />}
+                {currentTab.name === "reserved" && <Reservation />}
             </div>
             </motion.main>
         </AnimatePresence>

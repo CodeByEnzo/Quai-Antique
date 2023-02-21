@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
 import ResevervationForm from './ResevervationForm';
+import axios from 'axios';
+import { hostname } from '../../../config';
 
 class Reservation extends Component {
     constructor(props) {
@@ -12,25 +14,30 @@ class Reservation extends Component {
             numberOfPeople: '',
             comments: ''
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleSendReservation = this.handleSendReservation.bind(this);
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-        // Envoyer les informations de réservation au backend pour enregistrer la réservation
+    handleSendReservation = (message) => {
+        axios.post(`${hostname}front/sendReservation`, message)
+            .then(response => {
+                this.setState({ ReservationSent: true });
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
         return (
             <motion.main
-                className='main-margin'
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                <h1 className='text-center'> Réserver une table </h1>
-                <ResevervationForm/>
+                <h3 className='text-center'> Réserver une table </h3>
+                {this.state.ReservationSent && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation est prise en compte</div>}
+                <ResevervationForm sendReservation={this.handleReservation} />
             </motion.main>
         );
     }

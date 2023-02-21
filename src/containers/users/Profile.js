@@ -1,7 +1,6 @@
 import "./users.css";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { getItem } from "../../services/LocalStorage"
 import { hostname } from "../../config";
 
 
@@ -13,7 +12,6 @@ const Profile = (props) => {
     const handleExitComplete = () => {
         setIsVisible(false);
     };
-    const email = getItem("email");
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -52,7 +50,7 @@ const Profile = (props) => {
                 transition={{ duration: 1 }}
             >
                 <div className="container">
-                    <h3 className="text-center">Profil de l'utilisateur</h3>
+                    <h3 className="text-center">Votre profile</h3>
                     <div className='container-fluid d-flex justify-content-center'>
                         <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
                             <div className="col-12">
