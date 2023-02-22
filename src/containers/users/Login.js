@@ -75,7 +75,7 @@ const Login = () => {
                             value={credentials.email}
                             onChange={e => setCredentials({ ...credentials, [e.target.name]: e.target.value })}
                             id="email"
-                            placeholder="Entrez votre nom d'utilisateur ou adresse e-mail"
+                            placeholder="Entrez votre adresse e-mail"
                         />
                     </div>
                     <div className="form-group mt-3">
@@ -90,7 +90,7 @@ const Login = () => {
                             placeholder="Entrez votre mot de passe"
                         />
                         {error && (
-                            <div style={{ color: 'red' }}>{error}</div>
+                            <div className="text-danger">{error}</div>
                         )}
                     </div>
                     <button type="submit" className="btn sub-btn btn-lg d-block mx-auto mt-3">Se connecter</button>

@@ -16,11 +16,9 @@ class Home extends Component {
 
     //Get the pictures on the back end
     componentDidMount() {
-        axios.get(`${hostname}/front/gallerys`)
-            .then(res => {
-                const gallerys = res.data;
-                this.setState({ gallerys });
-            });
+        fetch(`${hostname}/front/gallerys`)
+            .then(response => response.json())
+            .then(data => this.setState({ gallerys: data }));
     }
     //Allow the page to show if next composant has disapear
     handleExitComplete = () => {

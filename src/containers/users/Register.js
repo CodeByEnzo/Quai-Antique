@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { hostname } from '../../config';
 import { motion, AnimatePresence } from 'framer-motion';
+import { NavLink } from 'react-router-dom';
 
 function Register() {
     const [username, setUsername] = useState('');
@@ -26,6 +27,10 @@ function Register() {
                 }
             });
             setSuccess(true);
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            
         } catch (error) {
             setError(error.response.data.message);
         }
@@ -59,7 +64,10 @@ function Register() {
                         )}
                         {success && (
                             <div className="alert alert-success text-center" role="alert">
-                                Inscription réussie !
+                                    Inscription réussie !
+                                    <NavLink to="/login" className="fw-bold nav-link">
+                                        Connectez-vous
+                                    </NavLink>
                             </div>
                         )}
                     </div>
@@ -69,7 +77,7 @@ function Register() {
                     </div>
                     <div className="form-group my-3">
                         <label>Adresse e-mail:</label>
-                        <input className="form-control" name='email' type="email" value={email} onChange={e => setEmail(e.target.value)} required />
+                            <input className="form-control" name='email' type="email" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email" />
                     </div>
                     <div className="form-group my-3">
                         <label>Mot de passe:</label>

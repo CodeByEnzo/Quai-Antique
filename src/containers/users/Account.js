@@ -8,9 +8,9 @@ import { motion, AnimatePresence } from "framer-motion";
 const Account = (props) => {
     const [currentTab, setcurrentTab] = useState({ name: "profile" })
     const [tabs] = useState([
-        { tabKey: 'profile', tabTitle: "Mon profile" },
-        { tabKey: 'reservation', tabTitle: "Mes réservations" },
-        { tabKey: 'reserved', tabTitle: "Faire une réservation" },
+        { tabKey: 'profile', tabTitle: "Profile" },
+        { tabKey: 'reservation', tabTitle: "Réservations" },
+        { tabKey: 'reserved', tabTitle: "Réserver" },
 
     ]);
     const handleTabs = (name) => {

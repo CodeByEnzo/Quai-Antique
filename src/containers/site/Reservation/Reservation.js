@@ -18,7 +18,7 @@ class Reservation extends Component {
     }
 
     handleSendReservation = (message) => {
-        axios.post(`${hostname}front/sendReservation`, message)
+        axios.post(`${hostname}front/makeReservation`, message)
             .then(response => {
                 this.setState({ ReservationSent: true });
             })

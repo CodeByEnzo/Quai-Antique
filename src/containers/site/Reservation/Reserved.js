@@ -36,7 +36,7 @@ function Reserved() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                <h3 className='text-center'> Vos réservation </h3>
+                <h3 className='text-center'> Vos réservations </h3>
                 <div className='container-fluid d-flex justify-content-center'>
                     <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
                         <div className="container ">
@@ -72,7 +72,7 @@ function Reserved() {
                                     </div>
                                 </div>
                             ) : (
-                                <p>Aucune réservation trouvée</p>
+                                <p className='text-center'>Aucune réservation trouvée</p>
                             )}
                         </div>
                     </div>
