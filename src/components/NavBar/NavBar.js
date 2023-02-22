@@ -1,79 +1,88 @@
-import React, { useContext, useState } from 'react';
-import { NavLink } from 'react-router-dom';
-import logo from '../../assets/images/LOGO-GOLD.png';
+import React, { useContext, useState, useEffect } from 'react';
 import Auth from '../../contexts/Auth';
+import { NavLink } from 'react-router-dom';
+import './Navbar.css';
+import logo from '../../assets/images/LOGO-GOLD.png';
 
-const Navbar = (props) => {
-    const [navbarOpen, setNavbarOpen] = useState(false);
+
+export default function Navbar() {
+    const [toggleMenu, setToggleMenu] = useState(false);
+    const [largeur, setLargeur] = useState(window.innerWidth)
+    const toggleMenuSmallScreen = () => {
+        setToggleMenu(!toggleMenu);
+    }
+
     const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
-
     const handleLogin = () => {
         setIsAuthenticated(false);
     };
 
+    useEffect(() => {
+        const changeWidth = () => {
+            setLargeur(window.innerWidth);
+            if (window.innerWidth > 800) {
+                setToggleMenu(false);
+            }
+        }
+
+        window.addEventListener('resize', changeWidth);
+        return () => {
+            window.removeEventListener('resize', changeWidth);
+        }
+    }, [])
+
     return (
-        <>
-            <nav className={`navbar navbar-expand-lg position-absolute z-3 w-100 ${navbarOpen ? 'bg-dark' : ''}`}>
-                <div className="container-fluid p-2">
-                    <a className="navbar-brand" href="/">
-                        <img src={logo} alt="logo du quai antique" width="70px" />
-                    </a>
-                    <button
-                        className="navbar-toggler bg-light"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#navbarNav"
-                        aria-controls="navbarNav"
-                        aria-expanded={navbarOpen}
-                        aria-label="Toggle navigation"
-                        onClick={() => setNavbarOpen(!navbarOpen)}
-                    >
-                        <span className="navbar-toggler-icon" />
-                    </button>
-                    <div className="collapse navbar-collapse" id="navbarNav">
-                        <ul className="navbar-nav ms-auto text-center">
-                            <li className="nav-item mt-5 mt-sm-0 rounded">
-                                <NavLink to="/" className="nav-link fw-bold text-light">
-                                    Accueil
-                                </NavLink>
-                            </li>
-                            <li className="nav-item mt-5 mt-sm-0 rounded">
-                                <NavLink to="/menu" className="nav-link fw-bold text-light ">
-                                    La carte
-                                </NavLink>
-                            </li>
-                            <li className="nav-item mt-5 mt-sm-0 rounded">
-                                <NavLink to="/Horaires" className="nav-link fw-bold text-light">Horaires</NavLink>
-                            </li>
-                            <li className="nav-item mt-5 mt-sm-0 rounded">
-                                <NavLink to="/Contact" className="nav-link fw-bold text-light">Contact</NavLink>
-                            </li>
-                            {(!isAuthenticated && (
+        <div className={`navContainer' ${toggleMenu ? "showNav" : "hideNav"}`}>
+            <NavLink to='/' className={(nav) => (nav.isActive ? "item position-absolute logo" : "item position-absolute logo")}>
+                <li>
+                    <img src={logo} alt="logo du quai antique" width="70px" />
+                </li>
+            </NavLink>
+            <nav>
+                {(toggleMenu || largeur > 800) && (
+                    <ul className='list'>
+                        <NavLink to='/' className={(nav) => (nav.isActive ? "active" : "item")}>
+                            <li> Acceuil </li>
+                        </NavLink >
+                        <NavLink to='/menu' className={(nav) => (nav.isActive ? "active" : "item")}>
+                            <li> La carte </li>
+                        </NavLink >
+                        <NavLink to='/Horaires' className={(nav) => (nav.isActive ? "active" : "item")}>
+                            <li> Horraires </li>
+                        </NavLink >
+                        <NavLink to='/Contact' className={(nav) => (nav.isActive ? "active" : "item")}>
+                            <li> Contact </li>
+                        </NavLink >
+                        {(!isAuthenticated && (
+                            <>
+                                <NavLink to='/Login' className={(nav) => (nav.isActive ? "active" : "item")}>
+                                    <li> Se connecter </li>
+                                </NavLink >
+                                <NavLink to='/Register' className={(nav) => (nav.isActive ? "active" : "item")}>
+                                    <li> S'enregistrer </li>
+                                </NavLink >
+                            </>
+                        )) || (
                                 <>
-                                    <li className="nav-item mt-5 mt-sm-0 rounded">
-                                        <NavLink to="/Login" className="nav-link fw-bold text-light">Se connecter</NavLink>
-                                    </li>
-                                    <li className="nav-item mt-5 mt-sm-0 rounded">
-                                        <NavLink to="/Register" className="nav-link fw-bold text-light">S'enregistrer</NavLink>
+                                    <NavLink to='/Account' className={(nav) => (nav.isActive ? "active" : "item")}>
+                                        <li> Mon compte </li>
+                                    </NavLink >
+                                    <li>
+                                        <button className="btn btn-danger item" onClick={handleLogin}>Deconnexion</button>
                                     </li>
                                 </>
-                            )) || (
-                                    <>
-                                        <li className="nav-item mt-5 mt-sm-0 rounded">
-                                            <NavLink to="/Account" className="nav-link fw-bold text-light">Mon compte</NavLink>
-                                        </li>
-                                        <li className="mt-5 mt-sm-0">
-                                            <button className="btn btn-danger" onClick={handleLogin}>Deconnexion</button>
-                                        </li>
-                                    </>
-                                )}
+                            )}
+                        <li>
 
-                        </ul>
-                    </div>
-                </div>
+                        </li>
+
+
+                    </ul>
+                )}
+                <button onClick={toggleMenuSmallScreen} className='btn-toggle'>
+                    <span className='burgerBar'></span>
+                </button>
             </nav>
-        </>
-    );
-};
-
-export default Navbar;
+        </div>
+    )
+}

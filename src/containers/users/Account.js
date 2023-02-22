@@ -33,10 +33,10 @@ const Account = (props) => {
                 transition={{ duration: 1 }}
             >
             <div className="tabs account">
-                <ul>
+                <ul id="ul-account">
                     {tabs.map((tab, index) => (
                         <li key={index} className={`tabs-pane ${currentTab.name === tab.tabKey ? "active" : ""}`}>
-                            <h2 onClick={() => handleTabs(tab.tabKey)}>{tab.tabTitle}</h2>
+                            <h2 id="account-title" className="text-center" onClick={() => handleTabs(tab.tabKey)}>{tab.tabTitle}</h2>
                         </li>)
                     )}
                 </ul>

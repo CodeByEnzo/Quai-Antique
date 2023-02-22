@@ -1,0 +1,247 @@
+/*
+********************COLORS********************
+
+#48330a Cafe noir
+#be9837 Satin sheen gold
+#f2f8f4 Mint Cream
+#353c46 Charcoal
+#4f6d7a Cadet
+#212529 Dark (same as bootstrap)
+
+**********************************************
+*/
+
+.navContainer {
+    position: absolute;
+}
+
+.logo {
+    z-index: 10;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+nav {
+    z-index: 10000;
+    height: 50px;
+    background-color: rgba(31, 31, 31, 0.018);
+    position: absolute;
+    right: 0%;
+    display: flex;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+
+.socials {
+    font-size: 2rem;
+    size: 2rem;
+    color: white;
+    margin-top: 20px;
+    margin-right: 10px;
+}
+
+.list {
+    list-style-type: none;
+    background: rgba(187, 187, 187, 0);
+
+    display: flex;
+    position: relative;
+}
+
+.items,
+.item {
+    color: white;
+    text-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    list-style-type: none;
+    font-size: 1.1rem;
+    text-decoration: none;
+    position: relative;
+    margin: 22px;
+}
+
+
+.active {
+    color: rgb(255, 255, 255);
+    text-shadow: 2px 2px 2px black;
+    cursor: pointer;
+    list-style-type: none;
+    font-size: 1.1rem;
+    text-decoration: none;
+    position: relative;
+    margin: 22px;
+}
+
+
+.active::after {
+    content: "";
+    width: 5%;
+    height: 3px;
+    background: #be9837;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: activeAnimation 0.5s ease forwards;
+}
+
+@keyframes activeAnimation {
+    0% {
+        width: 0%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.items:hover,
+.socials:hover,
+.item:hover {
+    color: #fff;
+    /* border: 1px solid #47555E; */
+    animation: menuAnimation infinite 1s;
+    border-radius: 5px;
+}
+
+@keyframes menuAnimation {
+    0% {
+        color: white;
+    }
+
+    25% {
+        color: #fff;
+    }
+
+    50% {
+        color: #47555E;
+    }
+
+    75% {
+        color: #fff;
+    }
+
+    100% {
+        color: white;
+    }
+
+}
+
+/* BURGER BUTTON START **************/
+.btn-toggle {
+    display: none;
+}
+
+.burgerBar,
+.burgerBar::before,
+.burgerBar::after {
+    display: block;
+    width: 40px;
+    height: 3px;
+    position: relative;
+    border-radius: 3px;
+    background-color: #be9837;
+    transition: all .5s ease-in-out;
+}
+
+.burgerBar::before,
+.burgerBar::after {
+    content: "";
+    position: absolute;
+}
+
+.burgerBar::before {
+    transform: translateY(-12px);
+}
+
+.burgerBar::after {
+    transform: translateY(12px);
+}
+
+.showNav .burgerBar::before {
+    transform: rotate(45deg);
+
+}
+
+.showNav .burgerBar::after {
+    transform: rotate(-45deg);
+}
+
+.showNav .burgerBar {
+    background: transparent;
+}
+
+.hideNav .nav {
+    visibility: hidden;
+}
+
+/* BURGER BUTTON END ****************/
+
+@media screen and (max-width: 800px) {
+    .showNav .nav {
+        margin-top: 50px;
+        transition: all .5s ease-in-out;
+    }
+
+    nav {
+        margin-top: 0;
+        margin-right: 0;
+    }
+
+    .list {
+        flex-direction: column;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        align-items: center;
+        left: 50%;
+        transform: translateX(-50%);
+        transition: all .5s ease-in-out;
+        background: rgba(0, 0, 0, 0.765);
+        position: fixed;
+        animation: menuAppear 0.3s forwards ease-in-out;
+    }
+    @keyframes menuAppear {
+        0%{
+            margin-left: -100%;
+        }
+        100%{
+            margin: 0;
+        }
+    }
+
+    .items {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100vw;
+        border-bottom: 1px solid #fff;
+        background: rgba(0, 0, 0, 0.654);
+        margin-right: 0;
+        font-size: 1.3rem;
+        text-decoration: none;
+    }
+
+    .item {
+        margin: 20px;
+    }
+
+
+    .btn-toggle {
+        height: 50px;
+        margin-right: 20px;
+        display: block;
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        background: #f2f8f4;
+        border-radius: 10px;
+        cursor: pointer;
+        text-align: center;
+        padding: 10px;
+    }
+}

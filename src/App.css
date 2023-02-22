@@ -38,6 +38,7 @@ body {
     background: #353c46;
     position: relative;
     color: #f2f8f4;
+    width: 100vw;
     overflow-x: hidden;
     min-height: 100vh;
     display: flex;
@@ -128,9 +129,6 @@ div.tabs {
     font-size: 1.5rem;
 }
 
-.tabs .tabs-pane.active {
-    border-bottom: 1px solid #f2f8f4;
-}
 
 .tab-content {
     width: 50%;
