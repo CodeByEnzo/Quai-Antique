@@ -40,7 +40,7 @@ export default function Navbar() {
             </NavLink>
             <nav>
                 {(toggleMenu || largeur > 800) && (
-                    <ul className='list'>
+                    <ul className='list fw-bold'>
                         <NavLink to='/' className={(nav) => (nav.isActive ? "active" : "item")}>
                             <li> Acceuil </li>
                         </NavLink >
@@ -67,8 +67,8 @@ export default function Navbar() {
                                     <NavLink to='/Account' className={(nav) => (nav.isActive ? "active" : "item")}>
                                         <li> Mon compte </li>
                                     </NavLink >
-                                    <li>
-                                        <button className="btn btn-danger item" onClick={handleLogin}>Deconnexion</button>
+                                    <li className='mt-2'>
+                                        <button className="btn btn-danger" onClick={handleLogin}>Deconnexion</button>
                                     </li>
                                 </>
                             )}

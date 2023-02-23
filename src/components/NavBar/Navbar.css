@@ -57,7 +57,7 @@ nav {
     font-size: 1.1rem;
     text-decoration: none;
     position: relative;
-    margin: 22px;
+    margin: 11px;
 }
 
 
@@ -69,7 +69,7 @@ nav {
     font-size: 1.1rem;
     text-decoration: none;
     position: relative;
-    margin: 22px;
+    margin: 11px;
 }
 
 
@@ -97,34 +97,10 @@ nav {
 .items:hover,
 .socials:hover,
 .item:hover {
-    color: #fff;
-    /* border: 1px solid #47555E; */
-    animation: menuAnimation infinite 1s;
-    border-radius: 5px;
+    color: #be9837;
 }
 
-@keyframes menuAnimation {
-    0% {
-        color: white;
-    }
 
-    25% {
-        color: #fff;
-    }
-
-    50% {
-        color: #47555E;
-    }
-
-    75% {
-        color: #fff;
-    }
-
-    100% {
-        color: white;
-    }
-
-}
 
 /* BURGER BUTTON START **************/
 .btn-toggle {
