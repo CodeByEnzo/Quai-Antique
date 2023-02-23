@@ -30,7 +30,7 @@ function Menu() {
     return isVisible ? (
         <AnimatePresence onExitComplete={handleExitComplete}>
             <motion.main
-                className='main-margin d-flex flex-column mx-auto pb-5'
+                className='main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
