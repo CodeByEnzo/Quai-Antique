@@ -10,20 +10,31 @@
 
 **********************************************
 */
+
+/***********************************************
+************************************************
+ FONT FAM's -> None works on safari / All works on Android
+ ***********************************************/
+@import url('https://fonts.cdnfonts.com/css/edwardian-scr-alt-itc-tt');
+
 @font-face {
-    font-family: 'Edwardian Scr ITC TT';
-    src: url('./font/Edwardian\ Scr\ Alt\ ITC\ TT.woff') format('woff');
+    font-family: 'Ballet';
+    src: url('./font/Ballet-Regular-VariableFont_opsz.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
+
+@import url('https://fonts.googleapis.com/css2?family=Luxurious+Script&display=swap');
+
 @font-face {
-    font-family: 'Ballet-Regular-VariableFont_opsz';
-    src: url('./font/Ballet-Regular-VariableFont_opsz.ttf') format('ttf');
+    font-family: 'balletregular';
+    src: url('./font/ballet-regular-variablefont_opsz-webfont.woff2') format('woff2'),
+        url('./font/ballet-regular-variablefont_opsz-webfont.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+
 }
-
-
 
 * {
     margin: 0;
@@ -97,14 +108,14 @@ body {
 }
 
 h1 {
-    font-family: 'Edwardian Scr Alt ITC TT', 'Ballet-Regular-VariableFont_opsz',sans-serif;
+    font-family: 'Edwardian Scr Alt ITC TT', 'Luxurious Script', 'Balletregular', sans-serif;
     color: #be9837;
     font-size: 4rem;
 
 }
 
 h2 {
-    font-family: 'Edwardian Scr Alt ITC TT', sans-serif;
+    font-family: 'Edwardian Scr Alt ITC TT', 'Luxurious Script', 'Balletregular', sans-serif;
     color: #be9837;
     font-size: 3rem;
 }
