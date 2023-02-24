@@ -1,92 +1,118 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import moment from 'moment';
+import { hostname } from "../../../config";
 
-const ReservationForm = (props) => (
-    <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
-        <form id="contactForm" className="form-border rounded p-3 row d-flex justify-content-center col-xl-5">
+const ReservationForm = (props) => {
+    const [userData, setUserData] = useState(null);
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+            const fetchUserData = async () => {
+                try {
+                    const response = await fetch(`${hostname}front/authenticate`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "Authorization": `Bearer ${token}`
+                        }
+                    });
+                    const data = await response.json();
+                    localStorage.setItem('userId', data.user.id);
 
-            <div className="mb-3 col-12 col-md-10">
-                <label htmlFor="date" className="form-label">date</label>
-                <input className="form-control"
-                    id="date"
-                    type="date"
-                    name="date"
-                    onChange={props.handleChange}
-                    value={props.values.date}
-                    onBlur={props.handleBlur}
-                />
-                {
-                    props.touched.date &&
-                    props.errors.date &&
-                    <span className="text-danger">{props.errors.date}</span>
+                } catch (error) {
+                    console.error("Error fetching user data", error);
                 }
-            </div>
-            <div className="mb-3 col-12 col-md-10">
-                <label htmlFor="time" className="form-label">Time</label>
-                <input className="form-control" id="time" type="time" placeholder="Time"
-                    name="time"
-                    onChange={props.handleChange}
-                    value={props.values.time}
-                    onBlur={props.handleBlur}
+            };
+            fetchUserData();
+        }
+    }, []);
+    return (
+        <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
+            <form id="ReservationForm" className="form-border rounded p-3 row d-flex justify-content-center col-xl-5">
 
-                />
-                {
-                    props.touched.time &&
-                    props.errors.time &&
-                    <span className="text-danger">{props.errors.time}</span>
-                }
-            </div>
-            <div className="mb-3 col-12 col-md-10">
-                <label htmlFor="number_of_people" className="form-label">Nombre de personne</label>
-                <input
-                    className="form-control"
-                    id="number_of_people"
-                    type="number"
-                    placeholder="Nombre de personne"
-                    name="number_of_people"
-                    onChange={props.handleChange}
-                    value={props.values.number_of_people}
-                    onBlur={props.handleBlur}
+                <div className="mb-3 col-12 col-md-10">
+                    <label htmlFor="date" className="form-label">date</label>
+                    <input className="form-control"
+                        id="date"
+                        type="date"
+                        name="date"
+                        onChange={props.handleChange}
+                        value={props.values.date}
+                        onBlur={props.handleBlur}
+                    />
+                    {
+                        props.touched.date &&
+                        props.errors.date &&
+                        <span className="text-danger">{props.errors.date}</span>
+                    }
+                </div>
+                <div className="mb-3 col-12 col-md-10">
+                    <label htmlFor="time" className="form-label">Time</label>
+                    <input className="form-control" id="time" type="time" placeholder="Time"
+                        name="time"
+                        onChange={props.handleChange}
+                        value={props.values.time}
+                        onBlur={props.handleBlur}
 
-                />
-                {
-                    props.touched.number_of_people &&
-                    props.errors.number_of_people &&
-                    <span className="text-danger">{props.errors.number_of_people}</span>
-                }
-            </div>
-            <div className="mb-3 col-12 col-md-10">
-                <label htmlFor="comment" className="form-label">Commentaire</label>
-                <textarea
-                    className="form-control"
-                    id="comment"
-                    type="text"
-                    placeholder="Commentaire"
-                    name="comment"
-                    onChange={props.handleChange}
-                    value={props.values.comment}
-                    onBlur={props.handleBlur}
-                ></textarea>
-                {
-                    props.touched.comment &&
-                    props.errors.comment &&
-                    <span className="text-danger">{props.errors.comment}</span>
-                }
-            </div>
-            <div className="d-grid col-12 col-md-10">
-                <button
-                    className="btn sub-btn btn-lg"
-                    type="submit"
-                    onClick={props.handleReservation}>
-                    ENVOYER
-                </button>
-            </div>
+                    />
+                    {
+                        props.touched.time &&
+                        props.errors.time &&
+                        <span className="text-danger">{props.errors.time}</span>
+                    }
+                </div>
+                <div className="mb-3 col-12 col-md-10">
+                    <label htmlFor="number_of_people" className="form-label">Nombre de personne</label>
+                    <input
+                        className="form-control"
+                        id="number_of_people"
+                        type="number"
+                        placeholder="Nombre de personne"
+                        name="number_of_people"
+                        onChange={props.handleChange}
+                        value={props.values.number_of_people}
+                        onBlur={props.handleBlur}
 
-        </form>
-    </div>
-)
+                    />
+                    {
+                        props.touched.number_of_people &&
+                        props.errors.number_of_people &&
+                        <span className="text-danger">{props.errors.number_of_people}</span>
+                    }
+                </div>
+                <div className="mb-3 col-12 col-md-10">
+                    <label htmlFor="comment" className="form-label">Commentaire</label>
+                    <textarea
+                        className="form-control"
+                        id="comment"
+                        type="text"
+                        placeholder="Commentaire"
+                        name="comment"
+                        onChange={props.handleChange}
+                        value={props.values.comment}
+                        onBlur={props.handleBlur}
+                    ></textarea>
+                    {
+                        props.touched.comment &&
+                        props.errors.comment &&
+                        <span className="text-danger">{props.errors.comment}</span>
+                    }
+                </div>
+                <div className="d-grid col-12 col-md-10">
+                    <button
+                        className="btn sub-btn btn-lg"
+                        type="submit"
+                        onClick={props.handleSubmit}>
+                        ENVOYER
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    )
+}
 
 export default withFormik({
     mapPropsToValues: () => ({
@@ -131,17 +157,17 @@ export default withFormik({
             .max(15, "Le nombre de personnes doit être au maximum 15")
             .required("Le nombre de personnes est obligatoire"),
         comment: Yup.string()
-            .min(10, "Votre message doit contenir plus de 50 caractères")
+            .min(10, "Votre message doit contenir plus de 10 caractères")
             .max(250, "Votre message doit contenir moins de 250 caractères")
     }),
-    handleReservation: (values, { props, resetForm }) => {
+    handleSubmit: (values, { props, resetForm }) => {
         const message = {
-            date: values.name,
+            date: values.date,
             time: values.time,
-            number_of_people: values.time,
+            number_of_people: values.number_of_people,
             content: values.comment
         };
-        props.sendMail(message);
+        props.sendReservation(message);
         resetForm();
     }
 })(ReservationForm); 

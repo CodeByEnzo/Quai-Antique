@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component,useState,useEffect } from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
 import ResevervationForm from './ResevervationForm';
 import axios from 'axios';
 import { hostname } from '../../../config';
+import { getItem } from '../../../services/LocalStorage';
 
 class Reservation extends Component {
     constructor(props) {
@@ -12,20 +13,37 @@ class Reservation extends Component {
             date: '',
             time: '',
             numberOfPeople: '',
-            comments: ''
+            comments: '',
+            client_id: '',
         };
-        this.handleSendReservation = this.handleSendReservation.bind(this);
+
+
     }
 
+
     handleSendReservation = (message) => {
-        axios.post(`${hostname}front/makeReservation`, message)
-            .then(response => {
+        const userId = localStorage.getItem(this.userId)
+    
+        const { date, time, numberOfPeople, comments, client_id } = this.state;
+        const requestBody = {
+            date,
+            time,
+            numberOfPeople,
+            comments,
+            client_id: userId
+        };
+        axios.post(`${hostname}front/reservation`, requestBody, {
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+            .then((response) => {
                 this.setState({ ReservationSent: true });
             })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     render() {
         return (
@@ -37,7 +55,7 @@ class Reservation extends Component {
             >
                 <h3 className='text-center'> Réserver une table </h3>
                 {this.state.ReservationSent && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation est prise en compte</div>}
-                <ResevervationForm sendReservation={this.handleReservation} />
+                <ResevervationForm sendReservation={this.handleSendReservation} />
             </motion.main>
         );
     }

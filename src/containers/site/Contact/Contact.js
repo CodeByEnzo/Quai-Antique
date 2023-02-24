@@ -18,7 +18,7 @@ class Contact extends Component {
     componentDidMount = () => {
         document.title = "Le Quai Antique - Contact"
     }
-
+    //Send message to back end
     handleSendMail = (message) => {
         axios.post(`${hostname}front/sendMessage`, message)
             .then(response => {

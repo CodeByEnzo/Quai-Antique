@@ -1,8 +1,8 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import insta from "../../assets/images/insta.png"
 import FB from "../../assets/images/FB.png"
 import './footer.css'
-import { NavLink } from 'react-router-dom'
 
 const Footer = (props) => (
 
