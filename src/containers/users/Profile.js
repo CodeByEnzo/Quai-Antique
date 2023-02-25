@@ -53,7 +53,7 @@ const Profile = (props) => {
                 <div className="container">
                     <h3 className="text-center">Votre profile</h3>
                     <div className='container-fluid d-flex justify-content-center'>
-                        <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
+                        <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2 bg-dark shadow">
                             <div className="col-12">
                                 <p>
                                     <strong>Nom d'utilisateur :</strong> 

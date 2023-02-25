@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { hostname } from '../../../config';
 
 function Reserved() {
+
+    // Get the user's data to display them
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -38,12 +40,12 @@ function Reserved() {
             >
                 <h3 className='text-center'> Vos réservations </h3>
                 <div className='container-fluid d-flex justify-content-center'>
-                    <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
+                    <div className=" rounded col-12 col-md-6 col-xl-4">
                         <div className="container ">
                             {userData?.reservations?.length > 0 ? (
                                 <div>
                                     {userData.reservations.map(reservation => (
-                                        <section className='border-bottom p-2' key={reservation.reservation_id}>
+                                        <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
                                             <div className="form-group mt-3">
                                                 <label>Date :</label>
                                                 <div>
@@ -63,7 +65,7 @@ function Reserved() {
                                                 </div>
                                             </div>
                                             <div className="form-group mt-3">
-                                                <label>Commentaires :</label>
+                                                <label>Commentaire :</label>
                                                 <div>
                                                     <p>{reservation.comments}</p>
                                                 </div>

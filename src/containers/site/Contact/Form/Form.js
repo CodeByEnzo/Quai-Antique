@@ -5,7 +5,16 @@ import "../Contact.css";
 
 const Form = (props) => (
     <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
-        <form id="contactForm" className="form-border rounded p-3 row d-flex justify-content-center col-xl-5">
+        <form id="contactForm"
+            className="
+            form-border 
+            rounded
+            shadow
+            p-3 row
+            d-flex
+            justify-content-center
+            col-xl-5
+            bg-dark">
 
             <div className="mb-3 col-12 col-md-10">
                 <label htmlFor="name" className="form-label">Name</label>
