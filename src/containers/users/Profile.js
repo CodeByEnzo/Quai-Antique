@@ -57,37 +57,37 @@ const Profile = (props) => {
                             <div className="col-12">
                                 <p>
                                     <strong>Nom d'utilisateur :</strong> 
-                                    <div>
+                                    <span>
                                         {userData ? (
-                                            <p>{userData.user.username}</p>
+                                            <span>{userData.user.username}</span>
                                         ) : (
-                                            <p>Loading...</p>
+                                            <span>Loading...</span>
                                         )}
-                                    </div>
+                                    </span>
                                 </p>
                             </div>
                             <div className="col-12">
                                 <p>
                                     <strong>Adresse e-mail :</strong>
-                                    <div>
+                                    <span>
                                         {userData ? (
-                                            <p>{userData.user.email}</p>
+                                            <span>{userData.user.email}</span>
                                         ) : (
-                                            <p>Loading...</p>
+                                            <span>Loading...</span>
                                         )}
-                                    </div>
+                                    </span>
                                 </p>
                             </div>
                             <div className="col-12">
                                 <p>
                                     <strong>Créé le  :</strong>
-                                    <div>
+                                    <span>
                                         {userData ? (
-                                            <p>{userData.user.created_at}</p>
+                                            <span>{userData.user.created_at}</span>
                                         ) : (
-                                            <p>Loading...</p>
+                                            <span>Loading...</span>
                                         )}
-                                    </div>
+                                    </span>
                                 </p>
                             </div>
                             <div className='d-flex justify-content-center mt-3'>

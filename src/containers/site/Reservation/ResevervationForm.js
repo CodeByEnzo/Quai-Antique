@@ -165,7 +165,7 @@ export default withFormik({
             date: values.date,
             time: values.time,
             number_of_people: values.number_of_people,
-            content: values.comment
+            comment: values.comment
         };
         props.sendReservation(message);
         resetForm();

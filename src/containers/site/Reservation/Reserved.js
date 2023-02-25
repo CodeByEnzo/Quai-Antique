@@ -42,34 +42,38 @@ function Reserved() {
                         <div className="container ">
                             {userData?.reservations?.length > 0 ? (
                                 <div>
-                                    <div className="form-group mt-3">
-                                        <label>Date :</label>
-                                        <div>
-                                            <p>{userData.reservations[0].date}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-group mt-3">
-                                        <label>Heure :</label>
-                                        <div>
-                                            <p>{userData.reservations[0].time}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-group mt-3">
-                                        <label>Nombre de personnes :</label>
-                                        <div>
-                                            <p>{userData.reservations[0].number_of_people}</p>
-                                        </div>
-                                    </div>
-                                    <div className="form-group mt-3">
-                                        <label>Commentaires :</label>
-                                        <div>
-                                            <p>{userData.reservations[0].comments}</p>
-                                        </div>
-                                    </div>
-                                    <div className='d-flex justify-content-center mt-3'>
-                                        <button className="btn sub-btn mx-2">Modifier</button>
-                                        <button className="btn sub-btn mx-2">Annuler</button>
-                                    </div>
+                                    {userData.reservations.map(reservation => (
+                                        <section className='border-bottom p-2' key={reservation.reservation_id}>
+                                            <div className="form-group mt-3">
+                                                <label>Date :</label>
+                                                <div>
+                                                    <p>{reservation.date}</p>
+                                                </div>
+                                            </div>
+                                            <div className="form-group mt-3">
+                                                <label>Heure :</label>
+                                                <div>
+                                                    <p>{reservation.time}</p>
+                                                </div>
+                                            </div>
+                                            <div className="form-group mt-3">
+                                                <label>Nombre de personnes :</label>
+                                                <div>
+                                                    <p>{reservation.number_of_people}</p>
+                                                </div>
+                                            </div>
+                                            <div className="form-group mt-3">
+                                                <label>Commentaires :</label>
+                                                <div>
+                                                    <p>{reservation.comments}</p>
+                                                </div>
+                                            </div>
+                                            <div className='d-flex justify-content-center mt-3'>
+                                                <button className="btn sub-btn mx-2">Modifier</button>
+                                                <button className="btn sub-btn mx-2">Annuler</button>
+                                            </div>
+                                        </section>
+                                    ))}
                                 </div>
                             ) : (
                                 <p className='text-center'>Aucune réservation trouvée</p>

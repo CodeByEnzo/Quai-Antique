@@ -12,8 +12,8 @@ class Reservation extends Component {
         this.state = {
             date: '',
             time: '',
-            numberOfPeople: '',
-            comments: '',
+            number_of_people: '',
+            comment: '',
             client_id: '',
         };
 
@@ -21,22 +21,22 @@ class Reservation extends Component {
     }
 
 
-    handleSendReservation = (message) => {
-        const userId = localStorage.getItem(this.userId)
-    
-        const { date, time, numberOfPeople, comments, client_id } = this.state;
+    handleSendReservation = (formData) => {
+        const userId = localStorage.getItem('userId');
+        const { date, time, number_of_people, comment } = formData;
         const requestBody = {
             date,
             time,
-            numberOfPeople,
-            comments,
-            client_id: userId
+            number_of_people,
+            comment,
+            userId
         };
-        axios.post(`${hostname}front/reservation`, requestBody, {
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token')}`,
-            },
-        })
+        axios
+            .post(`${hostname}front/reservation`, requestBody, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
             .then((response) => {
                 this.setState({ ReservationSent: true });
             })
