@@ -1,8 +1,8 @@
 import "./users.css"
 import React, { useState } from "react";
 import Profile from "./Profile"
-import Reserved from "../site/Reservation/Reserved";
-import Reservation from "../site/Reservation/Reservation";
+import Reserved from "../Reservation/Reserved";
+import Reservation from "../Reservation/Reservation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Account = (props) => {

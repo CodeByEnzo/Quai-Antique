@@ -1,7 +1,7 @@
 import "./users.css";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { hostname } from "../../config";
+import { hostname } from "../../../config";
 
 
 const Profile = (props) => {
@@ -27,7 +27,7 @@ const Profile = (props) => {
                 .then(data => {
                     try {
                         setUserData(data);
-                        
+
                     } catch (error) {
                         console.error("Error parsing JSON data", error);
                     }
@@ -56,7 +56,7 @@ const Profile = (props) => {
                         <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2 bg-dark shadow">
                             <div className="col-12">
                                 <p>
-                                    <strong>Nom d'utilisateur :</strong> 
+                                    <strong>Nom d'utilisateur :</strong>
                                     <span>
                                         {userData ? (
                                             <span>{userData.user.username}</span>
