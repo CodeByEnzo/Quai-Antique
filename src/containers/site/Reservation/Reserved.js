@@ -6,6 +6,8 @@ import { hostname } from '../../../config';
 function Reserved() {
     // Get the user's data to display them
     const [userData, setUserData] = useState(null);
+    const [isReservationDeleted, setIsReservationDeleted] = useState(false);
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -20,25 +22,34 @@ function Reserved() {
                     });
                     const data = await response.json();
                     setUserData(data);
+                    setIsReservationDeleted(false); // reset the state to false after fetching the data
                 } catch (error) {
                     console.error("Error fetching user data", error);
                 }
             };
             fetchUserData();
         }
-    }, []);
+    }, [isReservationDeleted]); // add isReservationDeleted as a dependency to recall the function when the state changes
 
     // To cancel a reservation
     const handleCancelReservation = async event => {
-        event.preventDefault();
         
         const userId = localStorage.getItem("userId")
         const reservationId = event.target.dataset.reservationid;
-        const response = await fetch(`${hostname}front/cancelReservation`, {
-            method: "DELETE",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ userId: userId, reservation_id: reservationId })
-        });
+        if (window.confirm("Êtes-vous sûr de vouloir annuler cette réservation ?")) {
+            const response = await fetch(`${hostname}front/cancelReservation`, {
+                method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: userId, reservation_id: reservationId })
+            });
+            const data = await response.json();
+            if (data.status === 'success') {
+                setIsReservationDeleted(true); // set the state to true if the reservation was successfully deleted
+                alert('Votre réservation à été annulé')
+            } else if (data.status === 'error') {
+                console.log(data.message);
+            }
+        }
     };
 
 
@@ -50,7 +61,9 @@ function Reserved() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <h3 className='text-center'> Vos réservations </h3>
+<h3 className='text-center'> Vos réservations </h3>
+            {isReservationDeleted && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation à été annulé</div>}
+
             <div className='container-fluid d-flex justify-content-center'>
                 <div className=" rounded col-12 col-md-6 col-xl-4">
                     <div className="container ">
