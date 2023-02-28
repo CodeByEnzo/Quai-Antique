@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import "./Home.css";
 import { hostname } from '../../../config';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -20,7 +19,7 @@ class Home extends Component {
             .then(response => response.json())
             .then(data => this.setState({ gallerys: data }));
     }
-    //Allow the page to show if next composant has disapear
+    //Allow the page to show if next composant has disapear (for transitions)
     handleExitComplete = () => {
         this.setState({ isVisible: false });
     };

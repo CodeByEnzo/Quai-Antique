@@ -4,15 +4,12 @@
 -- "password" par votre mot de passe, 
 -- "mydatabase" par le nom de votre base de données
 -- et "mytable" par le nom de la table que vous souhaitez afficher.
-
 -- CREATE DATABASE db_quai
-
 -- CREATE TABLE `categories` (
 --   `id` int(11) NOT NULL AUTO_INCREMENT,
 --   `name` varchar(150) NOT NULL,
 --   PRIMARY KEY (`id`)
 -- ) 
-
 -- CREATE TABLE `products` (
 --   `product_id` int(11) NOT NULL AUTO_INCREMENT,
 --   `title` varchar(150) NOT NULL,
@@ -23,12 +20,10 @@
 --   PRIMARY KEY (`product_id`),
 --   FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 -- ) 
-
 -- INSERT INTO `categories` (`name`) VALUES
 -- ('Entrées'),
 -- ('Plats'),
 -- ('Desserts');
-
 -- INSERT INTO products (title, content, category_id, prix)
 -- VALUES
 --     (
@@ -55,7 +50,6 @@
 --         1,
 --         '11.50'
 --     );
-
 -- INSERT INTO products (title, content, category_id, prix)
 -- VALUES
 -- (
@@ -82,9 +76,6 @@
 -- 2,
 -- 21.00
 -- );
-
-
-
 -- INSERT INTO products (title, content, category_id, prix)
 -- VALUES
 --     (
@@ -111,18 +102,14 @@
 --         3,
 --         12.00
 --     );
-
-
 -- CREATE TABLE gallerys (
 --     gallery_id INT PRIMARY KEY,
 --     gallery_title VARCHAR(255),
 --     gallery_content VARCHAR(255),
 --     gallery_img VARCHAR(255)
 -- );
-
 -- INSERT INTO gallerys ( gallery_title, gallery_content)
 -- VALUES
-
 --     (
 --         'Fondant au bon chocolat',
 --         'Fondant chaud et moelleux accompagné d\'une boule de glace à la vanille.'
@@ -131,8 +118,6 @@
 --         'Tarte la Tatin',
 --         'Tarte aux pommes caramélisées, servie tiède avec de la crème glacée à la vanille.'
 --     );
-
-
 -- CREATE TABLE clients (
 -- client_id INT(11) NOT NULL AUTO_INCREMENT,
 -- username VARCHAR(255) NOT NULL,
@@ -146,11 +131,8 @@
 -- UNIQUE (username),
 -- UNIQUE (email)
 -- );
-
-
 -- INSERT INTO clients (username, email, password, statut,created_at)
 -- VALUES ('JohnDoe', 'johndoe@example.com', '$2y$10$pJLxJxH/pT.jg8bv3f3cX.b4s4sWYV8vEaPqy7xzGwT3O8aL3q3X2', 'active',NOW());
-
 -- CREATE TABLE reservations (
 -- reservation_id INT(11) NOT NULL AUTO_INCREMENT,
 -- client_id INT(11) NOT NULL,
@@ -162,18 +144,28 @@
 -- PRIMARY KEY (reservation_id),
 -- FOREIGN KEY (client_id) REFERENCES clients(client_id)
 -- );
-
 -- INSERT INTO reservations (client_id, date, time, number_of_people, comments)
 -- VALUES (1, '2022-02-06', '19:00:00', 4, 'Fête d\'anniversaire');
-
-
 -- CREATE TABLE opening_hours (
 --     id INT PRIMARY KEY,
 --     day_of_week VARCHAR(20),
---     lunch_opening_time TIME,
---     lunch_closing_time TIME,
---     dinner_opening_time TIME,
---     dinner_closing_time TIME
+--     lunch_opening_time VARCHAR(10),
+--     lunch_closing_time VARCHAR(10),
+--     dinner_opening_time VARCHAR(10),
+--     dinner_closing_time VARCHAR(10)
 -- );
-
-
+-- INSERT INTO opening_hours (
+-- id, day_of_week, 
+-- lunch_opening_time, 
+-- lunch_closing_time, 
+-- dinner_opening_time, 
+-- dinner_closing_time
+-- )
+-- VALUES
+-- (1, 'Monday', NULL, NULL, NULL, NULL),
+-- (2, 'Tuesday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
+-- (3, 'Wednesday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
+-- (4, 'Thursday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
+-- (5, 'Friday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
+-- (6, 'Saturday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
+-- (7, 'Sunday', '12:00:00', '14:00:00', '19:00:00', '21:30:00');

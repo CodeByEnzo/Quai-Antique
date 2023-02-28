@@ -2,6 +2,7 @@ import React from 'react'
 import { Route, Routes, useLocation } from "react-router-dom";
 import Home from '../containers/site/Home/Home'
 import Menu from '../containers/site/menu/Menu';
+import Hours from '../containers/site/Hours/Hours';
 import NotFound from '../components/404/NotFound';
 // import Test from './test';
 import Contact from "../containers/site/Contact/Contact";
@@ -26,6 +27,7 @@ function AnimatedRoutes() {
 
                 <Route path='/menu' element={<Menu />} />
                 <Route path='/Contact' element={<Contact />} />
+                <Route path='/Hours' element={<Hours />} />
                 <Route path='/RGPD' element={<RGPD />} />
                 {/* <Route path='/test' element={<Test />} /> */}
 
