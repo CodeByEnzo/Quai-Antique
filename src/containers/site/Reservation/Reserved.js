@@ -33,7 +33,7 @@ function Reserved() {
 
     // To cancel a reservation
     const handleCancelReservation = async event => {
-        
+
         const userId = localStorage.getItem("userId")
         const reservationId = event.target.dataset.reservationid;
         if (window.confirm("Êtes-vous sûr de vouloir annuler cette réservation ?")) {
@@ -61,7 +61,7 @@ function Reserved() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-<h3 className='text-center'> Vos réservations </h3>
+            <h3 className='text-center'> Vos réservations </h3>
             {isReservationDeleted && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation à été annulé</div>}
 
             <div className='container-fluid d-flex justify-content-center'>

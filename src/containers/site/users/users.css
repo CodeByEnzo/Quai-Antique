@@ -1,11 +1,6 @@
-.account {
-    padding-top: 30px;
-}
-
 @media screen and (max-width: 700px) {
     #ul-account{
         flex-direction: column;
-        padding-left: 0;
     }
 
 }
