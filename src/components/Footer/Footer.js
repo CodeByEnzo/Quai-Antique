@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom'
 import insta from "../../assets/images/insta.png"
 import FB from "../../assets/images/FB.png"
 import './footer.css'
+import HoursTab from '../HoursTab/HoursTab'
 
 const Footer = (props) => (
 
     <>
         <footer className='text-center footer'>
-            <div className='row no-gutters align-items-center text-center p-3'>
+            <div className='row no-gutters align-items-center justify-content-center text-center p-3'>
                 <div className='col-6 col-md-3 p-3'>
                     <a href='https://www.facebook.com' className='d-block ' target="_blank">
                         <img src={FB} alt='facebook' className='socials' />
@@ -29,6 +30,7 @@ const Footer = (props) => (
                         Politique de confidentialité
                     </NavLink>
                 </div>
+                <HoursTab></HoursTab>
             </div>
             <p className='text-center'>Le Quai Antique - Tout droits réservés</p>
 

@@ -47,9 +47,6 @@ export default function Navbar() {
                         <NavLink to='/menu' className={(nav) => (nav.isActive ? "active" : "item")}>
                             <li> La carte </li>
                         </NavLink >
-                        <NavLink to='/Hours' className={(nav) => (nav.isActive ? "active" : "item")}>
-                            <li> Horraires </li>
-                        </NavLink >
                         <NavLink to='/Contact' className={(nav) => (nav.isActive ? "active" : "item")}>
                             <li> Contact </li>
                         </NavLink >

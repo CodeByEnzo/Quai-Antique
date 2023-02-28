@@ -65,7 +65,7 @@ const Login = () => {
             >
                 <h1 className="text-center">Connection</h1>
                 <div className="container-fluid d-flex justify-content-center">
-                    <form onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
+                    <form onSubmit={handleSubmit} className="form-border rounded bg-dark col-12 col-md-6 col-xl-4 p-2">
                         <div className="form-group mt-3">
                             <label htmlFor="login">Adresse e-mail</label>
                             <input

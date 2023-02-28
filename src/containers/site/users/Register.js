@@ -54,7 +54,7 @@ function Register() {
             >
                 <h1 className='text-center'>Créer un comtpe</h1>
                 <div className='container-fluid d-flex justify-content-center'>
-                    <form method='post' onSubmit={handleSubmit} className="form-border rounded col-12 col-md-6 col-xl-4 p-2">
+                    <form method='post' onSubmit={handleSubmit} className="form-border rounded bg-dark mb-5 col-12 col-md-6 col-xl-4 p-2">
                         <div className='col-12'>
 
                             {error && (

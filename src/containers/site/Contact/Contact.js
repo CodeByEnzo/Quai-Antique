@@ -35,7 +35,7 @@ class Contact extends Component {
         return isVisible ? (
             <AnimatePresence onExitComplete={this.handleExitComplete}>
                 <motion.main
-                    className='main-margin'
+                    className='main-margin mb-5'
 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}

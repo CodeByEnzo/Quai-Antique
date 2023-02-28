@@ -1,13 +1,15 @@
-import "./Hours.css";
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { hostname } from "../../../config";
+import { hostname } from '../../config';
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from 'react-router-dom';
 
 
-function OpeningHours() {
+function HoursTab() {
     const [hours, setHours] = useState([]);
-
+    const location = useLocation();
+    
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get(`${hostname}front/hours`);
@@ -27,7 +29,7 @@ function OpeningHours() {
     return isVisible ? (
         <AnimatePresence onExitComplete={handleExitComplete}>
             <motion.main
-                className='d-flex main-margin flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
+                className='d-flex align-items-center justify-content-center col-12 col-sm-8 col-md-6 col-xl-4'
 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -35,7 +37,6 @@ function OpeningHours() {
                 transition={{ duration: 1 }}
 
             >
-                <h1 className='text-center'>Les horraires d'ouverture</h1>
                 <table className="table text-light">
                     <thead>
                         <tr>
@@ -64,4 +65,4 @@ function OpeningHours() {
     ) : null;
 }
 
-export default OpeningHours;
+export default HoursTab;
