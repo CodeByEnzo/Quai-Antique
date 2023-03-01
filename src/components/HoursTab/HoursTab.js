@@ -3,18 +3,16 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { hostname } from '../../config';
 import { motion, AnimatePresence } from "framer-motion";
-import { useLocation } from 'react-router-dom';
+import './HoursTab.css'
 
 
 function HoursTab() {
     const [hours, setHours] = useState([]);
-    const location = useLocation();
     
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios.get(`${hostname}front/hours`);
             const hours = result.data;
-            console.log(hours)
             setHours(hours);
         };
         fetchData();
@@ -37,7 +35,7 @@ function HoursTab() {
                 transition={{ duration: 1 }}
 
             >
-                <table className="table text-light">
+                <table className="table hoursTable">
                     <thead>
                         <tr>
                             <th scope="col">Jour</th>
