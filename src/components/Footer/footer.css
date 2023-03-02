@@ -19,5 +19,7 @@
     min-height: 150px;
     background: #212529;
     width: 100vw;
+    color: #f2f8f4;
+    overflow-x: hidden;
 
 }

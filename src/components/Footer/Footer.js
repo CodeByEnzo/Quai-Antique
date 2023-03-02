@@ -9,7 +9,7 @@ const Footer = (props) => (
 
     <>
         <footer className='text-center footer'>
-            <div className='row no-gutters align-items-center justify-content-center text-center p-3'>
+            <div className='row no-gutters d-flex align-items-center justify-content-center text-center p-3'>
                 <div className='col-6 col-md-3 p-3'>
                     <a href='https://www.facebook.com' className='d-block ' target="_blank">
                         <img src={FB} alt='facebook' className='socials' />

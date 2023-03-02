@@ -4,12 +4,19 @@
 -- "password" par votre mot de passe, 
 -- "mydatabase" par le nom de votre base de données
 -- et "mytable" par le nom de la table que vous souhaitez afficher.
--- CREATE DATABASE db_quai
+-- CREATE DATABASE db_quai;
+-- CREATE TABLE `users` (
+--   `login` varchar(150) NOT NULL,
+--   `password` varchar(150) NOT NULL
+-- );
+-- INSERT INTO `users` (`login`, `password`) VALUES
+-- ('charle', 'admin01'),
+-- ('charle', '$2y$10$7Pe8coFM9jkrWULnkJD5tu9gvZHtcpas1fpFn4HYIgEGAfZ70tcB6');
 -- CREATE TABLE `categories` (
 --   `id` int(11) NOT NULL AUTO_INCREMENT,
 --   `name` varchar(150) NOT NULL,
 --   PRIMARY KEY (`id`)
--- ) 
+-- );
 -- CREATE TABLE `products` (
 --   `product_id` int(11) NOT NULL AUTO_INCREMENT,
 --   `title` varchar(150) NOT NULL,
@@ -19,7 +26,7 @@
 --   `product_image` varchar(250) DEFAULT NULL,
 --   PRIMARY KEY (`product_id`),
 --   FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
--- ) 
+-- );
 -- INSERT INTO `categories` (`name`) VALUES
 -- ('Entrées'),
 -- ('Plats'),
@@ -34,11 +41,11 @@
 --     ),
 --     (
 --         'Salade savoyarde aux endives et au bleu',
---         'Mélange frais et croquant d\'endives, noix, lardons fumés et morceaux de fromage bleu, servie avec une vinaigrette à la moutarde et aux noix. ',
+--         'Mélange frais et croquant d\'endives, noix, lardons fumés et morceaux de fromage bleu, servie avec une vinaigrette à la moutarde et aux noix.',
 --         1,
 --         12.50
 --     ),
--- (
+--     (
 --         'Assiette de Gor ion',
 --         'Viande séchée de boeuf charolais, spécialité du chef',
 --         1,
@@ -145,7 +152,7 @@
 -- FOREIGN KEY (client_id) REFERENCES clients(client_id)
 -- );
 -- INSERT INTO reservations (client_id, date, time, number_of_people, comments)
--- VALUES (1, '2022-02-06', '19:00:00', 4, 'Fête d\'anniversaire');
+-- VALUES (1, '2022-02-06', '19:00', 4, 'Fête d\'anniversaire');
 -- CREATE TABLE opening_hours (
 --     id INT PRIMARY KEY,
 --     day_of_week VARCHAR(20),
@@ -162,10 +169,10 @@
 -- dinner_closing_time
 -- )
 -- VALUES
--- (1, 'Monday', NULL, NULL, NULL, NULL),
--- (2, 'Tuesday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
--- (3, 'Wednesday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
--- (4, 'Thursday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
--- (5, 'Friday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
--- (6, 'Saturday', '12:00:00', '14:00:00', '19:00:00', '21:30:00'),
--- (7, 'Sunday', '12:00:00', '14:00:00', '19:00:00', '21:30:00');
+-- (1, 'Lundi', NULL, NULL, NULL, NULL),
+-- (2, 'Mardi', '12:00', '14:00', '19:00', '21:30'),
+-- (3, 'Mercredi', '12:00', '14:00', '19:00', '21:30'),
+-- (4, 'Jeudi', '12:00', '14:00', '19:00', '21:30'),
+-- (5, 'Vendredi', '12:00', '14:00', '19:00', '21:30'),
+-- (6, 'Samedi', '12:00', '14:00', '19:00', '21:30'),
+-- (7, 'Dimanche', '12:00', '14:00', '19:00', '21:30');
