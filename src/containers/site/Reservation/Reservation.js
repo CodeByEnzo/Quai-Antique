@@ -1,10 +1,9 @@
-import React, { Component,useState,useEffect } from 'react';
+import React, { Component} from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
 import ResevervationForm from './ResevervationForm';
 import axios from 'axios';
 import { hostname } from '../../../config';
-import { getItem } from '../../../services/LocalStorage';
 
 class Reservation extends Component {
     constructor(props) {
@@ -16,10 +15,7 @@ class Reservation extends Component {
             comment: '',
             client_id: '',
         };
-
-
     }
-
 
     handleSendReservation = (formData) => {
         const userId = localStorage.getItem('userId');

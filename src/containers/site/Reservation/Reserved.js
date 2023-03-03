@@ -2,11 +2,14 @@ import React, { useState, useEffect } from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
 import { hostname } from '../../../config';
+import ResevervationForm from './ResevervationForm';
 
-function Reserved() {
+
+const Reserved = ({ reservation }) => {
     // Get the user's data to display them
     const [userData, setUserData] = useState(null);
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
+
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -31,14 +34,44 @@ function Reserved() {
         }
     }, [isReservationDeleted]); // add isReservationDeleted as a dependency to recall the function when the state changes
 
-    // To cancel a reservation
-    const handleCancelReservation = async event => {
+    const [isEditing, setIsEditing] = useState(false);
 
+    const UpdateBTN = () => {
+        setIsEditing(true)
+    }
+
+    const handleSaveClick = () => {
+        // Ajouter du code pour sauvegarder la réservation modifiée
+        setIsEditing(false);
+    };
+
+
+    // To cancel a reservation from user
+    const handleCancelReservation = async event => {
         const userId = localStorage.getItem("userId")
         const reservationId = event.target.dataset.reservationid;
         if (window.confirm("Êtes-vous sûr de vouloir annuler cette réservation ?")) {
             const response = await fetch(`${hostname}front/cancelReservation`, {
                 method: "DELETE",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ userId: userId, reservation_id: reservationId })
+            });
+            const data = await response.json();
+            if (data.status === 'success') {
+                setIsReservationDeleted(true); // set the state to true if the reservation was successfully deleted
+                alert('Votre réservation à été annulé')
+            } else if (data.status === 'error') {
+                console.log(data.message);
+            }
+        }
+    };
+    //to modify reservation from user
+    const handleUpdateReservation = async event => {
+        const userId = localStorage.getItem("userId")
+        const reservationId = event.target.dataset.reservationid;
+        if (window.confirm("Êtes-vous sûr de vouloir modifier cette réservation ?")) {
+            const response = await fetch(`${hostname}front/updateReservation`, {
+                method: "UPDATE",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ userId: userId, reservation_id: reservationId })
             });
@@ -67,48 +100,61 @@ function Reserved() {
             <div className='container-fluid d-flex justify-content-center'>
                 <div className=" rounded col-12 col-md-6 col-xl-4">
                     <div className="container ">
-                        {userData?.reservations?.length > 0 ? (
-                            <div>
-                                {userData.reservations.map(reservation => (
-                                    <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
-                                        <div className="form-group mt-3">
-                                            <label>Date :</label>
-                                            <div>
-                                                <p>{reservation.date}</p>
-                                            </div>
-                                        </div>
-                                        <div className="form-group mt-3">
-                                            <label>Heure :</label>
-                                            <div>
-                                                <p>{reservation.time}</p>
-                                            </div>
-                                        </div>
-                                        <div className="form-group mt-3">
-                                            <label>Nombre de personnes :</label>
-                                            <div>
-                                                <p>{reservation.number_of_people}</p>
-                                            </div>
-                                        </div>
-                                        <div className="form-group mt-3">
-                                            <label>Commentaire :</label>
-                                            <div>
-                                                <p>{reservation.comments}</p>
-                                            </div>
-                                        </div>
-                                        <div className='d-flex justify-content-center mt-3'>
-                                            <button className="btn sub-btn mx-2">Modifier</button>
-                                            <button className="btn sub-btn mx-2"
-                                                onClick={handleCancelReservation}
-                                                data-reservationid={reservation.reservation_id}>
-                                                Annuler
-                                            </button>
-                                        </div>
-                                    </section>
-                                ))}
-                            </div>
+                        {isEditing ? (
+                            <span className='container-fluid'>
+                                <ResevervationForm />
+                            </span>
                         ) : (
-                            <p className='text-center'>Aucune réservation trouvée</p>
+                            <span>
+                                {userData?.reservations?.length > 0 ? (
+                                    <div>
+                                        {userData.reservations.map(reservation => (
+                                            <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
+                                                <div className="form-group mt-3">
+                                                    <label>Date :</label>
+                                                    <div>
+                                                        <p>{reservation.date}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="form-group mt-3">
+                                                    <label>Heure :</label>
+                                                    <div>
+                                                        <p>{reservation.time}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="form-group mt-3">
+                                                    <label>Nombre de personnes :</label>
+                                                    <div>
+                                                        <p>{reservation.number_of_people}</p>
+                                                    </div>
+                                                </div>
+                                                <div className="form-group mt-3">
+                                                    <label>Commentaire :</label>
+                                                    <div>
+                                                        <p>{reservation.comments}</p>
+                                                    </div>
+                                                </div>
+                                                <div className='d-flex justify-content-center mt-3'>
+                                                    <button className="btn sub-btn mx-2"
+                                                        onClick={UpdateBTN}>
+                                                        Modifier
+                                                    </button>
+                                                    <button className="btn sub-btn mx-2"
+                                                        onClick={handleCancelReservation}
+                                                        data-reservationid={reservation.reservation_id}>
+                                                        Annuler
+                                                    </button>
+                                                </div>
+                                            </section>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className='text-center'>Aucune réservation trouvée</p>
+                                )}
+                            </span>
                         )}
+
+
                     </div>
                 </div>
             </div>

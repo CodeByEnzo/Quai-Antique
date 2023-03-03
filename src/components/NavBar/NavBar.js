@@ -6,17 +6,24 @@ import logo from '../../assets/images/LOGO-GOLD.png';
 
 
 export default function Navbar() {
-
     const [toggleMenu, setToggleMenu] = useState(false);
     const [largeur, setLargeur] = useState(window.innerWidth)
+
     const toggleMenuSmallScreen = () => {
         setToggleMenu(!toggleMenu);
+
     }
 
     const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
     const handleLogin = () => {
         setIsAuthenticated(false);
     };
+    const closeMenu = () => {
+        setTimeout(() => {
+            setToggleMenu(false);
+        }, 100);
+    };
+
 
     useEffect(() => {
         const changeWidth = () => {
@@ -25,6 +32,7 @@ export default function Navbar() {
                 setToggleMenu(false);
             }
         }
+
         window.addEventListener('resize', changeWidth);
         return () => {
             window.removeEventListener('resize', changeWidth);
@@ -32,7 +40,7 @@ export default function Navbar() {
     }, [])
 
     return (
-        <div className={`${toggleMenu ? "showNav navContainer" : ""}`}>
+        <div className={`navContainer' ${toggleMenu ? "showNav" : "hideNav"}`}>
             <NavLink to='/' className={(nav) => (nav.isActive ? "item position-absolute logo" : "item position-absolute logo")}>
                 <li>
                     <img src={logo} alt="logo du quai antique" width="70px" />
@@ -40,29 +48,29 @@ export default function Navbar() {
             </NavLink>
             <nav>
                 {(toggleMenu || largeur > 800) && (
-                    // <ul className=' fw-bold list '>
-                    <ul className={`${toggleMenu ? "list" : "listClose"}`}>
-                        <NavLink to='/' className={(nav) => (nav.isActive ? "active" : "item")}>
+                    <ul className='list fw-bold'>
+
+                        <NavLink to='/' className={(nav) => (nav.isActive ? "active" : "item")} onClick={closeMenu}>
                             <li> Acceuil </li>
-                        </NavLink >
-                        <NavLink to='/menu' className={(nav) => (nav.isActive ? "active" : "item")}>
+                        </NavLink>
+                        <NavLink to='/menu' className={(nav) => (nav.isActive ? "active" : "item")} onClick={closeMenu}>
                             <li> La carte </li>
-                        </NavLink >
-                        <NavLink to='/Contact' className={(nav) => (nav.isActive ? "active" : "item")}>
+                        </NavLink>
+                        <NavLink to='/Contact' className={(nav) => (nav.isActive ? "active" : "item")} onClick={closeMenu}>
                             <li> Contact </li>
                         </NavLink >
                         {(!isAuthenticated && (
                             <>
-                                <NavLink to='/Login' className={(nav) => (nav.isActive ? "active" : "item")}>
+                                <NavLink to='/Login' className={(nav) => (nav.isActive ? "active" : "item")} onClick={closeMenu}>
                                     <li> Se connecter </li>
                                 </NavLink >
-                                <NavLink to='/Register' className={(nav) => (nav.isActive ? "active" : "item")}>
+                                <NavLink to='/Register' className={(nav) => (nav.isActive ? "active" : "item")} onClick={closeMenu}>
                                     <li> S'enregistrer </li>
                                 </NavLink >
                             </>
                         )) || (
                                 <>
-                                    <NavLink to='/Account' className={(nav) => (nav.isActive ? "active" : "item")}>
+                                    <NavLink to='/Account' className={(nav) => (nav.isActive ? "active" : "item")} onClick={closeMenu}>
                                         <li> Mon compte </li>
                                     </NavLink >
                                     <li className='mt-2'>
