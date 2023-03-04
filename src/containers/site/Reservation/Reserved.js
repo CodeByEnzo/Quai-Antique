@@ -7,12 +7,12 @@ import axios from 'axios';
 
 
 const Reserved = ({ reservation }) => {
-
-    // Get the user's data to display them
     const [userData, setUserData] = useState(null);
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
+    const [ReservationSent, setReservationSent] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
-
+    //Send request to display data    
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -36,19 +36,9 @@ const Reserved = ({ reservation }) => {
         }
     }, [isReservationDeleted]); // add isReservationDeleted as a dependency to recall the function when the state changes
 
-    const [isEditing, setIsEditing] = useState(false);
 
-    const UpdateBTN = () => {
-        setIsEditing(true)
-    }
-    const cancelBTN = () => {
-        setIsEditing(false)
-    }
 
-    const handleSaveClick = () => {
-        // Ajouter du code pour sauvegarder la réservation modifiée
-        setIsEditing(false);
-    };
+
 
 
     // To cancel a reservation from user
@@ -71,41 +61,27 @@ const Reserved = ({ reservation }) => {
         }
     };
     //to modify reservation from user
-    const handleUpdateReservation = async event => {
-        const userId = localStorage.getItem("userId")
-        const reservationId = event.target.dataset.reservationid;
-        if (window.confirm("Êtes-vous sûr de vouloir modifier cette réservation ?")) {
-            const response = await fetch(`${hostname}front/updateReservation`, {
-                method: "UPDATE",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId: userId, reservation_id: reservationId })
-            });
-            const data = await response.json();
-            if (data.status === 'success') {
-                setIsReservationDeleted(true); // set the state to true if the reservation was successfully deleted
-                alert('Votre réservation à été annulé')
-            } else if (data.status === 'error') {
-                console.log(data.message);
-            }
-        }
-    };
-
-    
     const [formData, setFormData] = useState({
         date: "",
         time: "",
-        numberOfPeople: "",
-        comments: "",
+        number_of_People: "",
+        comment: "",
     });
 
+    const UpdateBTN = () => {
+        setIsEditing(true)
+    }
+    const cancelBTN = () => {
+        setIsEditing(false)
+    }
     const handleSendUpdateReservation = (formData) => {
         const userId = localStorage.getItem('userId');
         const { date, time, number_of_people, comment } = formData;
         const requestBody = {
-            date,
-            time,
-            number_of_people,
-            comment,
+            date: date,
+            time: time,
+            number_of_people: number_of_people,
+            comment: comment,
             userId
         };
         axios
@@ -115,7 +91,7 @@ const Reserved = ({ reservation }) => {
                 },
             })
             .then((response) => {
-                this.setState({ ReservationSent: true });
+                setReservationSent(true);
             })
             .catch((error) => {
                 console.log(error);
@@ -134,13 +110,12 @@ const Reserved = ({ reservation }) => {
             {isReservationDeleted && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation à été annulé</div>}
 
             <div className='container-fluid d-flex justify-content-center'>
-                <div className=" rounded col-12 col-md-6 col-xl-4">
-                    <div className="container ">
+                <div className=" rounded col-12 col-md-8 col-xl-4">
+                    <div className="container-fluid">
                         {isEditing ? (
                             <span className='container-fluid d-flex flex-column align-items-center'>
-                                <UpdateReservationForm sendUpdateReservation={handleSendUpdateReservation()} />
-
-                                <span className='bg-dark'>
+                                <UpdateReservationForm sendUpdateReservation={handleSendUpdateReservation} />
+                                <span className='bg-dark mt-3 rounded'>
                                     <button
                                         className="btn sub-btn btn-lg"
                                         type="submit"
@@ -201,6 +176,7 @@ const Reserved = ({ reservation }) => {
                         )}
                     </div>
                 </div>
+
             </div>
 
         </motion.main>

@@ -29,9 +29,9 @@ const UpdateReservationForm = (props) => {
         }
     }, []);
     return (
-        <div className="m-2 p-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
+        <div className="d-flex justify-content-center py-2">
             <form id="UpdateReservationForm"
-                className=" form-border shadow rounded p-3 row d-flex justify-content-center col-xl-5 bg-dark">
+                className=" form-border shadow rounded p-3 row d-flex justify-content-center bg-dark">
 
                 <div className="mb-3 col-12 col-md-10">
                     <label htmlFor="date" className="form-label">date</label>
@@ -106,11 +106,12 @@ const UpdateReservationForm = (props) => {
                         className="btn sub-btn btn-lg mb-3"
                         type="submit"
                         onClick={props.handleSubmit}>
-                        ENVOYER
+                        Enregistrer
                     </button>
                 </div>
 
             </form>
+
         </div>
     )
 }
