@@ -11,6 +11,8 @@ const Reserved = ({ reservation }) => {
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
     const [ReservationSent, setReservationSent] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [selectedReservationId, setSelectedReservationId] = useState(null);
+
 
     //Send request to display data    
     useEffect(() => {
@@ -69,8 +71,15 @@ const Reserved = ({ reservation }) => {
     });
 
     const UpdateBTN = () => {
+        setSelectedReservationId();
+        console.log()
         setIsEditing(true)
     }
+    const handleUpdateClick = (reservationId, event) => {
+        setSelectedReservationId(reservationId);
+        console.log(event.target.dataset.reservationid);
+        setIsEditing(true);
+    };
     const cancelBTN = () => {
         setIsEditing(false)
     }
@@ -110,7 +119,7 @@ const Reserved = ({ reservation }) => {
             {isReservationDeleted && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation à été annulé</div>}
 
             <div className='container-fluid d-flex justify-content-center'>
-                <div className=" rounded col-12 col-md-8 col-xl-4">
+                <div className=" rounded col-12 col-md-8 col-xl-6">
                     <div className="container-fluid">
                         {isEditing ? (
                             <span className='container-fluid d-flex flex-column align-items-center'>
@@ -156,8 +165,14 @@ const Reserved = ({ reservation }) => {
                                                     </div>
                                                 </div>
                                                 <div className='d-flex justify-content-center mt-3'>
-                                                    <button className="btn sub-btn mx-2"
+                                                    {/* <button className="btn sub-btn mx-2"
                                                         onClick={UpdateBTN}>
+                                                        Modifier
+                                                    </button> */}
+                                                    <button
+                                                        className="btn sub-btn mx-2"
+                                                        onClick={(event) => handleUpdateClick(reservation.reservation_id, event)}
+                                                        data-reservationid={reservation.reservation_id}>
                                                         Modifier
                                                     </button>
                                                     <button className="btn sub-btn mx-2"

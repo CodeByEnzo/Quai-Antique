@@ -39,7 +39,7 @@ const ReservationForm = (props) => {
                     row
                     d-flex
                     justify-content-center
-                    col-xl-5
+                    col-xl-6
                     bg-dark">
 
                 <div className="mb-3 col-12 col-md-10">
