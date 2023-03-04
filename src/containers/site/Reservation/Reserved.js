@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import "./reservation.css";
 import { motion } from 'framer-motion';
 import { hostname } from '../../../config';
-import ResevervationForm from './ResevervationForm';
+import UpdateReservationForm from './UpdateReservationForm';
+import axios from 'axios';
 
 
 const Reserved = ({ reservation }) => {
+
     // Get the user's data to display them
     const [userData, setUserData] = useState(null);
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
@@ -38,6 +40,9 @@ const Reserved = ({ reservation }) => {
 
     const UpdateBTN = () => {
         setIsEditing(true)
+    }
+    const cancelBTN = () => {
+        setIsEditing(false)
     }
 
     const handleSaveClick = () => {
@@ -85,6 +90,37 @@ const Reserved = ({ reservation }) => {
         }
     };
 
+    
+    const [formData, setFormData] = useState({
+        date: "",
+        time: "",
+        numberOfPeople: "",
+        comments: "",
+    });
+
+    const handleSendUpdateReservation = (formData) => {
+        const userId = localStorage.getItem('userId');
+        const { date, time, number_of_people, comment } = formData;
+        const requestBody = {
+            date,
+            time,
+            number_of_people,
+            comment,
+            userId
+        };
+        axios
+            .post(`${hostname}front/updateReservation`, requestBody, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                },
+            })
+            .then((response) => {
+                this.setState({ ReservationSent: true });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
 
     return (
         <motion.main
@@ -101,8 +137,18 @@ const Reserved = ({ reservation }) => {
                 <div className=" rounded col-12 col-md-6 col-xl-4">
                     <div className="container ">
                         {isEditing ? (
-                            <span className='container-fluid'>
-                                <ResevervationForm />
+                            <span className='container-fluid d-flex flex-column align-items-center'>
+                                <UpdateReservationForm sendUpdateReservation={handleSendUpdateReservation()} />
+
+                                <span className='bg-dark'>
+                                    <button
+                                        className="btn sub-btn btn-lg"
+                                        type="submit"
+                                        onClick={cancelBTN}>
+                                        Annuler la modification
+                                    </button>
+                                </span>
+
                             </span>
                         ) : (
                             <span>
@@ -153,8 +199,6 @@ const Reserved = ({ reservation }) => {
                                 )}
                             </span>
                         )}
-
-
                     </div>
                 </div>
             </div>
