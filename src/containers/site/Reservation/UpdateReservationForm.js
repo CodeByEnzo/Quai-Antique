@@ -19,7 +19,7 @@ const UpdateReservationForm = (props) => {
                         }
                     });
                     const data = await response.json();
-                    localStorage.setItem('userId', data.user.id);
+                    localStorage.setItem('client_id', data.user.id);
 
                 } catch (error) {
                     console.error("Error fetching user data", error);

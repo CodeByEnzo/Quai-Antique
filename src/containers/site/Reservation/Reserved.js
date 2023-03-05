@@ -6,13 +6,13 @@ import UpdateReservationForm from './UpdateReservationForm';
 import axios from 'axios';
 
 
-const Reserved = ({ reservation }) => {
+const Reserved = () => {
     const [userData, setUserData] = useState(null);
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
     const [ReservationSent, setReservationSent] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [selectedReservationId, setSelectedReservationId] = useState(null);
-
+    const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
     //Send request to display data    
     useEffect(() => {
@@ -38,20 +38,15 @@ const Reserved = ({ reservation }) => {
         }
     }, [isReservationDeleted]); // add isReservationDeleted as a dependency to recall the function when the state changes
 
-
-
-
-
-
     // To cancel a reservation from user
     const handleCancelReservation = async event => {
-        const userId = localStorage.getItem("userId")
+        const client_id = localStorage.getItem("client_id")
         const reservationId = event.target.dataset.reservationid;
         if (window.confirm("Êtes-vous sûr de vouloir annuler cette réservation ?")) {
             const response = await fetch(`${hostname}front/cancelReservation`, {
                 method: "DELETE",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ userId: userId, reservation_id: reservationId })
+                body: JSON.stringify({ client_id: client_id, reservation_id: reservationId })
             });
             const data = await response.json();
             if (data.status === 'success') {
@@ -62,36 +57,38 @@ const Reserved = ({ reservation }) => {
             }
         }
     };
-    //to modify reservation from user
+    // To modify reservation from user
     const [formData, setFormData] = useState({
         date: "",
         time: "",
         number_of_People: "",
         comment: "",
     });
+    useEffect(() => {
+    }, [reservationIdToUpdate]);
 
-    const UpdateBTN = () => {
-        setSelectedReservationId();
-        console.log()
-        setIsEditing(true)
-    }
+    //Get the id of the reservation that will be update
     const handleUpdateClick = (reservationId, event) => {
         setSelectedReservationId(reservationId);
-        console.log(event.target.dataset.reservationid);
         setIsEditing(true);
+        setReservationIdToUpdate(event.target.dataset.reservationid);
     };
+    //Undisplay inputs
     const cancelBTN = () => {
         setIsEditing(false)
     }
+    // Request to back end
     const handleSendUpdateReservation = (formData) => {
-        const userId = localStorage.getItem('userId');
+        const client_id = localStorage.getItem('client_id');
+        const updateReservationId = reservationIdToUpdate;
         const { date, time, number_of_people, comment } = formData;
         const requestBody = {
             date: date,
             time: time,
             number_of_people: number_of_people,
             comment: comment,
-            userId
+            client_id: client_id,
+            reservation_id: updateReservationId
         };
         axios
             .post(`${hostname}front/updateReservation`, requestBody, {
@@ -101,11 +98,15 @@ const Reserved = ({ reservation }) => {
             })
             .then((response) => {
                 setReservationSent(true);
+                setIsEditing(false)
+                alert('Votre réservation à été modifié')
+                
             })
             .catch((error) => {
                 console.log(error);
             });
     };
+
 
     return (
         <motion.main
@@ -116,8 +117,6 @@ const Reserved = ({ reservation }) => {
             transition={{ duration: 1 }}
         >
             <h3 className='text-center'> Vos réservations </h3>
-            {isReservationDeleted && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation à été annulé</div>}
-
             <div className='container-fluid d-flex justify-content-center'>
                 <div className=" rounded col-12 col-md-8 col-xl-6">
                     <div className="container-fluid">

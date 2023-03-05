@@ -18,14 +18,14 @@ class Reservation extends Component {
     }
 
     handleSendReservation = (formData) => {
-        const userId = localStorage.getItem('userId');
+        const client_id = localStorage.getItem('client_id');
         const { date, time, number_of_people, comment } = formData;
         const requestBody = {
             date,
             time,
             number_of_people,
             comment,
-            userId
+            client_id
         };
         axios
             .post(`${hostname}front/reservation`, requestBody, {

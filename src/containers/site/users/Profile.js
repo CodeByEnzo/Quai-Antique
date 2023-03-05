@@ -27,6 +27,7 @@ const Profile = (props) => {
                 .then(data => {
                     try {
                         setUserData(data);
+                        localStorage.setItem('client_id', data.user.id);
 
                     } catch (error) {
                         console.error("Error parsing JSON data", error);
