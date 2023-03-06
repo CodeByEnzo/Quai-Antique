@@ -8,24 +8,19 @@ import { hostname } from '../../../config';
 class Reservation extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            date: '',
-            time: '',
-            number_of_people: '',
-            comment: '',
-            client_id: '',
+        this.state = { date: '', time: '', number_of_people: '', comment: '', client_id: ''
         };
     }
 
+    componentDidMount() {
+        axios.get("http://localhost/SERVEURQUAI/front/hours").then((response) => {
+            this.setState({ hours: response.data });
+        });
+    }
     handleSendReservation = (formData) => {
-        const client_id = localStorage.getItem('client_id');
+        const userId = localStorage.getItem('userId');
         const { date, time, number_of_people, comment } = formData;
-        const requestBody = {
-            date,
-            time,
-            number_of_people,
-            comment,
-            client_id
+        const requestBody = { date, time, number_of_people, comment, userId
         };
         axios
             .post(`${hostname}front/reservation`, requestBody, {
@@ -40,7 +35,6 @@ class Reservation extends Component {
                 console.log(error);
             });
     };
-
     render() {
         return (
             <motion.main
@@ -56,13 +50,4 @@ class Reservation extends Component {
         );
     }
 }
-
 export default Reservation;
-
-
-
-
-
-
-
-
