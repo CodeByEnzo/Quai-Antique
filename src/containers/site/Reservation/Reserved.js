@@ -11,7 +11,6 @@ const Reserved = () => {
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
     const [ReservationSent, setReservationSent] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [selectedReservationId, setSelectedReservationId] = useState(null);
     const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
     //Send request to display data    
@@ -57,19 +56,15 @@ const Reserved = () => {
             }
         }
     };
+
+    
     // To modify reservation from user
-    const [formData, setFormData] = useState({
-        date: "",
-        time: "",
-        number_of_People: "",
-        comment: "",
-    });
+
     useEffect(() => {
     }, [reservationIdToUpdate]);
 
     //Get the id of the reservation that will be update
-    const handleUpdateClick = (reservationId, event) => {
-        setSelectedReservationId(reservationId);
+    const handleUpdateClick = (reservationid, event) => {
         setIsEditing(true);
         setReservationIdToUpdate(event.target.dataset.reservationid);
     };
@@ -100,7 +95,6 @@ const Reserved = () => {
                 setReservationSent(true);
                 setIsEditing(false)
                 alert('Votre réservation à été modifié')
-                
             })
             .catch((error) => {
                 console.log(error);
@@ -164,10 +158,6 @@ const Reserved = () => {
                                                     </div>
                                                 </div>
                                                 <div className='d-flex justify-content-center mt-3'>
-                                                    {/* <button className="btn sub-btn mx-2"
-                                                        onClick={UpdateBTN}>
-                                                        Modifier
-                                                    </button> */}
                                                     <button
                                                         className="btn sub-btn mx-2"
                                                         onClick={(event) => handleUpdateClick(reservation.reservation_id, event)}
