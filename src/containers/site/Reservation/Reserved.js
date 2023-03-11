@@ -100,6 +100,10 @@ const Reserved = () => {
             });
     };
 
+    const handleUpdateSuccess = () => {
+        setIsEditing(false);
+        // afficher un message de confirmation ou rafraîchir les données des réservations
+    };
 
     return (
         <motion.main
@@ -115,7 +119,7 @@ const Reserved = () => {
                         {isEditing ? (
                             <span className='container-fluid d-flex flex-column align-items-center'>
                                 <h3 className='text-center'> Modifiez votre réservation </h3>
-                                <UpdateReservationForm reservationIdToUpdate={reservationIdToUpdate} reservationSent={cancelBTN} />
+                                <UpdateReservationForm reservationIdToUpdate={reservationIdToUpdate} onUpdateSuccess={handleUpdateSuccess} />
                                 <span className='bg-dark mt-3 rounded'>
                                     <button
                                         className="btn sub-btn btn-lg"

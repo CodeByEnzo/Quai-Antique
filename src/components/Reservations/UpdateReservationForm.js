@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { motion } from 'framer-motion';
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { hostname } from "../../config";
 import * as Yup from "yup";
@@ -9,7 +10,7 @@ moment.locale("fr"); // Définir l'heure locale française pour Moment.js
 
 const UpdateReservationForm = (props) => {
     const [hours, setHours] = useState(null);
-    const { reservationIdToUpdate } = props;
+    const { reservationIdToUpdate, onUpdateSuccess } = props;
 
     useEffect(() => {
         axios.get(`${hostname}front/hours`).then((response) => {
@@ -92,7 +93,12 @@ const UpdateReservationForm = (props) => {
     });
 
     return (
-        <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-8">
+        <motion.div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+        >
             <Formik
                 initialValues={{
                     date: "",
@@ -120,7 +126,7 @@ const UpdateReservationForm = (props) => {
                             },
                         })
                         .then((response) => {
-                            this.setState({ ReservationSent: true });
+                            onUpdateSuccess()
                         })
                         .catch((error) => {
                             console.log(error);
@@ -153,7 +159,7 @@ const UpdateReservationForm = (props) => {
                     </Form>
                 )}
             </Formik>
-        </div>
+        </motion.div>
     );
 
 }
