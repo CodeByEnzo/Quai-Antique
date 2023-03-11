@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { withFormik } from "formik";
 import * as Yup from "yup";
 import moment from 'moment';
-import { hostname } from "../../../config";
+import { hostname } from "../../config";
 
 const UpdateReservationForm = (props) => {
     const [userData, setUserData] = useState(null);

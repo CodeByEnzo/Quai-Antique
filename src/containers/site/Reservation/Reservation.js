@@ -1,7 +1,7 @@
+
 import React, { Component} from 'react';
-import "./reservation.css";
 import { motion } from 'framer-motion';
-import ResevervationForm from './ResevervationForm';
+import ResevervationForm from '../../../components/Reservations/ResevervationForm';
 import axios from 'axios';
 import { hostname } from '../../../config';
 
@@ -18,9 +18,9 @@ class Reservation extends Component {
         });
     }
     handleSendReservation = (formData) => {
-        const userId = localStorage.getItem('userId');
+        const client_id = localStorage.getItem('client_id');
         const { date, time, number_of_people, comment } = formData;
-        const requestBody = { date, time, number_of_people, comment, userId
+        const requestBody = { date, time, number_of_people, comment, client_id
         };
         axios
             .post(`${hostname}front/reservation`, requestBody, {
@@ -43,11 +43,62 @@ class Reservation extends Component {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1 }}
             >
-                <h3 className='text-center'> Réserver une table </h3>
-                {this.state.ReservationSent && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation est prise en compte</div>}
-                <ResevervationForm sendReservation={this.handleSendReservation} />
+                <ResevervationForm/>
             </motion.main>
         );
     }
 }
 export default Reservation;
+
+
+
+
+// import React, { Component} from 'react';
+// import "./reservation.css";
+// import { motion } from 'framer-motion';
+// import ResevervationForm from './ResevervationForm';
+// import axios from 'axios';
+// import { hostname } from '../../../config';
+
+// class Reservation extends Component {
+//     constructor(props) {
+//         super(props);
+//         this.state = { date: '', time: '', number_of_people: '', comment: '', client_id: ''
+//         };
+//     }
+//     handleSendReservation = (formData) => {
+//         const client_id = localStorage.getItem('client_id');
+//         const { date, time, number_of_people, comment } = formData;
+//         const requestBody = { date, time, number_of_people, comment, client_id
+//         };
+//         axios
+//             .post(`${hostname}front/reservation`, requestBody, {
+//                 headers: {
+//                     Authorization: `Bearer ${localStorage.getItem('token')}`,
+//                 },
+//             })
+//             .then((response) => {
+//                 this.setState({ ReservationSent: true });
+//             })
+//             .catch((error) => {
+//                 console.log(error);
+//             });
+//     };
+//     render() {
+//         return (
+//             <motion.main
+//                 initial={{ opacity: 0 }}
+//                 animate={{ opacity: 1 }}
+//                 exit={{ opacity: 0 }}
+//                 transition={{ duration: 1 }}
+//             >
+//                 <h3 className='text-center'> Réserver une table </h3>
+//                 {this.state.ReservationSent && <div className="alert alert-success col-9 text-center mx-auto">Votre réservation est prise en compte</div>}
+//                 <ResevervationForm sendReservation={this.handleSendReservation} />
+//             </motion.main>
+//         );
+//     }
+// }
+// export default Reservation;
+
+

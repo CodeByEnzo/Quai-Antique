@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import "./reservation.css";
 import { motion } from 'framer-motion';
 import { hostname } from '../../../config';
-import UpdateReservationForm from './UpdateReservationForm';
+import UpdateReservationForm from '../../../components/Reservations/UpdateReservationForm';
 import axios from 'axios';
 
 
@@ -57,7 +56,7 @@ const Reserved = () => {
         }
     };
 
-    
+
     // To modify reservation from user
 
     useEffect(() => {
