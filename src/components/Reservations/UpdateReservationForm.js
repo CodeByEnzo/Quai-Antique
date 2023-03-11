@@ -1,12 +1,20 @@
-import React, { useState, useEffect } from 'react';
-import { withFormik } from "formik";
-import * as Yup from "yup";
-import moment from 'moment';
+import React, { useState, useEffect } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { hostname } from "../../config";
+import * as Yup from "yup";
+import axios from "axios";
+import moment from "moment";
+import "moment/locale/fr";
+moment.locale("fr"); // Définir l'heure locale française pour Moment.js
 
 const UpdateReservationForm = (props) => {
-    const [userData, setUserData] = useState(null);
+    const [hours, setHours] = useState(null);
+    const { reservationIdToUpdate } = props;
+
     useEffect(() => {
+        axios.get(`${hostname}front/hours`).then((response) => {
+            setHours(response.data);
+        });
         const token = localStorage.getItem("token");
         if (token) {
             const fetchUserData = async () => {
@@ -28,148 +36,125 @@ const UpdateReservationForm = (props) => {
             fetchUserData();
         }
     }, []);
-    return (
-        <div className="d-flex justify-content-center py-2">
-            <form id="UpdateReservationForm"
-                className=" form-border shadow rounded p-3 row d-flex justify-content-center bg-dark">
 
-                <div className="mb-3 col-12 col-md-10">
-                    <label htmlFor="date" className="form-label">date</label>
-                    <input className="form-control"
-                        id="date"
-                        type="date"
-                        name="date"
-                        onChange={props.handleChange}
-                        value={props.values.date}
-                        onBlur={props.handleBlur}
-                    />
-                    {
-                        props.touched.date &&
-                        props.errors.date &&
-                        <span className="text-danger">{props.errors.date}</span>
-                    }
-                </div>
-                <div className="mb-3 col-12 col-md-10">
-                    <label htmlFor="time" className="form-label">Time</label>
-                    <input className="form-control" id="time" type="time" placeholder="Time"
-                        name="time"
-                        onChange={props.handleChange}
-                        value={props.values.time}
-                        onBlur={props.handleBlur}
-
-                    />
-                    {
-                        props.touched.time &&
-                        props.errors.time &&
-                        <span className="text-danger">{props.errors.time}</span>
-                    }
-                </div>
-                <div className="mb-3 col-12 col-md-10">
-                    <label htmlFor="number_of_people" className="form-label">Nombre de personne</label>
-                    <input
-                        className="form-control"
-                        id="number_of_people"
-                        type="number"
-                        placeholder="Nombre de personne"
-                        name="number_of_people"
-                        onChange={props.handleChange}
-                        value={props.values.number_of_people}
-                        onBlur={props.handleBlur}
-
-                    />
-                    {
-                        props.touched.number_of_people &&
-                        props.errors.number_of_people &&
-                        <span className="text-danger">{props.errors.number_of_people}</span>
-                    }
-                </div>
-                <div className="mb-3 col-12 col-md-10">
-                    <label htmlFor="comment" className="form-label">Commentaire</label>
-                    <textarea
-                        className="form-control"
-                        id="comment"
-                        type="text"
-                        placeholder="Commentaire"
-                        name="comment"
-                        onChange={props.handleChange}
-                        value={props.values.comment}
-                        onBlur={props.handleBlur}
-                    ></textarea>
-                    {
-                        props.touched.comment &&
-                        props.errors.comment &&
-                        <span className="text-danger">{props.errors.comment}</span>
-                    }
-                </div>
-                <div className="d-grid col-12 col-md-10">
-                    <button
-                        className="btn sub-btn btn-lg mb-3"
-                        type="submit"
-                        onClick={props.handleSubmit}>
-                        Enregistrer
-                    </button>
-                </div>
-
-            </form>
-
-        </div>
-    )
-}
-
-export default withFormik({
-    mapPropsToValues: () => ({
-        date: "",
-        time: "",
-        number_of_people: "",
-        comment: ""
-    }),
-    validationSchema: Yup.object().shape({
-        date: Yup.string()
-            .test('not-monday', "Les réservations ne sont pas autorisées les lundis.", function (value) {
-                return moment(value, "YYYY-MM-DD").day() !== 1;
-            })
-            .test('not-past-date', "Vous ne pouvez pas réserver sur une date passée.", function (value) {
-                return moment(value, "YYYY-MM-DD").isSameOrAfter(moment(), "day");
-            })
-            .required("La date est obligatoire"),
-
+    const reservationSchema = Yup.object().shape({
+        date: Yup.date()
+            .required("La date est requise")
+            .min(new Date(), "Vous ne pouvez pas choisir une date passée")
+            .test("is-opening-day", "Le restaurant est fermé à cette date", (date) => {
+                // Get the selected date and format the first letter to uppercase so it match with database
+                const dayOfWeek = moment(date).format("dddd").toLowerCase().replace(/^\w/, (c) => c.toUpperCase());
+                // Return all open days
+                const openingDays = Object.values(hours).filter(day => day.lunch_opening_time !== "FERME").map(day => day.day_of_week);
+                // Verify if day selected is not a closed day
+                const isOpeningDay = openingDays.some(day => day == dayOfWeek);
+                // Boolean
+                return isOpeningDay;
+            }),
         time: Yup.string()
-            .test(
-                "is-between-12-14-or-19-21",
-                "L'heure doit être entre 12h-14h ou 19h-21h",
-                (value) => {
-                    if (!value) {
-                        return false;
-                    }
-                    const time = moment(value, "HH:mm");
-                    const startMidi = moment("12:00", "HH:mm");
-                    const endMidi = moment("14:00", "HH:mm");
-                    const startSoir = moment("19:00", "HH:mm");
-                    const endSoir = moment("21:00", "HH:mm");
-                    return (
-                        (time.isBetween(startMidi, endMidi) && time.hours() < 15) ||
-                        (time.isBetween(startSoir, endSoir) && time.hours() < 22)
-                    );
+            .required("L'heure est obligatoire")
+            .test("is-valid-time", "Le restaurant est fermé à cette heure", function (value) {
+                const selectedDate = this.parent.date; // Récupérer la date sélectionnée dans le parent object
+                const dayOfWeek = moment(selectedDate).format("dddd").toLowerCase().replace(/^\w/, (c) => c.toUpperCase()); // Obtenir le jour de la semaine pour la date sélectionnée
+                const openingDays = Object.values(hours)
+                    .filter(day => day.lunch_opening_time !== "FERME")
+                    .map(day => day.day_of_week);
+                const openingHours = hours[openingDays.indexOf(dayOfWeek)];
+                if (openingHours.lunch_opening_time === "FERME" || openingHours.dinner_opening_time === "FERME") {
+                    return true;
                 }
-            )
-            .required("L'heure est obligatoire"),
-        number_of_people: Yup.string()
-            .matches(/^[0-9]+$/, "Le nombre de personnes doit être un nombre entier positif")
-            .min(1, "Le nombre de personnes doit être au minimum 1")
-            .max(15, "Le nombre de personnes doit être au maximum 15")
-            .required("Le nombre de personnes est obligatoire"),
+                if (value) {
+                    const openingHoursLunch = {
+                        openingTime: moment(openingHours.lunch_opening_time, "HH:mm"),
+                        closingTime: moment(openingHours.lunch_closing_time, "HH:mm")
+                    };
+                    const openingHoursDinner = {
+                        openingTime: moment(openingHours.dinner_opening_time, "HH:mm"),
+                        closingTime: moment(openingHours.dinner_closing_time, "HH:mm")
+                    };
+                    const selectedTime = moment(value, "HH:mm"); // Convertir la chaîne d'heure en objet moment
+                    // Vérifier si l'heure sélectionnée est pendant les horaires d'ouverture pour le déjeuner ou pour le dîner
+                    const isDuringLunchHours = selectedTime >= openingHoursLunch.openingTime && selectedTime < openingHoursLunch.closingTime;
+                    const isDuringDinnerHours = selectedTime >= openingHoursDinner.openingTime && selectedTime < openingHoursDinner.closingTime;
+                    if (!isDuringLunchHours && !isDuringDinnerHours) {
+                        return false; // Si l'heure n'est pas pendant les horaires d'ouverture pour le déjeuner ou pour le dîner, la validation ne passe pas
+                    }
+                    return true; // Sinon, la validation passe
+                }
+            }),
+        number_of_people: Yup.number()
+            .required("Le nombre de couvert est obligatoire.")
+            .min(1, "Au moins une personne est requise")
+            .max(15, "Veuillez prendre contact avec le restaurant pour plus de 15 couverts"),
         comment: Yup.string()
-            .min(10, "Votre message doit contenir plus de 10 caractères")
+            .min(5, "Votre message doit contenir plus de 5 caractères")
             .max(250, "Votre message doit contenir moins de 250 caractères")
-    }),
-    handleSubmit: (values, { props, resetForm }) => {
-        const message = {
-            date: values.date,
-            time: values.time,
-            number_of_people: values.number_of_people,
-            comment: values.comment
-        };
-        props.sendUpdateReservation(message);
-        resetForm();
-    }
-})(UpdateReservationForm); 
+    });
+
+    return (
+        <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-8">
+            <Formik
+                initialValues={{
+                    date: "",
+                    time: "",
+                    number_of_people: "",
+                    comment: ""
+                }}
+                validationSchema={reservationSchema}
+                onSubmit={(values) => {
+                    const client_id = localStorage.getItem('client_id');
+                    const reservation_id = reservationIdToUpdate
+                    const { date, time, number_of_people, comment } = values;
+                    const requestBody = {
+                        date,
+                        time,
+                        number_of_people,
+                        comment,
+                        reservation_id,
+                        client_id
+                    };
+                    axios
+                        .post(`${hostname}front/updateReservation`, requestBody, {
+                            headers: {
+                                Authorization: `Bearer ${localStorage.getItem('token')}`,
+                            },
+                        })
+                        .then((response) => {
+                            this.setState({ ReservationSent: true });
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
+                }}
+            >
+                {({ errors, touched }) => (
+                    <Form className="d-flex flex-column justify-content-center align-items-center">
+                        <div className="form-group mb-3 col-12">
+                            <label htmlFor="date">Date :</label>
+                            <Field name="date" type="date" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
+                            <ErrorMessage name="date" component="div" className="text-danger" />
+                        </div>
+                        <div className="form-group mb-3 col-12">
+                            <label htmlFor="time">Heure :</label>
+                            <Field name="time" type="time" className={`form-control ${errors.time && touched.time ? "is-invalid" : ""}`} />
+                            <ErrorMessage name="time" component="div" className="text-danger" />
+                        </div>
+                        <div className="form-group mb-3 col-12">
+                            <label htmlFor="number_of_people">Nombre de personnes :</label>
+                            <Field name="number_of_people" type="number" placeholder="Renseignez ici le nombre de couvert" className={`form-control ${errors.number_of_people && touched.number_of_people ? "is-invalid" : ""}`} />
+                            <ErrorMessage name="number_of_people" component="div" className="text-danger" />
+                        </div>
+                        <div className="form-group mb-3 col-12">
+                            <label htmlFor="comment">Commentaire :</label>
+                            <Field name="comment" as="textarea" placeholder='Exemple : "Je suis allérgique aux produits laitier"' className={`form-control ${errors.comment && touched.comment ? "is-invalid" : ""}`} />
+                            <ErrorMessage name="comment" component="div" className="text-danger" />
+                        </div>
+                        <button type="submit" className="btn sub-btn btn-lg col-5">Réserver</button>
+                    </Form>
+                )}
+            </Formik>
+        </div>
+    );
+
+}
+export default UpdateReservationForm

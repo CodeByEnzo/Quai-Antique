@@ -58,14 +58,14 @@ const Reserved = () => {
 
 
     // To modify reservation from user
-
     useEffect(() => {
     }, [reservationIdToUpdate]);
 
     //Get the id of the reservation that will be update
-    const handleUpdateClick = (reservationid, event) => {
+    const handleUpdateClick = (event) => {
         setIsEditing(true);
-        setReservationIdToUpdate(event.target.dataset.reservationid);
+        const reservationId = event.target.dataset.reservationid;
+        setReservationIdToUpdate(reservationId);
     };
     //Undisplay inputs
     const cancelBTN = () => {
@@ -109,19 +109,19 @@ const Reserved = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
         >
-            <h3 className='text-center'> Vos réservations </h3>
             <div className='container-fluid d-flex justify-content-center'>
                 <div className=" rounded col-12 col-md-8 col-xl-6">
                     <div className="container-fluid">
                         {isEditing ? (
                             <span className='container-fluid d-flex flex-column align-items-center'>
-                                <UpdateReservationForm sendUpdateReservation={handleSendUpdateReservation} />
+                                <h3 className='text-center'> Modifiez votre réservation </h3>
+                                <UpdateReservationForm reservationIdToUpdate={reservationIdToUpdate} reservationSent={cancelBTN} />
                                 <span className='bg-dark mt-3 rounded'>
                                     <button
                                         className="btn sub-btn btn-lg"
                                         type="submit"
                                         onClick={cancelBTN}>
-                                        Annuler la modification
+                                        Annuler les modifications
                                     </button>
                                 </span>
 
@@ -129,7 +129,8 @@ const Reserved = () => {
                         ) : (
                             <span>
                                 {userData?.reservations?.length > 0 ? (
-                                    <div>
+                                        <div>
+                                            <h3 className='text-center'>Vos réservation</h3>
                                         {userData.reservations.map(reservation => (
                                             <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
                                                 <div className="form-group mt-3">
@@ -159,7 +160,7 @@ const Reserved = () => {
                                                 <div className='d-flex justify-content-center mt-3'>
                                                     <button
                                                         className="btn sub-btn mx-2"
-                                                        onClick={(event) => handleUpdateClick(reservation.reservation_id, event)}
+                                                        onClick={handleUpdateClick}
                                                         data-reservationid={reservation.reservation_id}>
                                                         Modifier
                                                     </button>

@@ -4,9 +4,8 @@ import { hostname } from "../../config";
 import * as Yup from "yup";
 import axios from "axios";
 import moment from "moment";
-import "moment/locale/fr"; // Importer la localisation française de Moment.js
-
-moment.locale("fr"); // Définir la locale française pour Moment.js
+import "moment/locale/fr";
+moment.locale("fr"); // Définir l'heure locale française pour Moment.js
 
 const ReservationForm = () => {
     const [hours, setHours] = useState(null);
@@ -36,7 +35,6 @@ const ReservationForm = () => {
             fetchUserData();
         }
     }, []);
-    // console.log(hours)
 
     const reservationSchema = Yup.object().shape({
         date: Yup.date()
@@ -62,33 +60,26 @@ const ReservationForm = () => {
                     .map(day => day.day_of_week);
                 const openingHours = hours[openingDays.indexOf(dayOfWeek)];
                 if (openingHours.lunch_opening_time === "FERME" || openingHours.dinner_opening_time === "FERME") {
-                    return true; 
+                    return true;
                 }
                 if (value) {
                     const openingHoursLunch = {
                         openingTime: moment(openingHours.lunch_opening_time, "HH:mm"),
                         closingTime: moment(openingHours.lunch_closing_time, "HH:mm")
                     };
-
                     const openingHoursDinner = {
                         openingTime: moment(openingHours.dinner_opening_time, "HH:mm"),
                         closingTime: moment(openingHours.dinner_closing_time, "HH:mm")
                     };
-
                     const selectedTime = moment(value, "HH:mm"); // Convertir la chaîne d'heure en objet moment
-
                     // Vérifier si l'heure sélectionnée est pendant les horaires d'ouverture pour le déjeuner ou pour le dîner
                     const isDuringLunchHours = selectedTime >= openingHoursLunch.openingTime && selectedTime < openingHoursLunch.closingTime;
-
                     const isDuringDinnerHours = selectedTime >= openingHoursDinner.openingTime && selectedTime < openingHoursDinner.closingTime;
-
                     if (!isDuringLunchHours && !isDuringDinnerHours) {
                         return false; // Si l'heure n'est pas pendant les horaires d'ouverture pour le déjeuner ou pour le dîner, la validation ne passe pas
                     }
-
                     return true; // Sinon, la validation passe
                 }
-
             }),
         number_of_people: Yup.number()
             .required("Le nombre de couvert est obligatoire.")
@@ -99,10 +90,8 @@ const ReservationForm = () => {
             .max(250, "Votre message doit contenir moins de 250 caractères")
     });
 
-
     return (
-        <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5">
-            <h1 className="text-center">Réservez une table</h1>
+        <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-8">
             <Formik
                 initialValues={{
                     date: "",
@@ -112,7 +101,6 @@ const ReservationForm = () => {
                 }}
                 validationSchema={reservationSchema}
                 onSubmit={(values) => {
-                    console.log(values);
                     const client_id = localStorage.getItem('client_id');
                     const { date, time, number_of_people, comment } = values;
                     const requestBody = {
@@ -136,7 +124,7 @@ const ReservationForm = () => {
                         });
                 }}
             >
-                {({ errors, touched, setFieldValue }) => (
+                {({ errors, touched}) => (
                     <Form className="d-flex flex-column justify-content-center align-items-center">
                         <div className="form-group mb-3 col-12">
                             <label htmlFor="date">Date :</label>
@@ -155,7 +143,7 @@ const ReservationForm = () => {
                         </div>
                         <div className="form-group mb-3 col-12">
                             <label htmlFor="comment">Commentaire :</label>
-                            <Field name="comment" as="textarea" placeholder="Exemple : 'Je suis allérgique aux produits laitier'" className={`form-control ${errors.comment && touched.comment ? "is-invalid" : ""}`} />
+                            <Field name="comment" as="textarea" placeholder='Exemple : "Je suis allérgique aux produits laitier"' className={`form-control ${errors.comment && touched.comment ? "is-invalid" : ""}`} />
                             <ErrorMessage name="comment" component="div" className="text-danger" />
                         </div>
                         <button type="submit" className="btn sub-btn btn-lg col-5">Réserver</button>
