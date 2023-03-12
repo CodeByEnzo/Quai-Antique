@@ -8,7 +8,6 @@ import axios from 'axios';
 const Reserved = () => {
     const [userData, setUserData] = useState(null);
     const [isReservationDeleted, setIsReservationDeleted] = useState(false);
-    const [ReservationSent, setReservationSent] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
@@ -71,34 +70,6 @@ const Reserved = () => {
     const cancelBTN = () => {
         setIsEditing(false)
     }
-    // Request to back end
-    const handleSendUpdateReservation = (formData) => {
-        const client_id = localStorage.getItem('client_id');
-        const updateReservationId = reservationIdToUpdate;
-        const { date, time, number_of_people, comment } = formData;
-        const requestBody = {
-            date: date,
-            time: time,
-            number_of_people: number_of_people,
-            comment: comment,
-            client_id: client_id,
-            reservation_id: updateReservationId
-        };
-        axios
-            .post(`${hostname}front/updateReservation`, requestBody, {
-                headers: {
-                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                },
-            })
-            .then((response) => {
-                setReservationSent(true);
-                setIsEditing(false)
-                alert('Votre réservation à été modifié')
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
 
     const handleUpdateSuccess = () => {
         setIsEditing(false);

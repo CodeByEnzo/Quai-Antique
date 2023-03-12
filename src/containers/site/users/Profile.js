@@ -2,10 +2,13 @@ import "./users.css";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { hostname } from "../../../config";
+import UpdateProfileForm from "../../../components/Profile/UpdateProfileForm";
 
 
 const Profile = (props) => {
-
+    const [isReservationDeleted, setIsReservationDeleted] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
+    const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
     //page transitions
     const [isVisible, setIsVisible] = useState(true);
@@ -39,6 +42,25 @@ const Profile = (props) => {
         }
     }, []);
 
+    // To modify reservation from user
+    useEffect(() => {
+    }, [reservationIdToUpdate]);
+
+    //Get the id of the reservation that will be update
+    const handleUpdateClick = (event) => {
+        setIsEditing(true);
+        const reservationId = event.target.dataset.reservationid;
+        setReservationIdToUpdate(reservationId);
+    };
+    //Undisplay inputs
+    const cancelBTN = () => {
+        setIsEditing(false)
+    }
+
+    const handleUpdateSuccess = () => {
+        setIsEditing(false);
+        // afficher un message de confirmation ou rafraîchir les données des réservations
+    };
 
 
     return isVisible ? (
@@ -52,49 +74,74 @@ const Profile = (props) => {
                 transition={{ duration: 1 }}
             >
                 <div className="container">
-                    <h3 className="text-center">Votre profile</h3>
-                    <div className='container-fluid d-flex justify-content-center'>
-                        <div className="form-border rounded col-12 col-md-6 col-xl-4 p-2 bg-dark shadow">
-                            <div className="col-12">
-                                <p>
-                                    <strong>Nom d'utilisateur :</strong>
-                                    <span>
-                                        {userData ? (
-                                            <span>{userData.user.username}</span>
-                                        ) : (
-                                            <span>Loading...</span>
-                                        )}
-                                    </span>
-                                </p>
-                            </div>
-                            <div className="col-12">
-                                <p>
-                                    <strong>Adresse e-mail :</strong>
-                                    <span>
-                                        {userData ? (
-                                            <span>{userData.user.email}</span>
-                                        ) : (
-                                            <span>Loading...</span>
-                                        )}
-                                    </span>
-                                </p>
-                            </div>
-                            <div className="col-12">
-                                <p>
-                                    <strong>Créé le  :</strong>
-                                    <span>
-                                        {userData ? (
-                                            <span>{userData.user.created_at}</span>
-                                        ) : (
-                                            <span>Loading...</span>
-                                        )}
-                                    </span>
-                                </p>
-                            </div>
-                            <div className='d-flex justify-content-center mt-3'>
-                                <button type="submit" className="btn sub-btn">Modifier</button>
-                            </div>
-                        </div>
+                    <div className='container-fluid d-flex justify-content-center align-items-center'>
+                        {isEditing ? (
+                            <span className='container-fluid d-flex flex-column align-items-center'>
+                                <h3 className='text-center'> Modifiez vos informations </h3>
+                                <UpdateProfileForm reservationIdToUpdate={reservationIdToUpdate} onUpdateSuccess={handleUpdateSuccess} />
+                                <span className='bg-dark mt-3 rounded'>
+                                    <button
+                                        className="btn sub-btn btn-lg"
+                                        type="submit"
+                                        onClick={cancelBTN}>
+                                        Annuler les modifications
+                                    </button>
+                                </span>
+
+                            </span>
+                        ) : (
+                            <span className="col-12">
+                                    <h3 className='text-center'>Votre profile</h3>
+                                <div className="form-border rounded col-12 col-md-8 col-xl-5 p-2 bg-dark shadow mx-auto">
+                                    <div className="col-12">
+                                        <p>
+                                            <strong>Nom d'utilisateur :</strong>
+                                            <span>
+                                                {userData ? (
+                                                    <span>{userData.user.username}</span>
+                                                ) : (
+                                                    <span>Loading...</span>
+                                                )}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div className="col-12">
+                                        <p>
+                                            <strong>Adresse e-mail :</strong>
+                                            <span>
+                                                {userData ? (
+                                                    <span>{userData.user.email}</span>
+                                                ) : (
+                                                    <span>Loading...</span>
+                                                )}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div className="col-12">
+                                        <p>
+                                            <strong>Créé le  :</strong>
+                                            <span>
+                                                {userData ? (
+                                                    <span>{userData.user.created_at}</span>
+                                                ) : (
+                                                    <span>Loading...</span>
+                                                )}
+                                            </span>
+                                        </p>
+                                    </div>
+                                    <div className='d-flex justify-content-center mt-3'>
+                                        <button
+                                            type="submit"
+                                            className="btn sub-btn"
+                                            onClick={handleUpdateClick}
+                                        >
+                                            Modifier
+                                        </button>
+                                    </div>
+                                </div>
+                            </span>
+
+                        )}
                     </div>
                 </div>
             </motion.main>
