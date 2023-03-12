@@ -48,7 +48,7 @@ const UpdateReservationForm = (props) => {
                 // Return all open days
                 const openingDays = Object.values(hours).filter(day => day.lunch_opening_time !== "FERME").map(day => day.day_of_week);
                 // Verify if day selected is not a closed day
-                const isOpeningDay = openingDays.some(day => day == dayOfWeek);
+                const isOpeningDay = openingDays.some(day => day === dayOfWeek);
                 // Boolean
                 return isOpeningDay;
             }),

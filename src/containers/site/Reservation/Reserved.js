@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { hostname } from '../../../config';
 import UpdateReservationForm from '../../../components/Reservations/UpdateReservationForm';
-import axios from 'axios';
 
 
 const Reserved = () => {

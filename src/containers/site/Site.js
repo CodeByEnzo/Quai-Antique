@@ -9,11 +9,11 @@ import AnimatedRoutes from '../../components/AnimatedRoutes';
 function Site() {
 
     const [isAuthenticated, setIsAuthenticated] = useState(IsInitialAuthenticated());
- 
+
     return (
         <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
             <NavBar />
-            <AnimatedRoutes/>
+            <AnimatedRoutes />
             <Footer />
         </Auth.Provider >
     );

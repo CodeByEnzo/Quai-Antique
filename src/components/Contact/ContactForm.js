@@ -1,9 +1,9 @@
 import React from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
-import "../Contact.css";
+import "../../containers/site/Contact/Contact.css";
 
-const Form = (props) => (
+const ContactForm = (props) => (
     <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
         <form id="contactForm"
             className="
@@ -13,7 +13,7 @@ const Form = (props) => (
             p-3 row
             d-flex
             justify-content-center
-            col-xl-5
+            col-xl-7
             bg-dark">
 
             <div className="mb-3 col-12 col-md-10">
@@ -87,4 +87,4 @@ export default withFormik({
         props.sendMail(message);
         resetForm();
     }
-})(Form); 
+})(ContactForm); 

@@ -47,21 +47,16 @@ const Login = () => {
         }
     };
 
-    //page transitions
-    const [isVisible, setIsVisible] = useState(true);
-    const handleExitComplete = () => {
-        setIsVisible(false);
-    };
+   
 
-    return isVisible ? (
-        <AnimatePresence onExitComplete={handleExitComplete}>
+    return  (
             <motion.main
                 className='main-margin'
 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
+                initial={{ x: "-100%" }}
+                animate={{ x: "0%" }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 1, ease: "easeOut" }}
             >
                 <h1 className="text-center">Connection</h1>
                 <div className="container-fluid d-flex justify-content-center">
@@ -97,8 +92,8 @@ const Login = () => {
                     </form>
                 </div>
             </motion.main>
-        </AnimatePresence>
-    ) : null;
+
+    )
 };
 export default Login;
 

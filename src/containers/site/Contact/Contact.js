@@ -1,19 +1,14 @@
 import React, { Component } from "react";
 import './Contact.css';
-import Form from "./Form/Form";
+import ContactForm from "../../../components/Contact/ContactForm";
 import axios from "axios";
 import { hostname } from "../../../config";
 import { motion, AnimatePresence } from "framer-motion";
 
 class Contact extends Component {
     state = {
-        messageSent: false,
-        isVisible: true
+        messageSent: false
     }
-    //Transition page
-    handleExitComplete = () => {
-        this.setState({ isVisible: false });
-    };
 
     componentDidMount = () => {
         document.title = "Le Quai Antique - Contact"
@@ -30,24 +25,21 @@ class Contact extends Component {
     }
 
     render() {
-        const { isVisible } = this.state;
 
-        return isVisible ? (
-            <AnimatePresence onExitComplete={this.handleExitComplete}>
-                <motion.main
-                    className='main-margin mb-5'
+        return (
+            <motion.main
+                className='main-margin mb-5'
 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 1 }}
-                >
+                initial={{ x: "100%" }}
+                animate={{ x: "0%" }}
+                exit={{ x: "100%" }}
+                transition={{ duration: 1, ease: "easeOut" }}
+            >
                 <h1 className="text-center">Contactez nous !</h1>
-                {this.state.messageSent && <div className="alert alert-success col-9 text-center mx-auto">Votre message à été envoyé !</div>}
-                <Form sendMail={this.handleSendMail} />
-                </motion.main>
-            </AnimatePresence>
-        ) : null;
+                {this.state.messageSent && <div className="alert alert-success text-center mx-auto">Votre message à été envoyé !</div>}
+                <ContactForm sendMail={this.handleSendMail} />
+            </motion.main>
+        )
     }
 }
 

@@ -21,5 +21,6 @@
     width: 100vw;
     color: #f2f8f4;
     overflow-x: hidden;
+    transition: all 1s ease;
 
 }

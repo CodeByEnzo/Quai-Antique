@@ -21,23 +21,19 @@ function Menu() {
         fetchData();
     }, [])
 
-    //page transitions
-    const [isVisible, setIsVisible] = useState(true);
-    const handleExitComplete = () => {
-        setIsVisible(false);
-    };
 
-    return isVisible ? (
-        <AnimatePresence onExitComplete={handleExitComplete}>
-            <motion.main
-                className='main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-                
-            >
+    return (
+
+        <motion.main
+            className='main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
+
+            initial={{ y: "100%" }}
+            animate={{ y: "0%" }}
+            exit={{ y: "100%" }}
+            transition={{ duration: 1, ease: "easeOut" }}
+
+        >
             <h1 className='text-center'>La carte</h1>
             <h2 className='h2Menu row mt-5'>Entrées</h2>
             {entrees.map((product, index) => (
@@ -69,9 +65,8 @@ function Menu() {
                     <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>{product.prix}€</p>
                 </div>
             ))}
-            </motion.main>
-        </AnimatePresence>
-    ) : null;
+        </motion.main>
+    )
 }
 
 export default Menu;

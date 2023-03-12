@@ -5,10 +5,8 @@ import { hostname } from "../../../config";
 import UpdateProfileForm from "../../../components/Profile/UpdateProfileForm";
 
 
-const Profile = (props) => {
-    const [isReservationDeleted, setIsReservationDeleted] = useState(false);
+const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
-    const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
     //page transitions
     const [isVisible, setIsVisible] = useState(true);
@@ -42,15 +40,9 @@ const Profile = (props) => {
         }
     }, []);
 
-    // To modify reservation from user
-    useEffect(() => {
-    }, [reservationIdToUpdate]);
-
     //Get the id of the reservation that will be update
     const handleUpdateClick = (event) => {
         setIsEditing(true);
-        const reservationId = event.target.dataset.reservationid;
-        setReservationIdToUpdate(reservationId);
     };
     //Undisplay inputs
     const cancelBTN = () => {
@@ -78,7 +70,7 @@ const Profile = (props) => {
                         {isEditing ? (
                             <span className='container-fluid d-flex flex-column align-items-center'>
                                 <h3 className='text-center'> Modifiez vos informations </h3>
-                                <UpdateProfileForm reservationIdToUpdate={reservationIdToUpdate} onUpdateSuccess={handleUpdateSuccess} />
+                                <UpdateProfileForm onUpdateSuccess={handleUpdateSuccess} />
                                 <span className='bg-dark mt-3 rounded'>
                                     <button
                                         className="btn sub-btn btn-lg"

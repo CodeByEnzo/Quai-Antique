@@ -16,22 +16,17 @@ const Account = (props) => {
     const handleTabs = (name) => {
         setcurrentTab({ name });
     };
-    //page transitions
-    const [isVisible, setIsVisible] = useState(true);
-    const handleExitComplete = () => {
-        setIsVisible(false);
-    };
 
-    return isVisible ? (
-        <AnimatePresence onExitComplete={handleExitComplete}>
-            <motion.main
-                className='main-margin'
 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
-            >
+    return (
+        <motion.main
+            className='main-margin'
+
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+        >
             <div className="tabs account">
                 <ul id="ul-account">
                     {tabs.map((tab, index) => (
@@ -46,9 +41,8 @@ const Account = (props) => {
                 {currentTab.name === "reservation" && <Reserved />}
                 {currentTab.name === "reserved" && <Reservation />}
             </div>
-            </motion.main>
-        </AnimatePresence>
-    ) : null
+        </motion.main>
+    )
 
 
 };
