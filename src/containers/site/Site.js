@@ -13,8 +13,7 @@ function Site() {
     return (
         <Auth.Provider value={{ isAuthenticated, setIsAuthenticated }}>
             <NavBar />
-            <AnimatedRoutes />
-            <Footer />
+            <AnimatedRoutes className="AnimatedRoutes" />
         </Auth.Provider >
     );
 }

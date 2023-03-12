@@ -13,7 +13,8 @@ const Footer = (props) => (
             initial={{ y: "100%" }}
             animate={{ y: "0%" }}
             exit={{ y: "-100%" }}
-            transition={{ duration: 1, ease: "easeOut" }}>
+            transition={{ duration: 1, ease: "easeOut" }}
+        >
             <div className='row no-gutters d-flex align-items-center justify-content-center text-center p-3'>
                 <div className='col-6 col-md-3 p-3'>
                     <a href='https://www.facebook.com' className='d-block ' target="_blank">

@@ -28,11 +28,10 @@ function Menu() {
         <motion.main
             className='main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
 
-            initial={{ y: "100%" }}
+            initial={{ y: "-100%" }}
             animate={{ y: "0%" }}
             exit={{ y: "100%" }}
-            transition={{ duration: 1, ease: "easeOut" }}
-
+            transition={{ duration: 1, ease: "easeIn" }}
         >
             <h1 className='text-center'>La carte</h1>
             <h2 className='h2Menu row mt-5'>Entrées</h2>
@@ -41,7 +40,9 @@ function Menu() {
                     <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}
                         <br />
                         <small>{product.content}</small></p>
-                    <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>{product.prix}€</p>
+                    <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>
+                        {product.prix}€
+                    </p>
                 </div>
             ))}
 
@@ -51,7 +52,9 @@ function Menu() {
                     <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}
                         <br />
                         <small>{product.content}</small></p>
-                    <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>{product.prix}€</p>
+                    <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>
+                        {product.prix}€
+                    </p>
                 </div>
             ))}
 
@@ -62,7 +65,9 @@ function Menu() {
                         <br />
                         <small>{product.content}</small>
                     </p>
-                    <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>{product.prix}€</p>
+                    <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>
+                        {product.prix}€
+                    </p>
                 </div>
             ))}
         </motion.main>

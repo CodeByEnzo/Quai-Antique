@@ -25,30 +25,45 @@ class Home extends Component {
         return (
             <motion.main
                 id='Home'
-
-                initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                exit={{ y: "100%" }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
             >
-                <div className='banner'>
-                    <div className='img-banner'></div>
+                <motion.div
+                    className='banner'
+                    initial={{ x: "100%" }}
+                    animate={{ x: "0%" }}
+                    exit={{ x: "-100%" }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                >
+                    <div className='img-banner' alt="Bannière de la page d'accueil avec un tartare de saumon joliement présenté"></div>
                     <div className='text-banner'>
                         <h1 className='title-banner'>Le Quai Antique</h1>
                         <p className='under-text-banner'>Spécialités savoyardes </p>
                     </div>
-                </div>
+                </motion.div>
                 {/* Div will show only if user is not connected */}
                 {!isLoggedIn &&
-                    <div className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
+                    <motion.div 
+                                    initial={{ y: "100%" }}
+                animate={{ y: "0%" }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                    className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
                         <p className='text-dark'>Pas encore de compte ? Crée un compte et résèrve une table dès maintenant !</p>
                         <button className='book-btn'>
                             <NavLink to="/register" className="text-light text-decoration-none">Créer un compte</NavLink>
                         </button>
 
-                    </div>
+                    </motion.div>
                 }
-                <div className='home-content d-flex justify-content-center'>
+                <motion.div 
+                                initial={{ y: "100%" }}
+                animate={{ y: "0%" }}
+                exit={{ y: "100%" }}
+                transition={{ duration: 1, ease: "easeOut" }}
+                className='home-content d-flex justify-content-center'>
                     <div className='card-container row d-flex flex-wrap justify-content-around p-5'>
                         {Object
                             .values(this.state.gallerys)
@@ -72,7 +87,7 @@ class Home extends Component {
                             })
                         }
                     </div>
-                </div>
+                </motion.div>
             </motion.main>
         )
     }

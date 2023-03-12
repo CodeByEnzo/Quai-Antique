@@ -11,6 +11,7 @@ import Account from '../containers/site/users/Account';
 import Register from '../containers/site/users/Register';
 import AuthenticatedRoute from '../components/AuthenticatedRoute';
 import { AnimatePresence } from 'framer-motion';
+import Footer from './Footer/Footer';
 
 function AnimatedRoutes() {
 
@@ -39,6 +40,7 @@ function AnimatedRoutes() {
                 />
                 <Route path='*' element={<NotFound />} />
             </Routes>
+            <Footer />
         </AnimatePresence>
     )
 }

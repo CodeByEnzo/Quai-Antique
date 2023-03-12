@@ -1,6 +1,6 @@
 import "./users.css";
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { hostname } from "../../../config";
 import UpdateProfileForm from "../../../components/Profile/UpdateProfileForm";
 
@@ -8,11 +8,6 @@ import UpdateProfileForm from "../../../components/Profile/UpdateProfileForm";
 const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
 
-    //page transitions
-    const [isVisible, setIsVisible] = useState(true);
-    const handleExitComplete = () => {
-        setIsVisible(false);
-    };
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -55,15 +50,14 @@ const Profile = () => {
     };
 
 
-    return isVisible ? (
-        <AnimatePresence onExitComplete={handleExitComplete}>
+    return  (
             <motion.main
                 className='mb-5 pb-5'
 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 1 }}
+                transition={{ duration: 1, ease: "easeOut" }}
             >
                 <div className="container">
                     <div className='container-fluid d-flex justify-content-center align-items-center'>
@@ -137,7 +131,6 @@ const Profile = () => {
                     </div>
                 </div>
             </motion.main>
-        </AnimatePresence>
-    ) : null;
+    )
 };
 export default Profile;
