@@ -27,7 +27,6 @@ function HoursTab() {
     return isVisible ? (
         <AnimatePresence onExitComplete={handleExitComplete}>
             <motion.main
-                className='d-flex align-items-center justify-content-center col-12 col-sm-8 col-md-6 col-xl-4'
 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

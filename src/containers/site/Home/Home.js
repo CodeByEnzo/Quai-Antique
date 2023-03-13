@@ -45,12 +45,12 @@ class Home extends Component {
                 </motion.div>
                 {/* Div will show only if user is not connected */}
                 {!isLoggedIn &&
-                    <motion.div 
-                                    initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                exit={{ y: "100%" }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                    className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
+                    <motion.div
+                        initial={{ x: "100%" }}
+                        animate={{ x: "0%" }}
+                        exit={{ x: "100%" }}
+                        transition={{ duration: 1, ease: "easeOut" }}
+                        className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
                         <p className='text-dark'>Pas encore de compte ? Crée un compte et résèrve une table dès maintenant !</p>
                         <button className='book-btn'>
                             <NavLink to="/register" className="text-light text-decoration-none">Créer un compte</NavLink>
@@ -58,12 +58,12 @@ class Home extends Component {
 
                     </motion.div>
                 }
-                <motion.div 
-                                initial={{ y: "100%" }}
-                animate={{ y: "0%" }}
-                exit={{ y: "100%" }}
-                transition={{ duration: 1, ease: "easeOut" }}
-                className='home-content d-flex justify-content-center'>
+                <motion.div
+                    initial={{ x: "-100%" }}
+                    animate={{ x: "0%" }}
+                    exit={{ x: "100%" }}
+                    transition={{ duration: 1, ease: "easeOut" }}
+                    className='home-content d-flex justify-content-center'>
                     <div className='card-container row d-flex flex-wrap justify-content-around p-5'>
                         {Object
                             .values(this.state.gallerys)

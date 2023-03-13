@@ -36,7 +36,13 @@ const Footer = (props) => (
                         Politique de confidentialité
                     </NavLink>
                 </div>
-                <HoursTab></HoursTab>
+                <div className='col-12 col-md-6 d-flex justify-content-center '>
+                <HoursTab/>
+                </div>
+                {/*  This area should show company adress */}
+                {/* <div className='col-12 col-md-6 d-flex justify-content-center align-items-center'>
+                    <HoursTab />
+                </div> */}
             </div>
             <p className='text-center'>Le Quai Antique - Tout droits réservés</p>
 
