@@ -2,7 +2,7 @@ import "./menu.css";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { hostname } from "../../../config";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 function Menu() {
@@ -31,7 +31,7 @@ function Menu() {
             initial={{ y: "-100%" }}
             animate={{ y: "0%" }}
             exit={{ y: "100%" }}
-            transition={{ duration: 1, ease: "easeIn" }}
+            transition={{ duration: 0.7, ease: "easeIn" }}
         >
             <h1 className='text-center'>La carte</h1>
             <h2 className='h2Menu row mt-5'>Entrées</h2>

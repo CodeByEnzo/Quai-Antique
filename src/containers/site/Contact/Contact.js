@@ -3,7 +3,7 @@ import './Contact.css';
 import ContactForm from "../../../components/Contact/ContactForm";
 import axios from "axios";
 import { hostname } from "../../../config";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 class Contact extends Component {
     state = {

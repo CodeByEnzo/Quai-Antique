@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../../contexts/Auth";
 import { addItem } from "../../../services/LocalStorage";
 import { hostname } from "../../../config";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Login = () => {
 

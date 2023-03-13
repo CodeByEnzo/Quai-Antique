@@ -1,8 +1,8 @@
 # Getting start with the project
 
--This project is using REACT for the front-end and PHP for the back end.
-You will need to clone this repository that is the front-end AND
-Another one that is the back-end, find it here:
+-This project is using REACT for the front-end and PHP for the back end.  
+You will need to clone this repository that is the front-end AND  
+Another one that is the back-end, find it here:  
 (https://github.com/CodeByEnzo/Back-quai-antique)
 
 -You will need XAMPP to run a server localhost so first install XAMPP.
@@ -10,21 +10,21 @@ Another one that is the back-end, find it here:
 # First steps
 
 ## Back-end :
-Now that you have the 2 repositorys links, you have to clone them.
-Find the XAMPP folder, and open "htdocs" folder.
-Create a new folder inside and call it SERVEURQUAI.
-Now use this command in this folder:
-git clone https://github.com/CodeByEnzo/Back-quai-antique.git
-So now you have a new folder call "Back-quai-antique".
-Select everything inside, right click -> cut
-Come back in SERVEURQUAI folder that is up,
-And past everythings here. (in SERVEURQUAI folder.)
-You could now delete the folder "Back-quai-antique" that should be empty by now.
+Now that you have the 2 repositorys links, you have to clone them.  
+Find the XAMPP folder, and open "htdocs" folder.  
+Create a new folder inside and call it SERVEURQUAI.  
+Now use this command in this folder:  
+git clone https://github.com/CodeByEnzo/Back-quai-antique.git  
+So now you have a new folder call "Back-quai-antique".  
+Select everything inside, right click -> cut  
+Come back in SERVEURQUAI folder that is up,  
+And past everythings here. (in SERVEURQUAI folder.)  
+You could now delete the folder "Back-quai-antique" that should be empty by now.  
 
 ## DataBase :
 
-There's 3 ways.
-In this repository ->https://github.com/CodeByEnzo/Quai-Antique
+There's 3 ways.  
+In this repository ->https://github.com/CodeByEnzo/Quai-Antique  
 Actually this one, you have this file : RequettesSQL.sql
 
 ### First way (fastest)
@@ -65,24 +65,24 @@ You can create a new folder on your desktop or where ever you like.
 Use this command inside:
 git clone https://github.com/CodeByEnzo/Quai-Antique.git
 Now find the file config.js in src folder.
-You have make sure this :
+You have to make sure that this line :
 export const hostname = "http://localhost/SERVEURQUAI/";
 Match with the correct folder.
 
 
 # SUCCESS ! you should now be able to run the project !
-FRONT : 
-Just run npm start in the terminal and you will see the project.
+FRONT :  
+Just run npm start in the terminal and you will see the project.  
 You can register and login. Make a reservation and delete it.
 
-BACK :
-You have to login with 
-id: charle 
-password: admin01
+BACK :  
+You have to login with;  
+id: charle  
+password: admin01  
 Now you can manage the back office with the pictures, clients, reservations etc...
 
-See the project online:
-BACK: (https://quai-antique.ec-bootstrap.com/back/login)
+See the project online:  
+BACK: (https://quai-antique.ec-bootstrap.com/back/login)  
 FRONT: (https://le-quai-antique.ec-bootstrap.com/)
 
 ### Enjoy !
@@ -105,10 +105,10 @@ You may also see any lint errors in the console.
 
 ### `npm run build`
 
-Builds the app for production to the `build` folder.\
+Builds the app for production to the `build` folder.\  
 It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
+The build is minified and the filenames include the hashes.\  
 Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./Home.css";
 import { hostname } from '../../../config';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 
 
@@ -49,7 +49,7 @@ class Home extends Component {
                         initial={{ x: "100%" }}
                         animate={{ x: "0%" }}
                         exit={{ x: "100%" }}
-                        transition={{ duration: 1, ease: "easeOut" }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
                         className='container-fluid d-flex flex-column justify-content-center align-items-center p-5'>
                         <p className='text-dark'>Pas encore de compte ? Crée un compte et résèrve une table dès maintenant !</p>
                         <button className='book-btn'>
@@ -62,7 +62,7 @@ class Home extends Component {
                     initial={{ x: "-100%" }}
                     animate={{ x: "0%" }}
                     exit={{ x: "100%" }}
-                    transition={{ duration: 1, ease: "easeOut" }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
                     className='home-content d-flex justify-content-center'>
                     <div className='card-container row d-flex flex-wrap justify-content-around p-5'>
                         {Object

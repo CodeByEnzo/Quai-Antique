@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import moment from "moment";
 import "moment/locale/fr";
-moment.locale("fr"); // Définir l'heure locale française pour Moment.js
+moment.locale("fr");
 
 const ReservationForm = () => {
     const [hours, setHours] = useState(null);

@@ -17,6 +17,8 @@ export default function Navbar() {
     const { isAuthenticated, setIsAuthenticated } = useContext(Auth);
     const handleLogin = () => {
         setIsAuthenticated(false);
+        window.localStorage.clear();
+
     };
     const closeMenu = () => {
         setTimeout(() => {
