@@ -13,10 +13,16 @@ const UpdateReservationForm = (props) => {
     const { reservationIdToUpdate, onUpdateSuccess } = props;
 
     useEffect(() => {
-        axios.get(`${hostname}front/hours`).then((response) => {
-            setHours(response.data);
-        });
+        axios.get(`${hostname}front/hours`)
+            .then((response) => {
+                setHours(response.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching hours data", error);
+            });
+
         const token = localStorage.getItem("token");
+
         if (token) {
             const fetchUserData = async () => {
                 try {
@@ -27,16 +33,36 @@ const UpdateReservationForm = (props) => {
                             "Authorization": `Bearer ${token}`
                         }
                     });
-                    const data = await response.json();
-                    localStorage.setItem('client_id', data.user.id);
 
+                    if (response.status !== 200) {
+                        alert('Votre session a expiré, veuillez vous reconnecter.');
+                        window.location.href = "/login";
+                        return;
+                    }
+
+                    const data = await response.json();
+
+                    if (data && data.user) {
+                        localStorage.setItem('client_id', data.user.id);
+                    } else {
+                        alert('Une erreur est survenue lors de la récupération des informations utilisateur.');
+                        window.location.href = "/login";
+                        return;
+                    }
                 } catch (error) {
                     console.error("Error fetching user data", error);
                 }
             };
             fetchUserData();
+        } else {
+            alert('Votre session a expiré, veuillez vous reconnecter.');
+            window.location.href = "/login";
         }
     }, []);
+
+
+
+
 
     const reservationSchema = Yup.object().shape({
         date: Yup.date()

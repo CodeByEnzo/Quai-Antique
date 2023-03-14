@@ -10,29 +10,44 @@ const Reserved = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
-    //Send request to display data    
+
     useEffect(() => {
         const token = localStorage.getItem("token");
         if (token) {
-            const fetchUserData = async () => {
-                try {
-                    const response = await fetch(`${hostname}front/authenticate`, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${token}`
-                        }
-                    });
-                    const data = await response.json();
-                    setUserData(data);
-                    setIsReservationDeleted(false); // reset the state to false after fetching the data
-                } catch (error) {
-                    console.error("Error fetching user data", error);
+            fetch(`${hostname}front/authenticate`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
                 }
-            };
-            fetchUserData();
+            })
+                .then(response => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error(response.statusText);
+                    }
+                })
+                .then(data => {
+                    try {
+                        setUserData(data);
+                        setIsReservationDeleted(false); // reset the state to false after fetching the data
+                    } catch (error) {
+                        console.error("Error parsing JSON data", error);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error fetching user data", error);
+                    alert('Votre session a expiré, veuillez vous reconnecter.')
+                    window.location.href = "/login";
+                });
+        } else {
+            // If there is no token in local storage, redirect user to login
+            alert('Votre session a expiré, veuillez vous reconnecter.')
+            window.location.href = "/login";
         }
-    }, [isReservationDeleted]); // add isReservationDeleted as a dependency to recall the function when the state changes
+    }, [isReservationDeleted]);
+
 
     // To cancel a reservation from user
     const handleCancelReservation = async event => {
@@ -103,8 +118,8 @@ const Reserved = () => {
                         ) : (
                             <span>
                                 {userData?.reservations?.length > 0 ? (
-                                        <div>
-                                            <h3 className='text-center'>Vos réservation</h3>
+                                    <div>
+                                        <h3 className='text-center'>Vos réservation</h3>
                                         {userData.reservations.map(reservation => (
                                             <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
                                                 <div className="form-group mt-3">

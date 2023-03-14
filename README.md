@@ -20,6 +20,7 @@ Select everything inside, right click -> cut
 Come back in SERVEURQUAI folder that is up,  
 And past everythings here. (in SERVEURQUAI folder.)  
 You could now delete the folder "Back-quai-antique" that should be empty by now.  
+Back end is set !
 
 ## DataBase :
 
@@ -51,6 +52,7 @@ Now you should be able to run run querys starting with :
 create database db_quai;
 
 Once this done you can now send the querys that is in RequetteSQL.sql one by one.
+Data base is set !
 
 ### Asset of database and back-end
 
@@ -67,19 +69,21 @@ git clone https://github.com/CodeByEnzo/Quai-Antique.git
 Now find the file config.js in src folder.
 You have to make sure that this line :
 export const hostname = "http://localhost/SERVEURQUAI/";
-Match with the correct folder.
-
+Match with the correct folder.  
+Front end is set !
 
 # SUCCESS ! you should now be able to run the project !
 FRONT :  
 Just run npm start in the terminal and you will see the project.  
+Make sure Xampp is runing to see datas  
 You can register and login. Make a reservation and delete it.
 
 BACK :  
 You have to login with;  
 id: charle  
 password: admin01  
-Now you can manage the back office with the pictures, clients, reservations etc...
+Just make sure Xampp is runing  
+Now you can manage the web site from the back office like the pictures, clients, reservations etc...
 
 See the project online:  
 BACK: (https://quai-antique.ec-bootstrap.com/back/login)  

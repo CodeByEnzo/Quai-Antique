@@ -22,9 +22,14 @@ const Profile = () => {
                 .then(response => response.json())
                 .then(data => {
                     try {
-                        setUserData(data);
-                        localStorage.setItem('client_id', data.user.id);
-
+                        if (data && data.user) { // Vérifier si les données utilisateur sont présentes
+                            setUserData(data);
+                            localStorage.setItem('client_id', data.user.id);
+                        } else {
+                            // Si le token a expiré ou est invalide, rediriger vers une page de connexion ou demander à l'utilisateur de se reconnecter
+                            window.location.href = "/login";
+                            alert('Votre session à éxpiré, veuillez vous reconnecter.')
+                        }
                     } catch (error) {
                         console.error("Error parsing JSON data", error);
                     }
@@ -32,8 +37,13 @@ const Profile = () => {
                 .catch(error => {
                     console.error("Error fetching user data", error);
                 });
+        } else {
+            // Si le token n'est pas présent, rediriger vers une page de connexion ou demander à l'utilisateur de se reconnecter
+            window.location.href = "/login";
+            alert('Votre session à éxpiré, veuillez vous reconnecter.')
         }
     }, []);
+
 
     //Get the id of the reservation that will be update
     const handleUpdateClick = (event) => {
