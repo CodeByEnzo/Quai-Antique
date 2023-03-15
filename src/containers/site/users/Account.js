@@ -22,10 +22,10 @@ const Account = (props) => {
         <motion.main
             className='main-margin'
 
-            initial={{ y: "100%" }}
-            animate={{ y: "0%" }}
-            exit={{ y: "100%" }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            initial={{ x: "-100%" }}
+            animate={{ x: "0%" }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
         >
             <div className="tabs account">
                 <ul id="ul-account">

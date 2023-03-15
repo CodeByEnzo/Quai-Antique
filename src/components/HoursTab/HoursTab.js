@@ -26,7 +26,7 @@ function HoursTab() {
 
     return isVisible ? (
         <AnimatePresence onExitComplete={handleExitComplete}>
-            <motion.main
+            <motion.div
 
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -57,7 +57,7 @@ function HoursTab() {
                     </tbody>
                 </table>
 
-            </motion.main>
+            </motion.div>
         </AnimatePresence>
     ) : null;
 }

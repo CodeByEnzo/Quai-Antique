@@ -42,9 +42,7 @@ const Login = () => {
             }
         } catch (error) {
             setError(error.message);
-        } finally {
-            setIsLoading(false);
-        }
+        } 
     };
 
    
@@ -56,7 +54,7 @@ const Login = () => {
                 initial={{ x: "-100%" }}
                 animate={{ x: "0%" }}
                 exit={{ x: "100%" }}
-                transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
             >
                 <h1 className="text-center">Connection</h1>
                 <div className="container-fluid d-flex justify-content-center">

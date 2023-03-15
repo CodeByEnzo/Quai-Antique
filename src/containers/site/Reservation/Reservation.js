@@ -14,7 +14,7 @@ class Reservation extends Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost/SERVEURQUAI/front/hours").then((response) => {
+        axios.get(`${hostname}front/hours`).then((response) => {
             this.setState({ hours: response.data });
         });
     }
@@ -39,7 +39,7 @@ class Reservation extends Component {
     };
     render() {
         return (
-            <motion.main
+            <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -47,7 +47,7 @@ class Reservation extends Component {
             >
                 <h3 className='text-center'> Réservez votre table </h3>
                 <ResevervationForm />
-            </motion.main>
+            </motion.div>
         );
     }
 }

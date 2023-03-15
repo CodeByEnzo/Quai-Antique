@@ -3,86 +3,96 @@ import axios from 'axios';
 import { hostname } from '../../../config';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 function Register() {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(false);
+    const [isRegister, setIsRegister] = useState(false)
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        setError(null);
-        setSuccess(false);
-        try {
-            const response = await axios.post(`${hostname}front/register`, {
-                username,
-                email,
-                password
-            }, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                }
-            });
-            setSuccess(true);
-            setUsername('');
-            setEmail('');
-            setPassword('');
-
-        } catch (error) {
-            setError(error.response.data.message);
-        }
+    const handleRegister = () => {
+        setIsRegister(true)
     }
 
 
+    const reservationSchema = Yup.object().shape({
+        username: Yup.string()
+            .min(5, "Le nom d'utilisateur doit avoir au moins 5 caractères")
+            .max(20, "Le nom d'utilisateur ne doit pas dépasser 20 caractères")
+            .required("Le nom d'utilisateur est obligatoire"),
+        email: Yup.string()
+            .email("L'adresse e-mail doit être valide")
+            .required("L'adresse e-mail est obligatoire"),
+        password: Yup.string()
+            .matches(
+                /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.{8,})/,
+                "Le mot de passe doit contenir au moins 1 minuscule, 1 majuscule, 1 caractère spécial et avoir une longueur minimale de 8 caractères"
+            )
+            .required("Le mot de passe est obligatoire"),
+    });
     return (
-            <motion.main
-                className='main-margin'
+        <motion.main
+            className='main-margin'
 
-                initial={{ x: "100%" }}
-                animate={{ x: "0%" }}
-                exit={{ x: "100%" }}
-                transition={{ duration: 1, ease: "easeOut" }}
-            >
-                <h1 className='text-center'>Créer un comtpe</h1>
-                <div className='container-fluid d-flex justify-content-center'>
-                    <form method='post' onSubmit={handleSubmit} className="form-border rounded bg-dark mb-5 col-12 col-md-6 col-xl-4 p-2">
-                        <div className='col-12'>
-
-                            {error && (
-                                <div className="alert alert-danger text-center" role="alert">
-                                    {error}
+            initial={{ x: "-100%" }}
+            animate={{ x: "0%" }}
+            exit={{ x: "100%" }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+            <h1 className='text-center'>Créer un comtpe</h1>
+            <div className='container-fluid d-flex justify-content-center'>
+                {isRegister ? (
+                    <div>
+                        <p className="text-center">Votre compte à été créé.</p>
+                        <NavLink to="/login" className="fw-bold nav-link text-center form-border rounded p-2 bg-dark">
+                            Connectez-vous
+                        </NavLink>
+                    </div>
+                ) : (
+                    <Formik
+                        method='post'
+                        className="form-border rounded bg-dark mb-5 col-12 col-md-6 col-xl-4 p-2"
+                        initialValues={{ username: "", email: "", password: "" }}
+                        validationSchema={reservationSchema}
+                        onSubmit={(values) => {
+                            const { username, email, password } = values;
+                            const requestBody = { username, email, password };
+                            axios.post(`${hostname}front/register`, requestBody, {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                }
+                            })
+                                .then((response) => { handleRegister() })
+                                .catch((error) => { console.log(error); });
+                        }}
+                        validateOnChange={true}
+                    >
+                        {({ errors, touched }) => (
+                            <Form className="form-border rounded shadow p-3 row d-flex justify-content-center col-12 col-md-6 bg-dark">
+                                <div className="form-group my-3">
+                                    <label>Nom d'utilisateur:</label>
+                                    <Field name='username' type="text" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
+                                    <ErrorMessage name="username" component="div" className="text-danger" />
                                 </div>
-                            )}
-                            {success && (
-                                <div className="alert alert-success text-center" role="alert">
-                                    Inscription réussie !
-                                    <NavLink to="/login" className="fw-bold nav-link">
-                                        Connectez-vous
-                                    </NavLink>
+                                <div className="form-group my-3">
+                                    <label>Adresse e-mail:</label>
+                                    <Field name='email' type="email" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
+                                    <ErrorMessage name="email" component="div" className="text-danger" />
                                 </div>
-                            )}
-                        </div>
-                        <div className="form-group my-3">
-                            <label>Nom d'utilisateur:</label>
-                            <input className="form-control" name='username' type="text" value={username} onChange={e => setUsername(e.target.value)} required />
-                        </div>
-                        <div className="form-group my-3">
-                            <label>Adresse e-mail:</label>
-                            <input className="form-control" name='email' type="email" value={email} onChange={e => setEmail(e.target.value)} required autoComplete="email" />
-                        </div>
-                        <div className="form-group my-3">
-                            <label>Mot de passe:</label>
-                            <input className="form-control" name='password' type="password" value={password} onChange={e => setPassword(e.target.value)} required />
-                        </div>
-                        <div className='d-flex justify-content-center'>
-                            <button type="submit" className="btn sub-btn btn-lg btn-block my-2">S'enregistrer</button>
-                        </div>
-                    </form>
-                </div>
-            </motion.main>
+                                <div className="form-group my-3">
+                                    <label>Mot de passe:</label>
+                                    <Field name='password' type="password" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
+                                    <ErrorMessage name="password" component="div" className="text-danger" />
+                                </div>
+                                <div className='d-flex justify-content-center'>
+                                    <button type="submit" className="btn sub-btn btn-lg btn-block my-2">S'enregistrer</button>
+                                </div>
+                            </Form>
+                        )}
+                    </Formik>
+                )}
+            </div>
+        </motion.main>
     )
 }
 

@@ -43,17 +43,16 @@
 
 .main-margin {
     padding-top: 150px;
-    min-height: 60vh;
 }
 
 .App {
-    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 main {
     flex-grow: 1;
+    min-height: 85vh;
 }
 
 body {

@@ -91,7 +91,7 @@ const Reserved = () => {
     };
 
     return (
-        <motion.main
+        <motion.div
             className='mb-5 pb-5'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -172,7 +172,7 @@ const Reserved = () => {
 
             </div>
 
-        </motion.main>
+        </motion.div>
     );
 }
 

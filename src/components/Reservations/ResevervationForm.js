@@ -115,54 +115,54 @@ const ReservationForm = () => {
             {reservationSent ? (
                 <p className="text-center">Votre réservervation est enregistrer</p>
             ) : (
-                 <Formik
-                initialValues={{ date: "", time: "", number_of_people: "", comment: "" }}
-                validationSchema={reservationSchema}
-                onSubmit={(values) => {
-                    const client_id = localStorage.getItem('client_id');
-                    const { date, time, number_of_people, comment } = values;
-                    const requestBody = { date, time, number_of_people, comment, client_id };
-                    axios
-                        .post(`${hostname}front/reservation`, requestBody, {
-                            headers: {
-                                Authorization: `Bearer ${localStorage.getItem('token')}`,
-                            },
-                        })
-                        .then((response) => { handleSentReservation() })
-                        .catch((error) => { console.log(error); });
-                }}
-                validateOnChange={true}
-            >
+                <Formik
+                    initialValues={{ date: "", time: "", number_of_people: "", comment: "" }}
+                    validationSchema={reservationSchema}
+                    onSubmit={(values) => {
+                        const client_id = localStorage.getItem('client_id');
+                        const { date, time, number_of_people, comment } = values;
+                        const requestBody = { date, time, number_of_people, comment, client_id };
+                        axios
+                            .post(`${hostname}front/reservation`, requestBody, {
+                                headers: {
+                                    Authorization: `Bearer ${localStorage.getItem('token')}`,
+                                },
+                            })
+                            .then((response) => { handleSentReservation() })
+                            .catch((error) => { console.log(error); });
+                    }}
+                    validateOnChange={true}
+                >
 
-                {({ errors, touched }) => (
-                    <Form className="d-flex flex-column justify-content-center align-items-center">
-                        <div className="form-group mb-3 col-12">
-                            <label htmlFor="date">Date :</label>
-                            <Field name="date" type="date" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
-                            <ErrorMessage name="date" component="div" className="text-danger" />
-                        </div>
-                        <div className="form-group mb-3 col-12">
-                            <label htmlFor="time">Heure :</label>
-                            <Field name="time" type="time" className={`form-control ${errors.time && touched.time ? "is-invalid" : ""}`} />
-                            <ErrorMessage name="time" component="div" className="text-danger" />
-                        </div>
-                        <div className="form-group mb-3 col-12">
-                            <label htmlFor="number_of_people">Nombre de personnes :</label>
-                            <Field name="number_of_people" type="number" placeholder="Renseignez ici le nombre de couvert" className={`form-control ${errors.number_of_people && touched.number_of_people ? "is-invalid" : ""}`} />
-                            <ErrorMessage name="number_of_people" component="div" className="text-danger" />
-                        </div>
-                        <div className="form-group mb-3 col-12">
-                            <label htmlFor="comment">Commentaire :</label>
-                            <Field name="comment" as="textarea" placeholder='Exemple : "Je suis allérgique aux produits laitier"' className={`form-control ${errors.comment && touched.comment ? "is-invalid" : ""}`} />
-                            <ErrorMessage name="comment" component="div" className="text-danger" />
-                        </div>
-                        <button type="submit" className="btn sub-btn btn-lg col-5">Réserver</button>
-                    </Form>
-                )}
+                    {({ errors, touched }) => (
+                        <Form className="d-flex flex-column justify-content-center align-items-center">
+                            <div className="form-group mb-3 col-12">
+                                <label htmlFor="date">Date :</label>
+                                <Field name="date" type="date" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
+                                <ErrorMessage name="date" component="div" className="text-danger" />
+                            </div>
+                            <div className="form-group mb-3 col-12">
+                                <label htmlFor="time">Heure :</label>
+                                <Field name="time" type="time" className={`form-control ${errors.time && touched.time ? "is-invalid" : ""}`} />
+                                <ErrorMessage name="time" component="div" className="text-danger" />
+                            </div>
+                            <div className="form-group mb-3 col-12">
+                                <label htmlFor="number_of_people">Nombre de personnes :</label>
+                                <Field name="number_of_people" type="number" placeholder="Renseignez ici le nombre de couvert" className={`form-control ${errors.number_of_people && touched.number_of_people ? "is-invalid" : ""}`} />
+                                <ErrorMessage name="number_of_people" component="div" className="text-danger" />
+                            </div>
+                            <div className="form-group mb-3 col-12">
+                                <label htmlFor="comment">Commentaire :</label>
+                                <Field name="comment" as="textarea" placeholder='Exemple : "Je suis allérgique aux produits laitier"' className={`form-control ${errors.comment && touched.comment ? "is-invalid" : ""}`} />
+                                <ErrorMessage name="comment" component="div" className="text-danger" />
+                            </div>
+                            <button type="submit" className="btn sub-btn btn-lg col-5">Réserver</button>
+                        </Form>
+                    )}
 
-            </Formik>    
-             )}
-           
+                </Formik>
+            )}
+
         </div>
     );
 

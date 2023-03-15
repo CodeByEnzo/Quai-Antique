@@ -6,15 +6,7 @@ import "../../containers/site/Contact/Contact.css";
 const ContactForm = (props) => (
     <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">
         <form id="contactForm"
-            className="
-            form-border 
-            rounded
-            shadow
-            p-3 row
-            d-flex
-            justify-content-center
-            col-xl-7
-            bg-dark">
+            className="form-border rounded shadow p-3 row d-flex justify-content-center col-12 col-md-8 col-xl-6 bg-dark">
 
             <div className="mb-3 col-12 col-md-10">
                 <label htmlFor="name" className="form-label">Name</label>

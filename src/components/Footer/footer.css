@@ -16,11 +16,20 @@
 }
 
 .footer {
-    min-height: 150px;
     background: #212529;
     width: 100vw;
     color: #f2f8f4;
     overflow-x: hidden;
-    transition: all 1s ease;
+    animation: footerAppear 2 forwards ease-in;
 
+}
+
+@keyframes footerAppear {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }

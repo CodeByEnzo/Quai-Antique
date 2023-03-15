@@ -6,34 +6,36 @@
 -- et "mytable" par le nom de la table que vous souhaitez afficher.
 CREATE DATABASE db_quai;
 CREATE TABLE `users` (
-  `login` varchar(150) NOT NULL,
-  `password` varchar(150) NOT NULL
+    `login` varchar(150) NOT NULL,
+    `password` varchar(150) NOT NULL
 );
-INSERT INTO `users` (`login`, `password`) VALUES
-('charle', 'admin01'),
-('charle', '$2y$10$7Pe8coFM9jkrWULnkJD5tu9gvZHtcpas1fpFn4HYIgEGAfZ70tcB6');
+INSERT INTO `users` (`login`, `password`)
+VALUES ('charle', 'admin01'),
+    (
+        'charle',
+        '$2y$10$7Pe8coFM9jkrWULnkJD5tu9gvZHtcpas1fpFn4HYIgEGAfZ70tcB6'
+    );
 CREATE TABLE `categories` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(150) NOT NULL,
-  PRIMARY KEY (`id`)
+    `id` int(11) NOT NULL AUTO_INCREMENT,
+    `name` varchar(150) NOT NULL,
+    PRIMARY KEY (`id`)
 );
 CREATE TABLE `products` (
-  `product_id` int(11) NOT NULL AUTO_INCREMENT,
-  `title` varchar(150) NOT NULL,
-  `content` text NOT NULL DEFAULT '',
-  `category_id` int(11) NOT NULL,
-  `prix` decimal(10,0) NOT NULL,
-  `product_image` varchar(250) DEFAULT NULL,
-  PRIMARY KEY (`product_id`),
-  FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
+    `product_id` int(11) NOT NULL AUTO_INCREMENT,
+    `title` varchar(150) NOT NULL,
+    `content` text NOT NULL DEFAULT '',
+    `category_id` int(11) NOT NULL,
+    `prix` decimal(10, 0) NOT NULL,
+    `product_image` varchar(250) DEFAULT NULL,
+    PRIMARY KEY (`product_id`),
+    FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
 );
-INSERT INTO `categories` (`name`) VALUES
-('Entrées'),
-('Plats'),
-('Desserts');
+INSERT INTO `categories` (`name`)
+VALUES ('Entrées'),
+    ('Plats'),
+    ('Desserts');
 INSERT INTO products (title, content, category_id, prix)
-VALUES
-    (
+VALUES (
         'Velouté de courge et crème de châtaigne',
         'Velouté de courge, accompagné d\'une crème de châtaigne maison. Servi avec des croûtons à l\'ail et des noisettes concassées.',
         1,
@@ -58,34 +60,32 @@ VALUES
         '11.50'
     );
 INSERT INTO products (title, content, category_id, prix)
-VALUES
-(
-'Fondue savoyarde',
-'Fondue traditionnelle savoyarde à base de fromage Comté et Emmental, accompagnée de pain de seigle grillé et de pommes de terre.',
-2,
-22.50
-),
-(
-'Tartiflette',
-'Tartiflette traditionnelle faite maison, avec des pommes de terre, oignons, lardons et fromage Reblochon.',
-2,
-21.00
-),
-(
-'Raclette',
-'Raclette traditionnelle savoyarde, accompagnée de pommes de terre, charcuterie et cornichons.',
-2,
-24.50
-),
-(
-'Croziflette',
-'Croziflette, une variante de la tartiflette, avec des crozets à la place des pommes de terre, accompagnée de lardons et de fromage Reblochon.',
-2,
-21.00
-);
-INSERT INTO products (title, content, category_id, prix)
-VALUES
+VALUES (
+        'Fondue savoyarde',
+        'Fondue traditionnelle savoyarde à base de fromage Comté et Emmental, accompagnée de pain de seigle grillé et de pommes de terre.',
+        2,
+        22.50
+    ),
     (
+        'Tartiflette',
+        'Tartiflette traditionnelle faite maison, avec des pommes de terre, oignons, lardons et fromage Reblochon.',
+        2,
+        21.00
+    ),
+    (
+        'Raclette',
+        'Raclette traditionnelle savoyarde, accompagnée de pommes de terre, charcuterie et cornichons.',
+        2,
+        24.50
+    ),
+    (
+        'Croziflette',
+        'Croziflette, une variante de la tartiflette, avec des crozets à la place des pommes de terre, accompagnée de lardons et de fromage Reblochon.',
+        2,
+        21.00
+    );
+INSERT INTO products (title, content, category_id, prix)
+VALUES (
         'Tarte aux myrtilles',
         'Tarte aux myrtilles fraîches et crème glacée à la vanille.',
         3,
@@ -115,9 +115,8 @@ CREATE TABLE gallerys (
     gallery_content VARCHAR(255),
     gallery_img VARCHAR(255)
 );
-INSERT INTO gallerys ( gallery_title, gallery_content)
-VALUES
-    (
+INSERT INTO gallerys (gallery_title, gallery_content)
+VALUES (
         'Fondant au bon chocolat',
         "Fondant chaud et moelleux accompagné d\'une boule de glace à la vanille."
     ),
@@ -126,33 +125,51 @@ VALUES
         'Tarte aux pommes caramélisées, servie tiède avec de la crème glacée à la vanille.'
     );
 CREATE TABLE clients (
-client_id INT(11) NOT NULL AUTO_INCREMENT,
-username VARCHAR(255) NOT NULL,
-email VARCHAR(255) NOT NULL,
-password VARCHAR(255) NOT NULL,
-statut ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
-created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-token VARCHAR(255) NULL,
-PRIMARY KEY (client_id),
-UNIQUE (username),
-UNIQUE (email)
+    client_id INT(11) NOT NULL AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    statut ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    token VARCHAR(255) NULL,
+    PRIMARY KEY (client_id),
+    UNIQUE (username),
+    UNIQUE (email)
 );
-INSERT INTO clients (username, email, password, statut,created_at)
-VALUES ('JohnDoe', 'johndoe@example.com', '$2y$10$pJLxJxH/pT.jg8bv3f3cX.b4s4sWYV8vEaPqy7xzGwT3O8aL3q3X2', 'active',NOW());
+INSERT INTO clients (username, email, password, statut, created_at)
+VALUES (
+        'JohnDoe',
+        'johndoe@example.com',
+        '$2y$10$pJLxJxH/pT.jg8bv3f3cX.b4s4sWYV8vEaPqy7xzGwT3O8aL3q3X2',
+        'active',
+        NOW()
+    );
 CREATE TABLE reservations (
-reservation_id INT(11) NOT NULL AUTO_INCREMENT,
-client_id INT(11) NOT NULL,
-date DATE NOT NULL,
-time TIME NOT NULL,
-number_of_people INT(11) NOT NULL,
-comments TEXT,
-created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-PRIMARY KEY (reservation_id),
-FOREIGN KEY (client_id) REFERENCES clients(client_id)
+    reservation_id INT(11) NOT NULL AUTO_INCREMENT,
+    client_id INT(11) NOT NULL,
+    date DATE NOT NULL,
+    time TIME NOT NULL,
+    number_of_people INT(11) NOT NULL,
+    comments TEXT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (reservation_id),
+    FOREIGN KEY (client_id) REFERENCES clients(client_id)
 );
-INSERT INTO reservations (client_id, date, time, number_of_people, comments)
-VALUES (1, '2022-02-06', '19:00', 4, "Fête d\'anniversaire");
+INSERT INTO reservations (
+        client_id,
+        date,
+        time,
+        number_of_people,
+        comments
+    )
+VALUES (
+        1,
+        '2022-02-06',
+        '19:00',
+        4,
+        "Fête d\'anniversaire"
+    );
 CREATE TABLE opening_hours (
     id INT PRIMARY KEY,
     day_of_week VARCHAR(20),
@@ -162,28 +179,52 @@ CREATE TABLE opening_hours (
     dinner_closing_time VARCHAR(10)
 );
 INSERT INTO opening_hours (
-id, day_of_week, 
-lunch_opening_time, 
-lunch_closing_time, 
-dinner_opening_time, 
-dinner_closing_time
-)
-VALUES
-(1, 'Lundi', NULL, NULL, NULL, NULL),
-(2, 'Mardi', '12:00', '14:00', '19:00', '21:30'),
-(3, 'Mercredi', '12:00', '14:00', '19:00', '21:30'),
-(4, 'Jeudi', '12:00', '14:00', '19:00', '21:30'),
-(5, 'Vendredi', '12:00', '14:00', '19:00', '21:30'),
-(6, 'Samedi', '12:00', '14:00', '19:00', '21:30'),
-(7, 'Dimanche', '12:00', '14:00', '19:00', '21:30');
-
-CREATE TABLE restaurants (
+        id,
+        day_of_week,
+        lunch_opening_time,
+        lunch_closing_time,
+        dinner_opening_time,
+        dinner_closing_time
+    )
+VALUES (1, 'Lundi', NULL, NULL, NULL, NULL),
+    (2, 'Mardi', '12:00', '14:00', '19:00', '21:30'),
+    (
+        3,
+        'Mercredi',
+        '12:00',
+        '14:00',
+        '19:00',
+        '21:30'
+    ),
+    (4, 'Jeudi', '12:00', '14:00', '19:00', '21:30'),
+    (
+        5,
+        'Vendredi',
+        '12:00',
+        '14:00',
+        '19:00',
+        '21:30'
+    ),
+    (6, 'Samedi', '12:00', '14:00', '19:00', '21:30'),
+    (
+        7,
+        'Dimanche',
+        '12:00',
+        '14:00',
+        '19:00',
+        '21:30'
+    );
+CREATE TABLE company_info (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    nom VARCHAR(255) NOT NULL,
-    adresse VARCHAR(255) NOT NULL,
-    telephone VARCHAR(20) NOT NULL,
-    email VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL,
+    adress VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    email VARCHAR(50) NOT NULL
 );
-
-INSERT INTO restaurants (nom, adresse, telephone, email)
-VALUES ('Le Quai Antique', '15 rue fake adress', '01 01 01 01 01', 'le-quai-antqiues@fakemail.com');
+INSERT INTO company_info (name, adress, phone, email)
+VALUES (
+        'Le Quai Antique',
+        '15 rue fake adress',
+        '01 01 01 01 01',
+        'le-quai-antqiues@fakemail.com'
+    );
