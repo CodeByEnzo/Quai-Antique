@@ -87,7 +87,6 @@ const Reserved = () => {
 
     const handleUpdateSuccess = () => {
         setIsEditing(false);
-        // afficher un message de confirmation ou rafraîchir les données des réservations
     };
 
     return (

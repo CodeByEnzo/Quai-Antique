@@ -4,7 +4,8 @@ import { hostname } from "../../config";
 import * as Yup from "yup";
 import axios from "axios";
 
-const UpdateProfileForm = () => {
+const UpdateProfileForm = (props) => {
+    const { userData } = props;
 
     useEffect(() => {
         axios.get(`${hostname}front/hours`).then((response) => {
@@ -49,7 +50,7 @@ const UpdateProfileForm = () => {
     });
 
     return (
-        <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-10">
+        <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto col-12 col-md-10">
             <Formik
                 initialValues={{
                     username: "",
@@ -98,8 +99,7 @@ const UpdateProfileForm = () => {
                             <Field name="password" type="password" placeholder="Mot de passe" className={`form-control ${errors.password && touched.password ? "is-invalid" : ""}`} />
                             <ErrorMessage name="password" component="div" className="text-danger" />
                         </div>
-
-                        <button type="submit" className="btn sub-btn btn-lg col-5">Réserver</button>
+                        <button type="submit" className="btn sub-btn btn-lg col-5">Modifier</button>
                     </Form>
                 )}
             </Formik>

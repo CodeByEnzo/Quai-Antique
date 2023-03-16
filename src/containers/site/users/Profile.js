@@ -5,9 +5,8 @@ import { hostname } from "../../../config";
 import UpdateProfileForm from "../../../components/Profile/UpdateProfileForm";
 
 
-const Profile = () => {
+const Profile = (props) => {
     const [isEditing, setIsEditing] = useState(false);
-
     const [userData, setUserData] = useState(null);
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -74,7 +73,7 @@ const Profile = () => {
                         {isEditing ? (
                             <span className='container-fluid d-flex flex-column align-items-center'>
                                 <h3 className='text-center'> Modifiez vos informations </h3>
-                                <UpdateProfileForm onUpdateSuccess={handleUpdateSuccess} />
+                                <UpdateProfileForm onUpdateSuccess={handleUpdateSuccess} userData={userData} />
                                 <span className='bg-dark mt-3 rounded'>
                                     <button
                                         className="btn sub-btn btn-lg"
