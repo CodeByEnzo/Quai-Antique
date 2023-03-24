@@ -1,6 +1,7 @@
 .menu {
     padding-top: 150px;
     margin-bottom: 150px;
+    min-height: 100vh;
 }
 .h2Menu, .h1Menu {
     font-family: 'Edwardian Scr Alt ITC TT', 'Luxurious Script', 'Balletregular', sans-serif;

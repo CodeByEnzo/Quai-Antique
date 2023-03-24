@@ -26,11 +26,11 @@ function Menu() {
     return (
 
         <motion.main
-            className='main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
+            className='menu main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
 
-            initial={{ y: "-100%" }}
-            animate={{ y: "0%" }}
-            exit={{ y: "100%" }}
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0 }}
             transition={{ duration: 0.7, ease: "easeIn" }}
         >
             <h1 className='text-center'>La carte</h1>

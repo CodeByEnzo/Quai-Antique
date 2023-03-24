@@ -20,7 +20,7 @@
     width: 100vw;
     color: #f2f8f4;
     overflow-x: hidden;
-    animation: footerAppear 2 forwards ease-in;
+    animation: all 2 forwards ease-in;
 
 }
 
