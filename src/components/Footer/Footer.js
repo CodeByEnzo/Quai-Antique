@@ -51,7 +51,7 @@ const Footer = () => {
 
                 </div>
             </div>
-            <p className='text-center'>Le Quai Antique - Par Enzo Capitanio - Tout droits réservés</p>
+            <p className='text-center m-0'>Le Quai Antique - Par Enzo Capitanio - Tout droits réservés</p>
         </footer>
     );
 }

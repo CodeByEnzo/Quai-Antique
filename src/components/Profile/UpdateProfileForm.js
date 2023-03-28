@@ -69,7 +69,7 @@ const UpdateProfileForm = (props) => {
 
                     };
                     axios
-                        .post(`${hostname}front/reservation`, requestBody, {
+                        .post(`${hostname}front/userUpdateInfo`, requestBody, {
                             headers: {
                                 Authorization: `Bearer ${localStorage.getItem('token')}`,
                             },

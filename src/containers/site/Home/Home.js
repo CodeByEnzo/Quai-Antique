@@ -11,7 +11,6 @@ class Home extends Component {
         gallerys: []
     }
 
-
     //Get the pictures on the back end
     componentDidMount() {
         fetch(`${hostname}/front/gallerys`)

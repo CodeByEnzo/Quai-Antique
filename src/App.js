@@ -24,7 +24,7 @@ function App() {
                     className="content-container"
                     initial={{ scale: 2, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1, delay: 0.3, ease: "easeOut",  }}
+                    transition={{ duration: 1, delay: 0.3, ease: "easeOut", }}
                 >
                     <BrowserRouter>
                         <Site />
