@@ -90,7 +90,7 @@ const Profile = (props) => {
                                 <div className="form-border rounded col-12 col-md-8 col-xl-5 p-2 bg-dark shadow mx-auto">
                                     <div className="col-12">
                                         <p>
-                                            <strong>Nom d'utilisateur :</strong>
+                                            <strong>Nom d'utilisateur : </strong>
                                             <span>
                                                 {userData ? (
                                                     <span>{userData.user.username}</span>
@@ -102,7 +102,7 @@ const Profile = (props) => {
                                     </div>
                                     <div className="col-12">
                                         <p>
-                                            <strong>Adresse e-mail :</strong>
+                                            <strong>Adresse e-mail : </strong>
                                             <span>
                                                 {userData ? (
                                                     <span>{userData.user.email}</span>
@@ -114,7 +114,7 @@ const Profile = (props) => {
                                     </div>
                                     <div className="col-12">
                                         <p>
-                                            <strong>Créé le  :</strong>
+                                            <strong>Créé le  : </strong>
                                             <span>
                                                 {userData ? (
                                                     <span>{userData.user.created_at}</span>

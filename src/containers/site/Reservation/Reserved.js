@@ -104,7 +104,7 @@ const Reserved = () => {
                             <span className='container-fluid d-flex flex-column align-items-center'>
                                 <h3 className='text-center'> Modifiez votre réservation </h3>
                                 <UpdateReservationForm reservationIdToUpdate={reservationIdToUpdate} onUpdateSuccess={handleUpdateSuccess} />
-                                <span className='bg-dark mt-3 rounded'>
+                                <span className='bg-dark rounded'>
                                     <button
                                         className="btn sub-btn btn-lg"
                                         type="submit"

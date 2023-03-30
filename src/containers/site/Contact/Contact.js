@@ -28,7 +28,7 @@ class Contact extends Component {
 
         return (
             <motion.main
-                className='main-margin'
+                className='main-margin mx-3'
 
                 initial={{ x: "-100%" }}
                 animate={{ x: "0%" }}
@@ -36,7 +36,7 @@ class Contact extends Component {
                 transition={{ duration: 0.7, ease: "easeOut" }}
             >
                 <h1 className="text-center">Contactez nous !</h1>
-                {this.state.messageSent && <div className="alert alert-success text-center mx-auto">Votre message à été envoyé !</div>}
+                {this.state.messageSent && <div className="alert alert-success text-center col-12 col-sm-5 mx-auto">Votre message à été envoyé !</div>}
                 <ContactForm sendMail={this.handleSendMail} />
             </motion.main>
         )

@@ -113,7 +113,7 @@ const UpdateReservationForm = (props) => {
     });
 
     return (
-        <motion.div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-8"
+        <motion.div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-3 col-12 col-md-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
