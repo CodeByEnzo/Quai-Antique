@@ -19,6 +19,7 @@ function AnimatedRoutes() {
 
     return (
         <AnimatePresence initial={false} mode={"wait"}>
+            <ScrollToTop></ScrollToTop>
             <Routes location={location} key={location.pathname}>
                 <Route path='/' element={<Home />} />
 
