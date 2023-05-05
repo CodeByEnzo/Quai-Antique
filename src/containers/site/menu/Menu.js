@@ -26,7 +26,14 @@ function Menu() {
     return (
 
         <motion.main
-            className='menu main-margin d-flex flex-column mx-auto pb-5 px-2 justify-content-center align-items-center'
+            className='menu main-margin 
+            d-flex 
+            flex-column 
+            mx-auto 
+            pb-5 
+            px-2 
+            justify-content-center 
+            align-items-center'
 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
@@ -37,9 +44,13 @@ function Menu() {
             <h2 className='h2Menu row mt-5'>Entrées</h2>
             {entrees.map((product, index) => (
                 <div className='row container border-bottom align-items-center' key={index}>
-                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}
+                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>
+                        -{product.title}
                         <br />
-                        <small>{product.content}</small></p>
+                        <small>
+                            {product.content}
+                        </small>
+                    </p>
                     <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>
                         {product.prix}€
                     </p>
@@ -49,7 +60,8 @@ function Menu() {
             <h2 className='h2Menu row mt-5'>Plats</h2>
             {plats.map((product, index) => (
                 <div className='row container border-bottom align-items-center' key={index}>
-                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}
+                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>
+                        -{product.title}
                         <br />
                         <small>{product.content}</small></p>
                     <p className='col-1 col-xl-4 text-xl-center' key={product.unique_id}>
@@ -61,7 +73,8 @@ function Menu() {
             <h2 className='h2Menu row mt-5'>Desserts</h2>
             {desserts.map((product, index) => (
                 <div className='row container border-bottom align-items-center' key={index}>
-                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>-{product.title}
+                    <p className='col-11 col-xl-8 mt-2' key={product.unique_id}>
+                        -{product.title}
                         <br />
                         <small>{product.content}</small>
                     </p>

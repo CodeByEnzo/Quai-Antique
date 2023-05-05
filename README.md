@@ -69,7 +69,9 @@ git clone https://github.com/CodeByEnzo/Quai-Antique.git
 Now find the file config.js in src folder.
 You have to make sure that this line :
 export const hostname = "http://localhost/SERVEURQUAI/";
-Match with the correct folder.  
+Match with the correct folder. 
+Nom open new terminal in the projet and install NPM with this command:
+npm install 
 Front end is set !
 
 # SUCCESS ! you should now be able to run the project !

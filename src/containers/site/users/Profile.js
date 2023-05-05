@@ -44,22 +44,22 @@ const Profile = (props) => {
     }, []);
 
 
-    //Get the id of the reservation that will be update
-    const handleUpdateClick = (event) => {
-        setIsEditing(true);
-    };
-    //Undisplay inputs
-    const cancelBTN = () => {
-        setIsEditing(false)
-    }
+        //Get the id of the reservation that will be update
+        const handleUpdateClick = (event) => {
+            setIsEditing(true);
+        };
+        //Undisplay inputs
+        const cancelBTN = () => {
+            setIsEditing(false)
+        }
 
-    const handleUpdateSuccess = () => {
-        setIsEditing(false);
-        // afficher un message de confirmation ou rafraîchir les données des réservations
-    };
+        const handleUpdateSuccess = () => {
+            setIsEditing(false);
+            // afficher un message de confirmation ou rafraîchir les données des réservations
+        };
 
 
-    return  (
+        return (
             <motion.div
                 className='mb-5 pb-5'
 
@@ -86,7 +86,7 @@ const Profile = (props) => {
                             </span>
                         ) : (
                             <span className="col-12">
-                                    <h3 className='text-center'>Votre profile</h3>
+                                <h3 className='text-center'>Votre profile</h3>
                                 <div className="form-border rounded col-12 col-md-8 col-xl-5 p-2 bg-dark shadow mx-auto">
                                     <div className="col-12">
                                         <p>
@@ -140,6 +140,6 @@ const Profile = (props) => {
                     </div>
                 </div>
             </motion.div>
-    )
-};
-export default Profile;
+        )
+    };
+    export default Profile;

@@ -27,8 +27,9 @@
     top: 0;
     z-index: 0;
 }
+
 .title-banner {
-    font-family:  'Edwardian Scr Alt ITC TT','Luxurious Script', 'Balletregular', sans-serif;
+    font-family: 'Edwardian Scr Alt ITC TT', 'Luxurious Script', 'Balletregular', sans-serif;
     font-size: 6rem;
     color: #be9837;
 }
@@ -126,7 +127,7 @@
     }
 
     .title-banner {
-font-family:  'Edwardian Scr Alt ITC TT','Luxurious Script', 'Balletregular', sans-serif;
+        font-family: 'Edwardian Scr Alt ITC TT', 'Luxurious Script', 'Balletregular', sans-serif;
         font-size: 5rem;
         color: #be9837;
     }
@@ -136,8 +137,6 @@ font-family:  'Edwardian Scr Alt ITC TT','Luxurious Script', 'Balletregular', sa
         font-size: 1.3rem;
         margin-top: -5%;
     }
-
-
 }
 
 .book-btn {
@@ -148,7 +147,7 @@ font-family:  'Edwardian Scr Alt ITC TT','Luxurious Script', 'Balletregular', sa
     background: #212529;
     height: 75px;
     width: 220px;
-        transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
     text-transform: uppercase;
 }
 
