@@ -25,7 +25,7 @@ const Profile = (props) => {
                             setUserData(data);
                             localStorage.setItem('client_id', data.user.id);
                         } else {
-                            // Si le token a expiré ou est invalide, rediriger vers une page de connexion ou demander à l'utilisateur de se reconnecter
+                            // If the token is wrong, redirecting user to login page
                             window.location.href = "/login";
                             alert('Votre session à éxpiré, veuillez vous reconnecter.')
                         }
