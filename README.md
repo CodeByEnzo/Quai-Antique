@@ -37,48 +37,48 @@ Just copy the lines in RequetteSQL.sql, past them and run them.
 
 ### third way (harder)
 You can use command line with the same querys, 
-But you will need variables environements set on your computer to use MYSQL,
-Look for variable environements in Windows, look for path and add a new one.
-Copy the URL that should be "xampp/mysql/bin"
-(in my case : "C:\xampp\mysql\bin")
-And then past it in the new path.
+But you will need variables environements set on your computer to use MYSQL,  
+Look for variable environements in Windows, look for path and add a new one.  
+Copy the URL that should be "xampp/mysql/bin"  
+(in my case : "C:\xampp\mysql\bin")  
+And then past it in the new path.  
 
---> Now you should be able to use MYSQL.
-You can verify with this command => mysql --version
-THEN,
-mysql -u username -p 
-Enter your password, (By default, it should be id = root and password = root or maybe no password, depends of your set)
-Now you should be able to run run querys starting with :
-create database db_quai;
+--> Now you should be able to use MYSQL.  
+You can verify with this command => mysql --version  
+THEN,  
+mysql -u username -p  
+Enter your password, (By default, it should be id = root and password = root or maybe no password, depends of your set)  
+Now you should be able to run run querys starting with :  
+create database db_quai;  
 
-Once this done you can now send the querys that is in RequetteSQL.sql one by one.
-Data base is set !
+Once this done you can now send the querys that is in RequetteSQL.sql one by one.  
+Data base is set !  
 
 ### Asset of database and back-end
 
-You have to go on SERVEURQUAI folder. Look for models/Models.php.
-Now you have to modify this line:
-self::$pdo = new PDO("mysql:host=localhost;dbname=db_quai;charset=utf8", "YOUR_USERNAME", "YOUR_PASSWORD");
-To connect with database with your own configuration.
+You have to go on SERVEURQUAI folder. Look for models/Models.php.  
+Now you have to modify this line:  
+self::$pdo = new PDO("mysql:host=localhost;dbname=db_quai;charset=utf8", "YOUR_USERNAME", "YOUR_PASSWORD");  
+To connect with database with your own configuration.  
 
 ## Front-end:
 
-You can create a new folder on your desktop or where ever you like.
-Use this command inside:
-git clone https://github.com/CodeByEnzo/Quai-Antique.git
-Now find the file config.js in src folder.
-You have to make sure that this line :
-export const hostname = "http://localhost/SERVEURQUAI/";
-Match with the correct folder. 
-Nom open new terminal in the projet and install NPM with this command:
-npm install 
-Front end is set !
+You can create a new folder on your desktop or where ever you like.  
+Use this command inside:  
+git clone https://github.com/CodeByEnzo/Quai-Antique.git  
+Now find the file config.js in src folder.  
+You have to make sure that this line :  
+export const hostname = "http://localhost/SERVEURQUAI/";  
+Match with the correct folder.  
+Nom open new terminal in the projet and install NPM with this command:  
+npm install  
+Front end is set !  
 
 # SUCCESS ! you should now be able to run the project !
 FRONT :  
-Just run npm start in the terminal and you will see the project.  
+Just run npm start in the terminal and you will see the project.   
 Make sure Xampp is runing to see datas  
-You can register and login. Make a reservation and delete it.
+You can register and login. Make a reservation and delete it.  
 
 BACK :  
 You have to login with;  
