@@ -61,9 +61,6 @@ const UpdateReservationForm = (props) => {
     }, []);
 
 
-
-
-
     const reservationSchema = Yup.object().shape({
         date: Yup.date()
             .required("Une date est requise.")

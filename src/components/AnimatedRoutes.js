@@ -7,41 +7,48 @@ import NotFound from '../components/404/NotFound';
 import Contact from "../containers/site/Contact/Contact";
 import RGPD from '../containers/site/RGPD/RGPD';
 import Login from '../containers/site/users/Login';
+import ForgotPW from '../containers/site/users/ForgotPW';
 import Account from '../containers/site/users/Account';
 import Register from '../containers/site/users/Register';
 import AuthenticatedRoute from '../components/AuthenticatedRoute';
 import { AnimatePresence } from 'framer-motion';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
+import ResetPW from '../containers/site/users/ResetPW.js';
 
 function AnimatedRoutes() {
 
     const location = useLocation();
 
     return (
-        <AnimatePresence initial={false} mode={"wait"}>
+        <>
             <ScrollToTop />
-            <Routes location={location} key={location.pathname}>
-                <Route path='/' element={<Home />} />
+            <AnimatePresence initial={false} mode={"wait"}>
+                <Routes location={location} key={location.pathname}>
+                    <Route path='/' element={<Home />} />
 
-                <Route path='/Login' element={<Login />} />
-                <Route path='/Register' element={<Register />} />
+                    <Route path='/Login' element={<Login />} />
+                    <Route path='/Register' element={<Register />} />
+                    <Route path='/ForgotPW' element={<ForgotPW />} />
+                    <Route path='/ResetPW' element={<ResetPW />} />
 
-                <Route path='/menu' element={<Menu />} />
-                <Route path='/Contact' element={<Contact />} />
-                <Route path='/RGPD' element={<RGPD />} />
-                {/* <Route path='/test' element={<Test />} /> */}
+                    <Route path='/menu' element={<Menu />} />
+                    <Route path='/Contact' element={<Contact />} />
+                    <Route path='/RGPD' element={<RGPD />} />
+                    {/* <Route path='/test' element={<Test />} /> */}
 
-                <Route
-                    path='/Account'
-                    element={
-                        <AuthenticatedRoute>
-                            <Account />
-                        </AuthenticatedRoute>
-                    }
-                />
-                <Route path='*' element={<NotFound />} />
-            </Routes>
-        </AnimatePresence>
+                    <Route
+                        path='/Account'
+                        element={
+                            <AuthenticatedRoute>
+                                <Account />
+                            </AuthenticatedRoute>
+                        }
+                    />
+                    <Route path='*' element={<NotFound />} />
+                </Routes>
+            </AnimatePresence>
+        </>
+
     )
 }
 export default AnimatedRoutes

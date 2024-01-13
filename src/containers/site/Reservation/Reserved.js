@@ -118,53 +118,60 @@ const Reserved = () => {
                             <span>
                                 {userData?.reservations?.length > 0 ? (
                                     <div>
-                                        <h3 className='text-center'>Vos réservation</h3>
-                                        {userData.reservations.map(reservation => (
-                                            <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
-                                                <div className="form-group mt-3">
-                                                    <label>Date :</label>
-                                                    <div>
-                                                        <p>{reservation.date}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="form-group mt-3">
-                                                    <label>Heure :</label>
-                                                    <div>
-                                                        <p>{reservation.time}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="form-group mt-3">
-                                                    <label>Nombre de personnes :</label>
-                                                    <div>
-                                                        <p>{reservation.number_of_people}</p>
-                                                    </div>
-                                                </div>
-                                                <div className="form-group mt-3">
-                                                    <label>Commentaire :</label>
-                                                    <div>
-                                                        <p>{reservation.comments}</p>
-                                                    </div>
-                                                </div>
-                                                <div className='d-flex justify-content-center mt-3'>
-                                                    <button
-                                                        className="btn sub-btn mx-2"
-                                                        onClick={handleUpdateClick}
-                                                        data-reservationid={reservation.reservation_id}>
-                                                        Modifier
-                                                    </button>
-                                                    <button className="btn sub-btn mx-2"
-                                                        onClick={handleCancelReservation}
-                                                        data-reservationid={reservation.reservation_id}>
-                                                        Annuler
-                                                    </button>
-                                                </div>
-                                            </section>
-                                        ))}
+                                        <h3 className='text-center'>Vos réservations</h3>
+                                        {userData.reservations.some(reservation => new Date(reservation.date) >= new Date()) ? (
+                                            userData.reservations.map(reservation => (
+                                                new Date(reservation.date) >= new Date() && (
+                                                    <section className='form-border rounded bg-dark shadow p-2 my-3' key={reservation.reservation_id}>
+                                                        <div className="form-group mt-3">
+                                                            <label>Date :</label>
+                                                            <div>
+                                                                <p>{reservation.date}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-group mt-3">
+                                                            <label>Heure :</label>
+                                                            <div>
+                                                                <p>{reservation.time}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-group mt-3">
+                                                            <label>Nombre de personnes :</label>
+                                                            <div>
+                                                                <p>{reservation.number_of_people}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className="form-group mt-3">
+                                                            <label>Commentaire :</label>
+                                                            <div>
+                                                                <p>{reservation.comments}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div className='d-flex justify-content-center mt-3'>
+                                                            <button
+                                                                className="btn sub-btn mx-2"
+                                                                onClick={handleUpdateClick}
+                                                                data-reservationid={reservation.reservation_id}>
+                                                                Modifier
+                                                            </button>
+                                                            <button className="btn sub-btn mx-2"
+                                                                onClick={handleCancelReservation}
+                                                                data-reservationid={reservation.reservation_id}>
+                                                                Annuler
+                                                            </button>
+                                                        </div>
+                                                    </section>
+                                                )
+                                            ))
+                                        ) : (
+                                            <p className='text-center'>Aucune réservation à venir.</p>
+                                        )}
                                     </div>
                                 ) : (
                                     <p className='text-center'>Aucune réservation trouvée</p>
                                 )}
                             </span>
+
                         )}
                     </div>
                 </div>

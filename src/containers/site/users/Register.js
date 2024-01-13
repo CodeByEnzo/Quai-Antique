@@ -19,6 +19,11 @@ function Register() {
             .min(5, "Le nom d'utilisateur doit avoir au moins 5 caractères")
             .max(20, "Le nom d'utilisateur ne doit pas dépasser 20 caractères")
             .required("Le nom d'utilisateur est obligatoire"),
+        number: Yup.string()
+            .min(9, "Minimum 10 chiffres")
+            .max(15, "Maximum 15 chiffres")
+            .matches(/^[0-9]+$/, "Le numéro doit contenir uniquement des chiffres")
+            .required("Le numéro est obligatoire, nous l'utiliserons en cas de réservation."),
         email: Yup.string()
             .email("L'adresse e-mail doit être valide")
             .required("L'adresse e-mail est obligatoire"),
@@ -51,20 +56,32 @@ function Register() {
                     <Formik
                         method='post'
                         className="form-border rounded bg-dark mb-5 col-12 col-md-6 col-xl-4 p-2"
-                        initialValues={{ username: "", email: "", password: "" }}
+                        initialValues={{ username: "", number: "", email: "", password: "" }}
                         validationSchema={reservationSchema}
-                        onSubmit={(values) => {
-                            const { username, email, password } = values;
-                            const requestBody = { username, email, password };
+                        onSubmit={(values, { setSubmitting }) => {
+                            const { username, number, email, password } = values;
+                            const requestBody = { username, number, email, password };
                             axios.post(`${hostname}front/register`, requestBody, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
-                                }
+                                },
                             })
-                                .then((response) => { handleRegister() })
-                                .catch((error) => { console.log(error); });
+                                .then((response) => {
+                                    if (response.status === 200) {
+                                        handleRegister();
+                                    } else {
+                                        console.log('Erreur lors de la création du compte');
+                                    }
+                                })
+                                .catch((error) => {
+                                    console.log(error);
+                                })
+                                .finally(() => {
+                                    setSubmitting(false);
+                                });
                         }}
+
                         validateOnChange={true}
                     >
                         {({ errors, touched }) => (
@@ -73,6 +90,11 @@ function Register() {
                                     <label>Nom d'utilisateur:</label>
                                     <Field name='username' type="text" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
                                     <ErrorMessage name="username" component="div" className="text-danger" />
+                                </div>
+                                <div className="form-group my-3">
+                                    <label>Numéro de téléphone:</label>
+                                    <Field name='number' type="text" className={`form-control ${errors.date && touched.date ? "is-invalid" : ""}`} />
+                                    <ErrorMessage name="number" component="div" className="text-danger" />
                                 </div>
                                 <div className="form-group my-3">
                                     <label>Adresse e-mail:</label>

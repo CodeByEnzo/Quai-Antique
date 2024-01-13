@@ -5,6 +5,7 @@ import { useAuth } from "../../../contexts/Auth";
 import { addItem } from "../../../services/LocalStorage";
 import { hostname } from "../../../config";
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const Login = () => {
     
@@ -46,8 +47,6 @@ const Login = () => {
         }
     };
 
-
-
     return (
         <motion.main
             className='main-margin'
@@ -86,6 +85,10 @@ const Login = () => {
                         {error && (
                             <div className="text-danger">{error}</div>
                         )}
+                    </div>
+                    <div className="form-group mt-3">
+                        <NavLink to="/ForgotPW" className="text-light ms-1">Mot de passe oublié ?</NavLink>
+                        
                     </div>
                     <button type="submit" className="btn sub-btn btn-lg d-block mx-auto mt-3">Se connecter</button>
                 </form>

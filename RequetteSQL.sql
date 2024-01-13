@@ -1,230 +1,374 @@
 -- mysql -u username -p password -h localhost mydatabase -e "SELECT * FROM mytable"
--- Dans cette commande, 
--- remplacez "username" par le nom d'utilisateur de votre base de données, 
--- "password" par votre mot de passe, 
--- "mydatabase" par le nom de votre base de données
--- et "mytable" par le nom de la table que vous souhaitez afficher.
+-- In this command, 
+-- replace "username" with your database username, 
+-- "password" with your password, 
+-- "mydatabase" with your database name,
+-- and "mytable" with the name of the table you want to display.
+
 CREATE DATABASE db_quai;
-CREATE TABLE `users` (
-    `login` varchar(150) NOT NULL,
-    `password` varchar(150) NOT NULL
-);
-INSERT INTO `users` (`login`, `password`)
-VALUES ('charle', 'admin01'),
-    (
-        'charle',
-        '$2y$10$7Pe8coFM9jkrWULnkJD5tu9gvZHtcpas1fpFn4HYIgEGAfZ70tcB6'
-    );
+
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : ven. 15 déc. 2023 à 17:23
+-- Version du serveur : 10.4.27-MariaDB
+-- Version de PHP : 8.1.12
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `db_quai`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categories`
+--
+
 CREATE TABLE `categories` (
-    `id` int(11) NOT NULL AUTO_INCREMENT,
-    `name` varchar(150) NOT NULL,
-    PRIMARY KEY (`id`)
-);
+  `id` int(11) NOT NULL,
+  `name` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`) VALUES
+(1, 'Entrées'),
+(2, 'Plats'),
+(3, 'Desserts');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `clients`
+--
+
+CREATE TABLE `clients` (
+  `client_id` int(11) NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `statut` enum('active','inactive') NOT NULL DEFAULT 'active',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `token` varchar(255) DEFAULT NULL,
+  `number` varchar(15) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `clients`
+--
+
+INSERT INTO `clients` (`client_id`, `username`, `email`, `password`, `statut`, `created_at`, `updated_at`, `token`, `number`) VALUES
+(1, 'JohnDoe', 'johndoe@example.com', '$2y$10$FqwkmDcaEiuZdvorm1BXD.K9e/HwlkOpEq/i6pna6NGI8I04U0A/O', 'active', '2023-01-29 09:10:42', '2023-10-07 15:39:03', NULL, '0784856891'),
+(24, 'Alicia Keys', 'aliciak@gmail.com', '$2y$10$gcCKu9BNXDQfl9M9ruPFP.cc3LXnE/dSYM90j4s2HokX9URLEnpb.', 'active', '2023-01-31 22:22:31', '2023-10-07 15:39:50', NULL, '0652565289'),
+(52, 'Allomoic', 'allomoi@gmail.com', '$2y$10$i5AiVcT8BKPCvXjIjpjkTeEjwylgOwxEPdiPeEhWtfI7IbJGUpDcW', 'active', '2023-10-06 16:45:49', '2023-10-07 15:38:15', NULL, '0505456854'),
+(53, 'magicme', 'magicme@gmail.com', '$2y$10$r3uOlGeYhL0HiOofrlQGGedqJhowR0JfDnrt8z9d6gLf5icq38YSi', 'active', '2023-10-06 16:47:45', '2023-12-14 11:35:52', NULL, '155551511');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `company_info`
+--
+
+CREATE TABLE `company_info` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `adress` varchar(255) DEFAULT NULL,
+  `phone` varchar(20) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `company_info`
+--
+
+INSERT INTO `company_info` (`id`, `name`, `adress`, `phone`, `email`) VALUES
+(1, 'Le Quai Antique', '15 rue fake adress', '01 01 01 01 01', 'QuaiAntique@fakeAdress.com');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `gallerys`
+--
+
+CREATE TABLE `gallerys` (
+  `gallery_id` int(11) NOT NULL,
+  `gallery_title` varchar(255) DEFAULT NULL,
+  `gallery_content` varchar(255) DEFAULT NULL,
+  `gallery_img` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `gallerys`
+--
+
+INSERT INTO `gallerys` (`gallery_id`, `gallery_title`, `gallery_content`, `gallery_img`) VALUES
+(1, 'Le trio de figues ', 'Trois figues posés sur un caramel maison avec une touche de menthe fraîche.', '63570_fig-4466450_1920.jpg'),
+(7, 'Salade de figues', 'Notre salade de figues met en vedette des figues fraîches, coupées en quartiers, et est accompagnée d\'une vinaigrette légère à base d\'huile d\'olive, de vinaigre balsamique et de miel. Elle est également parsemée de feuilles de roquette pour plus de fraîch', '99523_plat.jpg'),
+(8, 'Fondue savoyarde', 'La fondue savoyarde est un plat traditionnel de la région de Savoie, idéal pour les soirées d\'hiver. Cette fondue est préparée avec du fromage de raclette et du fromage à fondue, mélangés à de la farine de seigle et de l\'ail.', '30638_cheese-fondue-2803840_1920.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `opening_hours`
+--
+
+CREATE TABLE `opening_hours` (
+  `id` int(11) NOT NULL,
+  `day_of_week` varchar(20) DEFAULT NULL,
+  `lunch_opening_time` varchar(10) DEFAULT NULL,
+  `lunch_closing_time` varchar(10) DEFAULT NULL,
+  `dinner_opening_time` varchar(10) DEFAULT NULL,
+  `dinner_closing_time` varchar(10) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `opening_hours`
+--
+
+INSERT INTO `opening_hours` (`id`, `day_of_week`, `lunch_opening_time`, `lunch_closing_time`, `dinner_opening_time`, `dinner_closing_time`) VALUES
+(1, 'Lundi', '12:00', '14:00', '19:00', '21:30'),
+(2, 'Mardi', 'FERME', 'FERME', 'FERME', 'FERME'),
+(3, 'Mercredi', '12:00', '14:00', '19:00', '21:30'),
+(4, 'Jeudi', '12:00', '14:00', '19:00', '21:30'),
+(5, 'Vendredi', '12:00', '14:00', '19:00', '21:30'),
+(6, 'Samedi', '12:00', '14:00', '19:00', '21:30'),
+(7, 'Dimanche', '12:00', '14:00', '19:00', '21:00');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `products`
+--
+
 CREATE TABLE `products` (
-    `product_id` int(11) NOT NULL AUTO_INCREMENT,
-    `title` varchar(150) NOT NULL,
-    `content` text NOT NULL DEFAULT '',
-    `category_id` int(11) NOT NULL,
-    `prix` decimal(10, 0) NOT NULL,
-    `product_image` varchar(250) DEFAULT NULL,
-    PRIMARY KEY (`product_id`),
-    FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`)
-);
-INSERT INTO `categories` (`name`)
-VALUES ('Entrées'),
-    ('Plats'),
-    ('Desserts');
-INSERT INTO products (title, content, category_id, prix)
-VALUES (
-        'Velouté de courge et crème de châtaigne',
-        'Velouté de courge, accompagné d\'une crème de châtaigne maison. Servi avec des croûtons à l\'ail et des noisettes concassées.',
-        1,
-        14.50
-    ),
-    (
-        'Salade savoyarde aux endives et au bleu',
-        'Mélange frais et croquant d\'endives, noix, lardons fumés et morceaux de fromage bleu, servie avec une vinaigrette à la moutarde et aux noix.',
-        1,
-        12.50
-    ),
-    (
-        'Assiette de Gor ion',
-        'Viande séchée de boeuf charolais, spécialité du chef',
-        1,
-        '12'
-    ),
-    (
-        'Terrine artisanale',
-        'Pain de campagne toasté et condiments',
-        1,
-        '11.50'
-    );
-INSERT INTO products (title, content, category_id, prix)
-VALUES (
-        'Fondue savoyarde',
-        'Fondue traditionnelle savoyarde à base de fromage Comté et Emmental, accompagnée de pain de seigle grillé et de pommes de terre.',
-        2,
-        22.50
-    ),
-    (
-        'Tartiflette',
-        'Tartiflette traditionnelle faite maison, avec des pommes de terre, oignons, lardons et fromage Reblochon.',
-        2,
-        21.00
-    ),
-    (
-        'Raclette',
-        'Raclette traditionnelle savoyarde, accompagnée de pommes de terre, charcuterie et cornichons.',
-        2,
-        24.50
-    ),
-    (
-        'Croziflette',
-        'Croziflette, une variante de la tartiflette, avec des crozets à la place des pommes de terre, accompagnée de lardons et de fromage Reblochon.',
-        2,
-        21.00
-    );
-INSERT INTO products (title, content, category_id, prix)
-VALUES (
-        'Tarte aux myrtilles',
-        'Tarte aux myrtilles fraîches et crème glacée à la vanille.',
-        3,
-        12.50
-    ),
-    (
-        'Crème brûlée à la truffe',
-        'Crème brûlée classique relevée par une touche de truffe fraîche.',
-        3,
-        14.00
-    ),
-    (
-        'Fondant au chocolat',
-        'Fondant chaud et moelleux accompagné d\'une boule de glace à la vanille.',
-        3,
-        13.50
-    ),
-    (
-        'Tarte Tatin',
-        'Tarte aux pommes caramélisées, servie tiède avec de la crème glacée à la vanille.',
-        3,
-        12.00
-    );
-CREATE TABLE gallerys (
-    gallery_id INT PRIMARY KEY,
-    gallery_title VARCHAR(255),
-    gallery_content VARCHAR(255),
-    gallery_img VARCHAR(255)
-);
-INSERT INTO gallerys (gallery_title, gallery_content)
-VALUES (
-        'Fondant au bon chocolat',
-        "Fondant chaud et moelleux accompagné d\'une boule de glace à la vanille."
-    ),
-    (
-        'Tarte la Tatin',
-        'Tarte aux pommes caramélisées, servie tiède avec de la crème glacée à la vanille.'
-    );
-CREATE TABLE clients (
-    client_id INT(11) NOT NULL AUTO_INCREMENT,
-    username VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    statut ENUM('active', 'inactive') NOT NULL DEFAULT 'active',
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    token VARCHAR(255) NULL,
-    PRIMARY KEY (client_id),
-    UNIQUE (username),
-    UNIQUE (email)
-);
-INSERT INTO clients (username, email, password, statut, created_at)
-VALUES (
-        'JohnDoe',
-        'johndoe@example.com',
-        '$2y$10$pJLxJxH/pT.jg8bv3f3cX.b4s4sWYV8vEaPqy7xzGwT3O8aL3q3X2',
-        'active',
-        NOW()
-    );
-CREATE TABLE reservations (
-    reservation_id INT(11) NOT NULL AUTO_INCREMENT,
-    client_id INT(11) NOT NULL,
-    date DATE NOT NULL,
-    time TIME NOT NULL,
-    number_of_people INT(11) NOT NULL,
-    comments TEXT,
-    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (reservation_id),
-    FOREIGN KEY (client_id) REFERENCES clients(client_id)
-);
-INSERT INTO reservations (
-        client_id,
-        date,
-        time,
-        number_of_people,
-        comments
-    )
-VALUES (
-        1,
-        '2022-02-06',
-        '19:00',
-        4,
-        "Fête d\'anniversaire"
-    );
-CREATE TABLE opening_hours (
-    id INT PRIMARY KEY,
-    day_of_week VARCHAR(20),
-    lunch_opening_time VARCHAR(10),
-    lunch_closing_time VARCHAR(10),
-    dinner_opening_time VARCHAR(10),
-    dinner_closing_time VARCHAR(10)
-);
-INSERT INTO opening_hours (
-        id,
-        day_of_week,
-        lunch_opening_time,
-        lunch_closing_time,
-        dinner_opening_time,
-        dinner_closing_time
-    )
-VALUES (1, 'Lundi', NULL, NULL, NULL, NULL),
-    (2, 'Mardi', '12:00', '14:00', '19:00', '21:30'),
-    (
-        3,
-        'Mercredi',
-        '12:00',
-        '14:00',
-        '19:00',
-        '21:30'
-    ),
-    (4, 'Jeudi', '12:00', '14:00', '19:00', '21:30'),
-    (
-        5,
-        'Vendredi',
-        '12:00',
-        '14:00',
-        '19:00',
-        '21:30'
-    ),
-    (6, 'Samedi', '12:00', '14:00', '19:00', '21:30'),
-    (
-        7,
-        'Dimanche',
-        '12:00',
-        '14:00',
-        '19:00',
-        '21:30'
-    );
-CREATE TABLE company_info (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name VARCHAR(255) NOT NULL,
-    adress VARCHAR(255) NOT NULL,
-    phone VARCHAR(20) NOT NULL,
-    email VARCHAR(50) NOT NULL
-);
-INSERT INTO company_info (name, adress, phone, email)
-VALUES (
-        'Le Quai Antique',
-        '15 rue fake adress',
-        '01 01 01 01 01',
-        'le-quai-antqiues@fakemail.com'
-    );
+  `product_id` int(11) NOT NULL,
+  `title` varchar(150) NOT NULL,
+  `content` text NOT NULL DEFAULT '',
+  `category_id` int(11) NOT NULL,
+  `prix` decimal(10,0) NOT NULL,
+  `product_image` varchar(250) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `products`
+--
+
+INSERT INTO `products` (`product_id`, `title`, `content`, `category_id`, `prix`, `product_image`) VALUES
+(29, 'Velouté de courge et crème de châtaigne', 'Velouté de courge, accompagné d\'une crème de châtaigne maison. Servi avec des croûtons à l\'ail et des noisettes concassées', 1, '15', NULL),
+(30, 'Salade savoyarde aux endives et au bleu', 'Mélange frais et croquant d\'endives, noix, lardons fumés et morceaux de fromage bleu, servie avec une vinaigrette à la moutarde et aux noix. ', 1, '13', NULL),
+(31, 'Assiette de Gor ion', 'Viande séchée de boeuf charolais, spécialité du chef', 1, '12', NULL),
+(32, 'Terrine artisanale', 'Pain de campagne toasté et condiments', 1, '12', NULL),
+(33, 'Fondue savoyarde', 'Fondue traditionnelle savoyarde à base de fromage Comté et Emmental, accompagnée de pain de seigle grillé et de pommes de terre.', 2, '23', NULL),
+(34, 'Tartiflette', 'Tartiflette traditionnelle faite maison, avec des pommes de terre, oignons, lardons et fromage Reblochon.', 2, '21', NULL),
+(35, 'Raclette', 'Raclette traditionnelle savoyarde, accompagnée de pommes de terre, charcuterie et cornichons.', 2, '25', NULL),
+(36, 'Croziflette', 'Croziflette, une variante de la tartiflette, avec des crozets à la place des pommes de terre, accompagnée de lardons et de fromage Reblochon.', 2, '21', NULL),
+(37, 'Tarte aux myrtilles', 'Tarte aux myrtilles fraîches et crème glacée à la vanille.', 3, '9', NULL),
+(38, 'Crème brûlée à la truffe', 'Crème brûlée classique relevée par une touche de truffe fraîche.', 3, '12', NULL),
+(39, 'Fondant au chocolat', 'Fondant chaud et moelleux accompagné d\'une boule de glace à la vanille.', 3, '12', NULL),
+(40, 'Tarte Tatin', 'Tarte aux pommes caramélisées, servie tiède avec de la crème glacée à la vanille.', 3, '11', NULL);
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `reservation_id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `number_of_people` int(11) NOT NULL,
+  `comments` text DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `reservations`
+--
+
+INSERT INTO `reservations` (`reservation_id`, `client_id`, `date`, `time`, `number_of_people`, `comments`, `created_at`) VALUES
+(1, 1, '2022-02-01', '19:00:00', 4, 'Fête d\'anniversaire', '2023-01-29 09:12:36'),
+(59, 1, '2022-10-02', '14:00:00', 2, 'bonjoru', '2023-10-06 08:33:43');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `users`
+--
+
+CREATE TABLE `users` (
+  `login` varchar(150) NOT NULL,
+  `password` varchar(150) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `users`
+--
+
+INSERT INTO `users` (`login`, `password`) VALUES
+('charle', '$2y$10$7Pe8coFM9jkrWULnkJD5tu9gvZHtcpas1fpFn4HYIgEGAfZ70tcB6');
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `answers`
+--
+ALTER TABLE `answers`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `question_id` (`question_id`);
+
+--
+-- Index pour la table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `clients`
+--
+ALTER TABLE `clients`
+  ADD PRIMARY KEY (`client_id`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `email` (`email`);
+
+--
+-- Index pour la table `company_info`
+--
+ALTER TABLE `company_info`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `gallerys`
+--
+ALTER TABLE `gallerys`
+  ADD PRIMARY KEY (`gallery_id`);
+
+--
+-- Index pour la table `opening_hours`
+--
+ALTER TABLE `opening_hours`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`product_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Index pour la table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`reservation_id`),
+  ADD KEY `client_id` (`client_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`login`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT pour la table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `clients`
+--
+ALTER TABLE `clients`
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+
+--
+-- AUTO_INCREMENT pour la table `company_info`
+--
+ALTER TABLE `company_info`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `gallerys`
+--
+ALTER TABLE `gallerys`
+  MODIFY `gallery_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT pour la table `products`
+--
+ALTER TABLE `products`
+  MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+
+--
+-- AUTO_INCREMENT pour la table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT pour la table `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `answers`
+--
+ALTER TABLE `answers`
+  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
+
+--
+-- Contraintes pour la table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `categories` (`id`);
+
+--
+-- Contraintes pour la table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD CONSTRAINT `reservations_ibfk_1` FOREIGN KEY (`client_id`) REFERENCES `clients` (`client_id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -48,7 +48,7 @@ You can verify with this command => mysql --version
 THEN,  
 mysql -u username -p  
 Enter your password, (By default, it should be id = root and password = root or maybe no password, depends of your set)  
-Now you should be able to run run querys starting with :  
+Now you should be able to run querys starting with :  
 create database db_quai;  
 
 Once this done you can now send the querys that is in RequetteSQL.sql one by one.  
@@ -70,11 +70,11 @@ Now find the file config.js in src folder.
 You have to make sure that this line :  
 export const hostname = "http://localhost/SERVEURQUAI/";  
 Match with the correct folder.  
-Nom open new terminal in the projet and install NPM with this command:  
+Now open new terminal in the projet and install NPM with this command:  
 npm install  
 Front end is set !  
 
-# SUCCESS ! you should now be able to run the project !
+# SUCCESS ! You should now be able to run the project !
 FRONT :  
 Just run npm start in the terminal and you will see the project.   
 Make sure Xampp is runing to see datas  
