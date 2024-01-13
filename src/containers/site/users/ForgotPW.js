@@ -12,13 +12,13 @@ const ForgotPW = (props) => {
     const handleSubmit = async event => {
         event.preventDefault();
 
-        // Vérifier si l'email est présent
+        // check if email
         if (!email) {
             setError('Veuillez saisir votre adresse e-mail.');
             setSuccess('');
             return;
         }
-        // Envoyer une requête pour réinitialiser le mot de passe
+        // send request to reset paswword
         axios.post(`${hostname}front/forgotPW`, { email })
             .then(response => {
                 setSuccess('Nous vous avons envoyé un lien sur votre boîte mail. Si vous ne le trouvez pas, vérifiez dans vos spams.');
