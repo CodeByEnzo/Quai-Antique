@@ -54,7 +54,6 @@ function Register() {
                     </div>
                 ) : (
                     <Formik
-                        method='post'
                         className="form-border rounded bg-dark mb-5 col-12 col-md-6 col-xl-4 p-2"
                         initialValues={{ username: "", number: "", email: "", password: "" }}
                         validationSchema={reservationSchema}
@@ -68,14 +67,16 @@ function Register() {
                                 },
                             })
                                 .then((response) => {
-                                    if (response.status === 200) {
+                                    if (response.status >= 200 && response.status < 300) {
                                         handleRegister();
                                     } else {
                                         console.log('Erreur lors de la création du compte');
                                     }
                                 })
                                 .catch((error) => {
-                                    console.log(error);
+                                    console.log(error.response.data);
+                                    console.log(error.response.status);
+                                    console.log(error.response.headers);
                                 })
                                 .finally(() => {
                                     setSubmitting(false);

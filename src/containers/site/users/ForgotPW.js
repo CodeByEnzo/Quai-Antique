@@ -15,7 +15,7 @@ const ForgotPW = (props) => {
         // Vérifier si l'email est présent
         if (!email) {
             setError('Veuillez saisir votre adresse e-mail.');
-            setSuccess('ok');
+            setSuccess('');
             return;
         }
         // Envoyer une requête pour réinitialiser le mot de passe
