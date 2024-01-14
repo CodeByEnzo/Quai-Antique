@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import "./Home.css";
-import { hostname } from '../../../config';
+import { hostname } from '../../config';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 

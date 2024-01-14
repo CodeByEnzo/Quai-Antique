@@ -1,6 +1,5 @@
 /*
 ********************COLORS********************
-
 #48330a Cafe noir
 #be9837 Satin sheen gold
 #f2f8f4 Mint Cream
@@ -94,8 +93,6 @@ body {
     background: #000;
 }
 
-
-
 .test {
     padding-top: 100px;
     text-align: center;
@@ -112,6 +109,13 @@ h2 {
     font-family: 'Edwardian Scr Alt ITC TT', 'Luxurious Script', 'Balletregular', sans-serif;
     color: #be9837;
     font-size: 3rem;
+}
+
+@media screen and (max-width: 700px) {
+    #ul-account {
+        flex-direction: column;
+    }
+
 }
 
 /* TABS/USERS--------------------*/

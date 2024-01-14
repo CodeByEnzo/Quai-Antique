@@ -1,8 +1,7 @@
-import "./users.css";
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { hostname } from "../../../config";
-import UpdateProfileForm from "../../../components/Profile/UpdateProfileForm";
+import { hostname } from "../../config";
+import UpdateProfileForm from "../UpdateProfileForm/UpdateProfileForm";
 import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
@@ -20,56 +19,56 @@ const Profile = () => {
         reservations: [],
     });
 
-        useEffect(() => {
-            const fetchData = async () => {
-                try {
-                    const token = localStorage.getItem('token');
-                    if (!token) {
-                        redirectToLogin();
-                        return;
-                    }
-
-                    const response = await fetch(`${hostname}front/authenticate`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${token}`,
-                        },
-                    });
-
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-
-                    const data = await response.json();
-
-                    if (data && data.user) {
-                        setUserData(data);
-                        localStorage.setItem('client_id', data.user.id);
-                    } else {
-                        redirectToLogin();
-                        showErrorMessage('Votre session a expiré, veuillez vous reconnecter.');
-                    }
-                } catch (error) {
-                    console.error('Error during data fetching:', error);
-                    showErrorMessage('Une erreur est survenue. Veuillez réessayer.');
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    redirectToLogin();
+                    return;
                 }
-            };
 
-            fetchData();
-        }, []);
+                const response = await fetch(`${hostname}front/authenticate`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
 
-        const redirectToLogin = () => {
-            navigate('/login');
-            showErrorMessage('Votre session a expiré, veuillez vous reconnecter.');
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+
+                const data = await response.json();
+
+                if (data && data.user) {
+                    setUserData(data);
+                    localStorage.setItem('client_id', data.user.id);
+                } else {
+                    redirectToLogin();
+                    showErrorMessage('Votre session a expiré, veuillez vous reconnecter.');
+                }
+            } catch (error) {
+                console.error('Error during data fetching:', error);
+                showErrorMessage('Une erreur est survenue. Veuillez réessayer.');
+            }
         };
 
-        const showErrorMessage = (message) => {
-            // Utilisez un composant d'interface utilisateur plus élaboré pour afficher les messages d'erreur.
-            console.error(message);
-            // Exemple avec un modal fictif :
-            // showModal({ type: 'error', message });
-        };
+        fetchData();
+    }, []);
+
+    const redirectToLogin = () => {
+        navigate('/login');
+        showErrorMessage('Votre session a expiré, veuillez vous reconnecter.');
+    };
+
+    const showErrorMessage = (message) => {
+        // Utilisez un composant d'interface utilisateur plus élaboré pour afficher les messages d'erreur.
+        console.error(message);
+        // Exemple avec un modal fictif :
+        // showModal({ type: 'error', message });
+    };
 
 
 
@@ -159,7 +158,7 @@ const Profile = () => {
                                         <strong>Créé le  : </strong>
                                         <span>
                                             {userData ? (
-                                                    <span>{formattedCreatedAt}</span>
+                                                <span>{formattedCreatedAt}</span>
                                             ) : (
                                                 <span>Loading...</span>
                                             )}

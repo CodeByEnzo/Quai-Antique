@@ -1,9 +1,9 @@
 
 import React, { Component } from 'react';
 import { motion } from 'framer-motion';
-import ResevervationForm from '../../../components/Reservations/ResevervationForm';
+import ResevervationForm from '../../components/ReservationsForm/ResevervationForm';
 import axios from 'axios';
-import { hostname } from '../../../config';
+import { hostname } from '../../config';
 
 class Reservation extends Component {
     constructor(props) {

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import './Contact.css';
-import ContactForm from "../../../components/Contact/ContactForm";
+import ContactForm from "../../components/ContactForm/ContactForm";
 import axios from "axios";
-import { hostname } from "../../../config";
+import { hostname } from "../../config";
 import { motion } from "framer-motion";
 
 class Contact extends Component {

@@ -1,8 +1,7 @@
-import "./users.css";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import { hostname } from "../../../config";
+import { hostname } from "../../config";
 
 const ForgotPW = (props) => {
     const [email, setEmail] = useState('');

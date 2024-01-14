@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { hostname } from '../../../config';
+import { hostname } from '../../config';
 
 const ResetPW = () => {
     const location = useLocation();

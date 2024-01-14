@@ -1,35 +1,9 @@
 // import React, { Fragment, useState, useEffect, Component } from 'react';
-// import axios from 'axios'
+
 
 
 // class Test extends Component {
-//     state = {
-//         products: null
-//     }
-//     componentDidMount = () => {
-//         axios.get(`https://quai-antique.ec-bootstrap.com/front/products`)
-//             .then(response => {
-//                 // console.log(response)
-//                 this.setState({ products: Object.values(response.data) })
-//             })
-//     }
 
-//     render() {
-//         const filteredProducts = this.state.products && this.state.products.filter(product => product.category_id == 1);
-//         return (
-//             <div className='main-margin'>
-//                 <h1 className='text-center'>Test</h1>
-//                 <div className='container-fluid'>
-//                     {
-//                         filteredProducts &&
-//                         filteredProducts.map(product => {
-//                             return <h3>{product.id} - {product.title} </h3>
-//                         })
-//                     }
-//                 </div>
-//             </div>
-//         )
-//     }
 // }
 
 // export default Test

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { hostname } from '../../../config';
+import { hostname } from '../../config';
 import { motion } from 'framer-motion';
 import { NavLink } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from "formik";

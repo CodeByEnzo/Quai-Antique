@@ -1,19 +1,20 @@
 import React from 'react'
 import { Route, Routes, useLocation } from "react-router-dom";
-import Home from '../containers/site/Home/Home'
-import Menu from '../containers/site/menu/Menu';
-import NotFound from '../components/404/NotFound';
+import Home from '../pages/Home/Home.js'
+import Menu from '../pages/Menu/Menu.js';
+import NotFound from '../pages/404/NotFound';
 // import Test from './test';
-import Contact from "../containers/site/Contact/Contact";
-import RGPD from '../containers/site/RGPD/RGPD';
-import Login from '../containers/site/users/Login';
-import ForgotPW from '../containers/site/users/ForgotPW';
-import Account from '../containers/site/users/Account';
-import Register from '../containers/site/users/Register';
-import AuthenticatedRoute from '../components/AuthenticatedRoute';
+import Contact from "../pages/Contact/Contact";
+import RGPD from '../pages/RGPD/RGPD';
+import Login from '../pages/Users/Login.js';
+import ForgotPW from '../pages/Users/ForgotPW.js';
+import Account from '../pages/Users/Account.js';
+import Register from '../pages/Users/Register.js';
+import AuthenticatedRoute from '../contexts/AuthenticatedRoute.js';
 import { AnimatePresence } from 'framer-motion';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
-import ResetPW from '../containers/site/users/ResetPW.js';
+import ResetPW from '../pages/Users/ResetPW.js';
+
 
 function AnimatedRoutes() {
 

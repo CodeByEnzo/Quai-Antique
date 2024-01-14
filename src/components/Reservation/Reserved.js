@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { hostname } from '../../../config';
-import UpdateReservationForm from '../../../components/Reservations/UpdateReservationForm';
+import { hostname } from '../../config';
+import UpdateReservationForm from '../../components/ReservationsForm/UpdateReservationForm';
 
 
 const Reserved = () => {

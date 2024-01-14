@@ -1,7 +1,7 @@
 import React from "react";
 import { withFormik } from "formik";
 import * as Yup from "yup";
-import "../../containers/site/Contact/Contact.css";
+import "../../pages/Contact/Contact.css";
 
 const ContactForm = (props) => (
     <div className="px-2 px-sm-5 mx-sm-5 row d-flex justify-content-center py-2">

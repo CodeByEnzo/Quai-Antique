@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Site from './containers/site/Site';
+import Site from './pages/Site';
 import './App.css';
 import { BrowserRouter } from "react-router-dom";
 import { motion } from "framer-motion";
