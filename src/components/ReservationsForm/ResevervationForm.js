@@ -9,8 +9,14 @@ moment.locale("fr");
 
 const ReservationForm = () => {
     const [hours, setHours] = useState(null);
-    const [reservationSent, setReservationSent] = useState(false)
 
+    const [selectedDate, setSelectedDate] = useState(null);
+    const [numberOfPeople, setNumberOfPeople] = useState(null);
+    const [isOpen, setIsOpen] = useState(null);
+    const [isClose, setIsClose] = useState(null);
+
+    const [reservationSent, setReservationSent] = useState(false)
+    //Get datas
     useEffect(() => {
         axios.get(`${hostname}front/hours`)
             .then((response) => {
@@ -19,9 +25,8 @@ const ReservationForm = () => {
             .catch((error) => {
                 console.error("Error fetching hours data", error);
             });
-
+        // Check Token 
         const token = localStorage.getItem("token");
-
         if (token) {
             const fetchUserData = async () => {
                 try {
@@ -32,15 +37,12 @@ const ReservationForm = () => {
                             "Authorization": `Bearer ${token}`
                         }
                     });
-
                     if (response.status !== 200) {
                         alert('Votre session a expiré, veuillez vous reconnecter.');
                         window.location.href = "/login";
                         return;
                     }
-
                     const data = await response.json();
-
                     if (data && data.user) {
                         localStorage.setItem('client_id', data.user.id);
                     } else {
@@ -97,6 +99,17 @@ const ReservationForm = () => {
                     // Check if selected time is within lunch or dinner hours
                     const isWithinLunchHours = (selectedTime >= lunchOpeningTime && selectedTime <= lunchClosingTime);
                     const isWithinDinnerHours = (selectedTime >= dinnerOpeningTime && selectedTime <= dinnerClosingTime);
+                    // Set isOpen and isClose based on the selected day's opening and closing times 
+                    if (isWithinLunchHours) {
+                        setIsOpen(openingHours.lunch_opening_time);
+                        setIsClose(openingHours.lunch_closing_time);
+                    } else if (isWithinDinnerHours) {
+                        setIsOpen(openingHours.dinner_opening_time);
+                        setIsClose(openingHours.dinner_closing_time);
+                    } else {
+                        setIsOpen('');
+                        setIsClose('');
+                    }
                     // Return validation result
                     return (isWithinLunchHours || isWithinDinnerHours);
                 }),
@@ -115,24 +128,46 @@ const ReservationForm = () => {
             {reservationSent ? (
                 <p className="text-center">Votre réservervation est enregistrer</p>
             ) : (
-                <Formik
-                    initialValues={{ date: "", time: "", number_of_people: "", comment: "" }}
-                    validationSchema={reservationSchema}
-                    onSubmit={(values) => {
-                        const client_id = localStorage.getItem('client_id');
-                        const { date, time, number_of_people, comment } = values;
-                        const requestBody = { date, time, number_of_people, comment, client_id };
-                        axios
-                            .post(`${hostname}front/reservation`, requestBody, {
-                                headers: {
-                                    Authorization: `Bearer ${localStorage.getItem('token')}`,
-                                },
-                            })
-                            .then((response) => { handleSentReservation() })
-                            .catch((error) => { console.log(error); });
-                    }}
-                    validateOnChange={true}
-                >
+                    <Formik
+                        initialValues={{ date: "", time: "", number_of_people: "", comment: "" }}
+                        validationSchema={reservationSchema}
+                        onSubmit={async (values) => {
+                            setSelectedDate(values.date);
+                            setNumberOfPeople(values.number_of_people);
+                            const client_id = localStorage.getItem('client_id');
+                            const { date, time, number_of_people, comment } = values;
+                            const requestBody = { date, time, number_of_people, comment, client_id };
+                            try {
+                                
+                                // check if restaurant full
+                                const isRestaurantFullResponse = await axios.post(
+                                    `${hostname}front/isRestaurantFull`,
+                                    {
+                                        date,
+                                        number_of_people,
+                                        isOpen,
+                                        isClose
+                                    }
+                                );
+                                const isRestaurantFull = isRestaurantFullResponse.data.isRestaurantFull;
+                                if (isRestaurantFull) {
+                                    alert('Désolé, le restaurant est plein à cette heure-là. Veuillez choisir une autre heure ou date.');
+                                    return;
+                                }
+                                // if not full then send reservation
+                                const reservationResponse = await axios.post(`${hostname}front/reservation`, requestBody, {
+                                    headers: {
+                                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                                    },
+                                });
+                                handleSentReservation();
+                            } catch (error) {
+                                console.log(error);
+                            }
+                        }}
+                        validateOnChange={true}
+                    >
+
 
                     {({ errors, touched }) => (
                         <Form className="d-flex flex-column justify-content-center align-items-center">
