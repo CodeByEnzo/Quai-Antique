@@ -10,8 +10,6 @@ moment.locale("fr");
 const ReservationForm = () => {
     const [hours, setHours] = useState(null);
 
-    const [selectedDate, setSelectedDate] = useState(null);
-    const [numberOfPeople, setNumberOfPeople] = useState(null);
     const [isOpen, setIsOpen] = useState(null);
     const [isClose, setIsClose] = useState(null);
 
@@ -132,8 +130,6 @@ const ReservationForm = () => {
                         initialValues={{ date: "", time: "", number_of_people: "", comment: "" }}
                         validationSchema={reservationSchema}
                         onSubmit={async (values) => {
-                            setSelectedDate(values.date);
-                            setNumberOfPeople(values.number_of_people);
                             const client_id = localStorage.getItem('client_id');
                             const { date, time, number_of_people, comment } = values;
                             const requestBody = { date, time, number_of_people, comment, client_id };
