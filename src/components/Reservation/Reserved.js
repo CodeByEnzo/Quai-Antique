@@ -10,9 +10,9 @@ const Reserved = () => {
     const [isEditing, setIsEditing] = useState(false);
     const [reservationIdToUpdate, setReservationIdToUpdate] = useState(null);
 
-
     useEffect(() => {
         const token = localStorage.getItem("token");
+
         if (token) {
             fetch(`${hostname}front/authenticate`, {
                 method: "POST",
@@ -31,7 +31,7 @@ const Reserved = () => {
                 .then(data => {
                     try {
                         setUserData(data);
-                        setIsReservationDeleted(false); // reset the state to false after fetching the data
+                        setIsReservationDeleted(false);
                     } catch (error) {
                         console.error("Error parsing JSON data", error);
                     }
@@ -42,11 +42,12 @@ const Reserved = () => {
                     window.location.href = "/login";
                 });
         } else {
-            // If there is no token in local storage, redirect user to login
+            // Si aucun token n'est trouvé, redirigez l'utilisateur vers la page de connexion
             alert('Votre session a expiré, veuillez vous reconnecter.')
             window.location.href = "/login";
         }
     }, [isReservationDeleted]);
+
 
 
     // To cancel a reservation from user
@@ -68,7 +69,6 @@ const Reserved = () => {
             }
         }
     };
-
 
     // To modify reservation from user
     useEffect(() => {

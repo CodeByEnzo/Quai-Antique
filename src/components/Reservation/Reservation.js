@@ -1,4 +1,4 @@
-
+// To allow user to book a table
 import React, { Component } from 'react';
 import { motion } from 'framer-motion';
 import ResevervationForm from '../../components/ReservationsForm/ResevervationForm';

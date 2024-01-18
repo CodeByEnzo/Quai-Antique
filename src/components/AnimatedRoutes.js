@@ -15,7 +15,6 @@ import { AnimatePresence } from 'framer-motion';
 import ScrollToTop from './ScrollToTop/ScrollToTop';
 import ResetPW from '../pages/Users/ResetPW.js';
 
-
 function AnimatedRoutes() {
 
     const location = useLocation();

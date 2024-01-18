@@ -3,10 +3,12 @@ import { motion } from "framer-motion";
 import { hostname } from "../../config";
 import UpdateProfileForm from "../UpdateProfileForm/UpdateProfileForm";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../contexts/Auth";
 
 const Profile = () => {
     const [isEditing, setIsEditing] = useState(false);
     const navigate = useNavigate();
+    const { setIsAuthenticated } = useAuth();
     const [userData, setUserData] = useState({
         user: {
             id: "",
@@ -54,7 +56,6 @@ const Profile = () => {
                 showErrorMessage('Une erreur est survenue. Veuillez réessayer.');
             }
         };
-
         fetchData();
     }, []);
 
@@ -64,10 +65,7 @@ const Profile = () => {
     };
 
     const showErrorMessage = (message) => {
-        // Utilisez un composant d'interface utilisateur plus élaboré pour afficher les messages d'erreur.
         console.error(message);
-        // Exemple avec un modal fictif :
-        // showModal({ type: 'error', message });
     };
 
 
