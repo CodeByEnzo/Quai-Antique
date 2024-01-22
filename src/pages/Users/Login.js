@@ -16,14 +16,11 @@ const Login = () => {
 
     const { setIsAuthenticated } = useAuth();
     const navigate = useNavigate();
-
     const [error, setError] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
 
     //treat the token
     const handleSubmit = async event => {
         event.preventDefault();
-        setIsLoading(true);
         try {
             const response = await fetch(`${hostname}front/userLogin`, {
                 method: "POST",
@@ -59,7 +56,7 @@ const Login = () => {
             <div className="container-fluid d-flex justify-content-center">
                 <form onSubmit={handleSubmit} className="form-border rounded bg-dark col-12 col-md-6 col-xl-4 p-2">
                     <div className="form-group mt-3">
-                        <label htmlFor="login">Adresse e-mail</label>
+                        <label htmlFor="email">Adresse e-mail</label>
                         <input
                             type="text"
                             name="email"
@@ -87,7 +84,6 @@ const Login = () => {
                     </div>
                     <div className="form-group mt-3">
                         <NavLink to="/ForgotPW" className="text-light ms-1">Mot de passe oublié ?</NavLink>
-                        
                     </div>
                     <button type="submit" className="btn sub-btn btn-lg d-block mx-auto mt-3">Se connecter</button>
                 </form>

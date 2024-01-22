@@ -12,7 +12,6 @@ const Reserved = () => {
 
     useEffect(() => {
         const token = localStorage.getItem("token");
-
         if (token) {
             fetch(`${hostname}front/authenticate`, {
                 method: "POST",

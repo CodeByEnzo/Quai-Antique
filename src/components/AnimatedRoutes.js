@@ -3,7 +3,6 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import Home from '../pages/Home/Home.js'
 import Menu from '../pages/Menu/Menu.js';
 import NotFound from '../pages/404/NotFound';
-// import Test from './test';
 import Contact from "../pages/Contact/Contact";
 import RGPD from '../pages/RGPD/RGPD';
 import Login from '../pages/Users/Login.js';
