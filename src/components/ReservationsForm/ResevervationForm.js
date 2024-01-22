@@ -9,10 +9,8 @@ moment.locale("fr");
 
 const ReservationForm = () => {
     const [hours, setHours] = useState(null);
-
     const [isOpen, setIsOpen] = useState(null);
     const [isClose, setIsClose] = useState(null);
-
     const [reservationSent, setReservationSent] = useState(false)
     //Get datas
     useEffect(() => {
@@ -124,7 +122,7 @@ const ReservationForm = () => {
     return (
         <div className="container form-border shadow rounded p-3 row d-flex justify-content-center col-xl-6 bg-dark mx-auto mb-5 col-12 col-md-8">
             {reservationSent ? (
-                <p className="text-center">Votre réservervation est enregistrer</p>
+                <p className="text-center">Votre réservervation est enregistrée</p>
             ) : (
                     <Formik
                         initialValues={{ date: "", time: "", number_of_people: "", comment: "" }}
@@ -163,8 +161,6 @@ const ReservationForm = () => {
                         }}
                         validateOnChange={true}
                     >
-
-
                     {({ errors, touched }) => (
                         <Form className="d-flex flex-column justify-content-center align-items-center">
                             <div className="form-group mb-3 col-12">
@@ -198,5 +194,5 @@ const ReservationForm = () => {
     );
 
 }
-export default ReservationForm
+export default ReservationForm;
 

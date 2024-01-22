@@ -13,7 +13,6 @@ const ResetPW = () => {
     const [token, setToken] = useState("");
     const navigate = useNavigate();
 
-
     useEffect(() => {
         const searchParams = new URLSearchParams(location.search);
         const token = searchParams.get('token');

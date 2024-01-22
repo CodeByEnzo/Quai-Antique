@@ -26,10 +26,11 @@
     "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
-        "test": "react-scripts test --transformIgnorePatterns 'node_modules/(?!my-library-dir)/'",
+        "test": "react-scripts test",
         "eject": "react-scripts eject"
     },
     "eslintConfig": {
+        "parser": "@babel/eslint-parser",
         "extends": [
             "react-app",
             "react-app/jest"
@@ -48,15 +49,15 @@
         ]
     },
     "devDependencies": {
+        "@babel/core": "^7.23.7",
+        "@babel/eslint-parser": "^7.23.3",
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@babel/preset-env": "^7.23.8",
         "@babel/preset-react": "^7.23.3",
+        "babel-eslint": "^10.1.0",
         "babel-jest": "^29.7.0",
         "history": "^5.3.0",
         "jest-fetch-mock": "^3.0.3",
         "webpack": "^5.75.0"
-    },
-    "transform": {
-        "^.+\\.[t|j]sx?$": "babel-jest"
     }
 }
