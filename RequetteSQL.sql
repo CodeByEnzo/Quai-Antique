@@ -5,30 +5,12 @@
 -- "mydatabase" with your database name,
 -- and "mytable" with the name of the table you want to display.
 
-CREATE DATABASE db_quai;
-
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Hôte : 127.0.0.1
--- Généré le : ven. 15 déc. 2023 à 17:23
--- Version du serveur : 10.4.27-MariaDB
--- Version de PHP : 8.1.12
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Base de données : `db_quai`
 --
+
+CREATE DATABASE db_quai;
 
 -- --------------------------------------------------------
 
@@ -65,7 +47,7 @@ CREATE TABLE `clients` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `token` varchar(255) DEFAULT NULL,
-  `number` varchar(15) DEFAULT NULL
+  `number` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -73,31 +55,11 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_id`, `username`, `email`, `password`, `statut`, `created_at`, `updated_at`, `token`, `number`) VALUES
-(1, 'JohnDoe', 'johndoe@example.com', '$2y$10$FqwkmDcaEiuZdvorm1BXD.K9e/HwlkOpEq/i6pna6NGI8I04U0A/O', 'active', '2023-01-29 09:10:42', '2023-10-07 15:39:03', NULL, '0784856891'),
-(24, 'Alicia Keys', 'aliciak@gmail.com', '$2y$10$gcCKu9BNXDQfl9M9ruPFP.cc3LXnE/dSYM90j4s2HokX9URLEnpb.', 'active', '2023-01-31 22:22:31', '2023-10-07 15:39:50', NULL, '0652565289'),
-(52, 'Allomoic', 'allomoi@gmail.com', '$2y$10$i5AiVcT8BKPCvXjIjpjkTeEjwylgOwxEPdiPeEhWtfI7IbJGUpDcW', 'active', '2023-10-06 16:45:49', '2023-10-07 15:38:15', NULL, '0505456854'),
-(53, 'magicme', 'magicme@gmail.com', '$2y$10$r3uOlGeYhL0HiOofrlQGGedqJhowR0JfDnrt8z9d6gLf5icq38YSi', 'active', '2023-10-06 16:47:45', '2023-12-14 11:35:52', NULL, '155551511');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `company_info`
---
-
-CREATE TABLE `company_info` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `adress` varchar(255) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `email` varchar(50) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `company_info`
---
-
-INSERT INTO `company_info` (`id`, `name`, `adress`, `phone`, `email`) VALUES
-(1, 'Le Quai Antique', '15 rue fake adress', '01 01 01 01 01', 'QuaiAntique@fakeAdress.com');
+(1, 'JohnD', 'johnde@example.com', '$2y$10$FqwkmDcaEiuZdvorm1BXD.K9e/HwlkOpEq/i6pna6NGI8I04U0A/O', 'active', '2023-01-29 09:10:42', '2024-01-23 12:00:16', NULL, '0784856891'),
+(54, 'Enzo Capi', 'enzocapi@gmail.com', '$2y$10$x/wC9Fz0z.PZ8dJc9WiEHe441oLZ3IDFeyU5bM2IN6NqdtHDJSOMm', 'active', '2023-10-07 20:17:41', '2023-10-08 10:30:25', NULL, '0120236558'),
+(55, 'efecdece', 'edfeferefr@gmaiul.com', '$2y$10$aslSG9SWZ2XFnovMh3V4quy535Tm.NLiz.NzuMbhK7reZEoDvbW..', 'active', '2023-12-15 16:55:35', '2023-12-15 16:55:35', NULL, '787878948894489'),
+(56, 'joycooo', 'joyco@gmail.com', '$2y$10$GlhAnlsGGevGh2ULNCxOsOs9om972jBJGk.byd46wWbulxTrkhvUG', 'active', '2023-12-19 00:33:23', '2023-12-19 00:33:23', NULL, '615156561156'),
+(57, 'magicmeeee', 'magicme@gmail.com', '$2y$10$hlubrqbTTqLyesokx7AJ.O78yOz07h64J3tTwZAJIFjJCITjLxqVK', 'active', '2024-01-15 10:04:46', '2024-01-22 16:58:02', NULL, '0235987458');
 
 -- --------------------------------------------------------
 
@@ -124,34 +86,6 @@ INSERT INTO `gallerys` (`gallery_id`, `gallery_title`, `gallery_content`, `galle
 -- --------------------------------------------------------
 
 --
--- Structure de la table `opening_hours`
---
-
-CREATE TABLE `opening_hours` (
-  `id` int(11) NOT NULL,
-  `day_of_week` varchar(20) DEFAULT NULL,
-  `lunch_opening_time` varchar(10) DEFAULT NULL,
-  `lunch_closing_time` varchar(10) DEFAULT NULL,
-  `dinner_opening_time` varchar(10) DEFAULT NULL,
-  `dinner_closing_time` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Déchargement des données de la table `opening_hours`
---
-
-INSERT INTO `opening_hours` (`id`, `day_of_week`, `lunch_opening_time`, `lunch_closing_time`, `dinner_opening_time`, `dinner_closing_time`) VALUES
-(1, 'Lundi', '12:00', '14:00', '19:00', '21:30'),
-(2, 'Mardi', 'FERME', 'FERME', 'FERME', 'FERME'),
-(3, 'Mercredi', '12:00', '14:00', '19:00', '21:30'),
-(4, 'Jeudi', '12:00', '14:00', '19:00', '21:30'),
-(5, 'Vendredi', '12:00', '14:00', '19:00', '21:30'),
-(6, 'Samedi', '12:00', '14:00', '19:00', '21:30'),
-(7, 'Dimanche', '12:00', '14:00', '19:00', '21:00');
-
--- --------------------------------------------------------
-
---
 -- Structure de la table `products`
 --
 
@@ -169,7 +103,7 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`product_id`, `title`, `content`, `category_id`, `prix`, `product_image`) VALUES
-(29, 'Velouté de courge et crème de châtaigne', 'Velouté de courge, accompagné d\'une crème de châtaigne maison. Servi avec des croûtons à l\'ail et des noisettes concassées', 1, '15', NULL),
+(29, 'Velout&eacute; de courge et cr&egrave;me de ch&acirc;taigne', 'Velout&eacute; de courge, accompagn&eacute; d&#039;une cr&egrave;me de ch&acirc;taigne maison. Servi avec des cro&ucirc;tons &agrave; l&#039;ail et des noisettes concass&eacute;es.', 1, '15', NULL),
 (30, 'Salade savoyarde aux endives et au bleu', 'Mélange frais et croquant d\'endives, noix, lardons fumés et morceaux de fromage bleu, servie avec une vinaigrette à la moutarde et aux noix. ', 1, '13', NULL),
 (31, 'Assiette de Gor ion', 'Viande séchée de boeuf charolais, spécialité du chef', 1, '12', NULL),
 (32, 'Terrine artisanale', 'Pain de campagne toasté et condiments', 1, '12', NULL),
@@ -181,7 +115,6 @@ INSERT INTO `products` (`product_id`, `title`, `content`, `category_id`, `prix`,
 (38, 'Crème brûlée à la truffe', 'Crème brûlée classique relevée par une touche de truffe fraîche.', 3, '12', NULL),
 (39, 'Fondant au chocolat', 'Fondant chaud et moelleux accompagné d\'une boule de glace à la vanille.', 3, '12', NULL),
 (40, 'Tarte Tatin', 'Tarte aux pommes caramélisées, servie tiède avec de la crème glacée à la vanille.', 3, '11', NULL);
-
 
 -- --------------------------------------------------------
 
@@ -196,16 +129,24 @@ CREATE TABLE `reservations` (
   `time` time NOT NULL,
   `number_of_people` int(11) NOT NULL,
   `comments` text DEFAULT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `client_number` varchar(20) DEFAULT NULL,
+  `client_username` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `reservations`
 --
 
-INSERT INTO `reservations` (`reservation_id`, `client_id`, `date`, `time`, `number_of_people`, `comments`, `created_at`) VALUES
-(1, 1, '2022-02-01', '19:00:00', 4, 'Fête d\'anniversaire', '2023-01-29 09:12:36'),
-(59, 1, '2022-10-02', '14:00:00', 2, 'bonjoru', '2023-10-06 08:33:43');
+INSERT INTO `reservations` (`reservation_id`, `client_id`, `date`, `time`, `number_of_people`, `comments`, `created_at`, `client_number`, `client_username`) VALUES
+(1, 1, '2024-07-02', '19:00:00', 4, 'a007', '2023-01-29 09:12:36', '0784856891', 'JohnD'),
+(59, 1, '2024-10-02', '14:00:00', 2, 'Select  <strong class=\"m-5\">coucou</strong>', '2023-10-06 08:33:43', '0784856891', 'JohnD'),
+(62, 57, '2024-01-14', '19:15:00', 8, 'voila bien 50 ans', '2024-01-15 10:05:34', '0235987458', 'magicmeeee'),
+(63, 57, '2024-01-15', '19:28:00', 3, 'azaaezzeaazezaaze', '2024-01-15 10:06:03', '0235987458', 'magicmeeee'),
+(66, 57, '2023-02-15', '19:26:00', 2, 'eefefrefrr', '2024-01-15 16:25:17', '0235987458', 'magicmeeee'),
+(69, 57, '2024-01-19', '20:40:00', 3, '3334545', '2024-01-16 10:35:43', '0235987458', 'magicmeeee'),
+(70, 57, '2024-01-19', '20:04:00', 4, 'deéeeé', '2024-01-16 10:42:34', '0235987458', 'magicmeeee'),
+(83, 57, '2024-04-13', '20:00:00', 4, 'anniversaire.', '2024-01-26 17:30:04', '0235987458', 'magicmeeee');
 
 -- --------------------------------------------------------
 
@@ -223,18 +164,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`login`, `password`) VALUES
+('admin', 'admin01'),
 ('charle', '$2y$10$7Pe8coFM9jkrWULnkJD5tu9gvZHtcpas1fpFn4HYIgEGAfZ70tcB6');
 
 --
 -- Index pour les tables déchargées
 --
-
---
--- Index pour la table `answers`
---
-ALTER TABLE `answers`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `question_id` (`question_id`);
 
 --
 -- Index pour la table `categories`
@@ -248,13 +183,8 @@ ALTER TABLE `categories`
 ALTER TABLE `clients`
   ADD PRIMARY KEY (`client_id`),
   ADD UNIQUE KEY `username` (`username`),
-  ADD UNIQUE KEY `email` (`email`);
-
---
--- Index pour la table `company_info`
---
-ALTER TABLE `company_info`
-  ADD PRIMARY KEY (`id`);
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `idx_unique_number` (`number`);
 
 --
 -- Index pour la table `gallerys`
@@ -263,23 +193,11 @@ ALTER TABLE `gallerys`
   ADD PRIMARY KEY (`gallery_id`);
 
 --
--- Index pour la table `opening_hours`
---
-ALTER TABLE `opening_hours`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Index pour la table `products`
 --
 ALTER TABLE `products`
   ADD PRIMARY KEY (`product_id`),
   ADD KEY `category_id` (`category_id`);
-
---
--- Index pour la table `questions`
---
-ALTER TABLE `questions`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `reservations`
@@ -299,12 +217,6 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT pour la table `answers`
---
-ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
 -- AUTO_INCREMENT pour la table `categories`
 --
 ALTER TABLE `categories`
@@ -314,13 +226,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT pour la table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
-
---
--- AUTO_INCREMENT pour la table `company_info`
---
-ALTER TABLE `company_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `client_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT pour la table `gallerys`
@@ -335,26 +241,14 @@ ALTER TABLE `products`
   MODIFY `product_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
--- AUTO_INCREMENT pour la table `questions`
---
-ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
 -- AUTO_INCREMENT pour la table `reservations`
 --
 ALTER TABLE `reservations`
-  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `reservation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- Contraintes pour les tables déchargées
 --
-
---
--- Contraintes pour la table `answers`
---
-ALTER TABLE `answers`
-  ADD CONSTRAINT `answers_ibfk_1` FOREIGN KEY (`question_id`) REFERENCES `questions` (`id`);
 
 --
 -- Contraintes pour la table `products`
