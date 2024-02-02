@@ -43,7 +43,7 @@ const Footer = () => {
                         <img src={insta} alt='instagram' className='socials' />
                     </a>
                 </div>
-                <div className='col-12 col-md-5 p3 text-start '>
+                <div className='col-12 col-md-5 p-3 text-start '>
                     <HoursTab />
                 </div>
                 <div className='col-12 col-md-5 p-3 text-center'>
@@ -53,7 +53,7 @@ const Footer = () => {
                     <h5>{companyInfo[1]?.email}</h5>
                 </div>
             </div>
-            <p className='text-center m-0'>
+            <p className='text-center m-0 p-3'>
                 Le Quai Antique - Par Enzo Capitanio - Tout droits réservés
             </p>
         </footer>
