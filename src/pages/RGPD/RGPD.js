@@ -1,6 +1,7 @@
 import "./RGPD.css"
 import React from 'react';
 import { motion } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const RGPD = () => {
     return (
@@ -11,37 +12,23 @@ const RGPD = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
         >
-            <h1 className="text-center pb-5">Mentions légales et politique de confidentialité</h1>
+            <h1 className="text-center pb-5">Politique de confidentialité</h1>
+            <p>
+                La société Le Quai Antique, soucieuse des droits des individus, notamment au regard des traitements automatisés et dans une volonté de transparence avec ses clients, a mis en place une politique reprenant l’ensemble de ces traitements, des finalités poursuivies par ces derniers ainsi que des moyens d’actions à la disposition des individus afin qu’ils puissent au mieux exercer leurs droits.
+                Pour toute information complémentaire sur la protection des données personnelles, nous vous invitons à consulter le site : https://www.cnil.fr/
+            </p>
+            <p>
+                La poursuite de la navigation sur ce site vaut acceptation sans réserve des dispositions et conditions d'utilisation qui suivent.
+                La version actuellement en ligne de ces conditions d'utilisation est la seule opposable pendant toute la durée d'utilisation du site et jusqu'à ce qu'une nouvelle version la remplace.
+            </p>
             <span className="pb-5">
-                <p>
-                    La société Le Quai Antique, soucieuse des droits des individus, notamment au regard des traitements automatisés et dans une volonté de transparence avec ses clients, a mis en place une politique reprenant l’ensemble de ces traitements, des finalités poursuivies par ces derniers ainsi que des moyens d’actions à la disposition des individus afin qu’ils puissent au mieux exercer leurs droits.
-                    Pour toute information complémentaire sur la protection des données personnelles, nous vous invitons à consulter le site : https://www.cnil.fr/
-
-                    La poursuite de la navigation sur ce site vaut acceptation sans réserve des dispositions et conditions d'utilisation qui suivent.
-                    La version actuellement en ligne de ces conditions d'utilisation est la seule opposable pendant toute la durée d'utilisation du site et jusqu'à ce qu'une nouvelle version la remplace.
-                </p>
-
                 <h3 className="pt-5">Article 1 - Mentions légales</h3>
-                <p>
-                    1.1 Site (ci-après « le site ») :
 
-                    Le Quai Antique
-
-                    1.2 Éditeur (ci-après « l'éditeur ») :
-
-                    Le Quai Antique SARL au capital de 0 €
-                    dont le siège social est situé :  00 Rue fictive 75000 Paris
-                    représentée par Prenom Nom, en sa qualité de PDG
-                    immatriculée au RCS de xxx xxx xxx xxx
-                    n° de téléphone : 00 00 00 00 00
-                    adresse mail : Lequaiantique@exemple.com
-                    directeur de la publication : Prenom Nom
-
-                    1.3 Hébergeur (ci-après « l'hébergeur ») :
-
-                    Le Quai Antique est hébergé par Hebrgeur, dont le siège social est situé 00 Rue fictive 75000 Paris.
-                </p>
-
+                <NavLink to='/Legal' className={"nav-link fw-bold d-inline d-flex justify-content-center "}>
+                    <button className="btn sub-btn btn-lg col-5">
+                        Aller à la page des mentions légales
+                    </button>
+                </NavLink>
                 <h3 className="pt-5">Article 2 - Accès au site</h3>
                 <p>
                     L'accès au site et son utilisation sont réservés à un usage strictement personnel. Vous vous engagez à ne pas utiliser ce site et les informations ou données qui y figurent à des fins commerciales, politiques, publicitaires et pour toute forme de sollicitation commerciale et notamment l'envoi de courriers électroniques non sollicités.
@@ -183,7 +170,8 @@ const RGPD = () => {
 
                 </p>
             </span>
-        </motion.main>
+
+        </motion.main >
     );
 };
 

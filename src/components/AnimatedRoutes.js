@@ -5,6 +5,7 @@ import Menu from '../pages/Menu/Menu.js';
 import NotFound from '../pages/404/NotFound';
 import Contact from "../pages/Contact/Contact";
 import RGPD from '../pages/RGPD/RGPD';
+import Legal from '../pages/Legal/Legal.js';
 import Login from '../pages/Users/Login.js';
 import ForgotPW from '../pages/Users/ForgotPW.js';
 import Account from '../pages/Users/Account.js';
@@ -33,6 +34,7 @@ function AnimatedRoutes() {
                     <Route path='/menu' element={<Menu />} />
                     <Route path='/Contact' element={<Contact />} />
                     <Route path='/RGPD' element={<RGPD />} />
+                    <Route path='/Legal' element={<Legal />} />
                     {/* <Route path='/test' element={<Test />} /> */}
 
                     <Route

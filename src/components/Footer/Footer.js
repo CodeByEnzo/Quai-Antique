@@ -40,6 +40,11 @@ const Footer = () => {
                         Politique de confidentialité
                     </NavLink>
                 </div>
+                <div className='col-6 col-md-3 p-3'>
+                    <NavLink to='/Legal' className={(nav) => (nav.isActive ? "nav-link fw-bold d-inline" : "nav-link fw-bold d-inline")}>
+                        Mentions légales
+                    </NavLink>
+                </div>
                 <div className='col-12 col-md-6 p-3 text-start '>
                     <HoursTab />
                 </div>
