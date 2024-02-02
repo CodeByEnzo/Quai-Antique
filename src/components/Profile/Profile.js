@@ -21,6 +21,15 @@ const Profile = () => {
         reservations: [],
     });
 
+    const redirectToLogin = () => {
+        navigate('/login');
+        showErrorMessage('Votre session a expiré, veuillez vous reconnecter.');
+    };
+
+    const showErrorMessage = (message) => {
+        console.error(message);
+    };
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -29,7 +38,6 @@ const Profile = () => {
                     redirectToLogin();
                     return;
                 }
-
                 const response = await fetch(`${hostname}front/authenticate`, {
                     method: 'POST',
                     headers: {
@@ -37,13 +45,10 @@ const Profile = () => {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Une erreure s\'est produite. Veuillez réessayer.');
                 }
-
                 const data = await response.json();
-
                 if (data && data.user) {
                     setUserData(data);
                     localStorage.setItem('client_id', data.user.id);
@@ -59,17 +64,6 @@ const Profile = () => {
         fetchData();
     }, []);
 
-    const redirectToLogin = () => {
-        navigate('/login');
-        showErrorMessage('Votre session a expiré, veuillez vous reconnecter.');
-    };
-
-    const showErrorMessage = (message) => {
-        console.error(message);
-    };
-
-
-
     const initialUserValues = {
         username: userData ? userData.user.username : "",
         email: userData ? userData.user.email : "",
@@ -77,7 +71,6 @@ const Profile = () => {
         password: userData ? userData.user.password : "",
         created_at: userData ? userData.user.created_at : "",
     };
-
 
     //Get the id of the reservation that will be update
     const handleUpdateClick = () => {

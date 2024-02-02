@@ -8,19 +8,29 @@ import { NavLink } from 'react-router-dom';
 class Home extends Component {
     //Display pictures with their descriptions
     state = {
-        gallerys: []
-    }
+        gallerys: [],
+        bannerData: {},
+    };
 
-    //Get the pictures on the back end
     componentDidMount() {
+        // Fetch for the gallery
         fetch(`${hostname}/front/gallerys`)
             .then(response => response.json())
-            .then(data => this.setState({ gallerys: data }));
+            .then(data => this.setState({ gallerys: data }))
+            .catch(error => console.error('Erreur lors de la récupération des données de la galerie:', error));
+
+        // Fetch for the banner
+        fetch(`${hostname}/front/banner`)
+            .then(response => response.json())
+            .then(data => this.setState({ bannerData: data }))
+            .catch(error => console.error('Erreur lors de la récupération des données de la bannière:', error));
+        console.log(this.state.bannerData)
     }
+
 
     render() {
         const isLoggedIn = !!localStorage.getItem('email');
-
+        const { bannerData } = this.state;
         return (
             <motion.main
                 id='Home'
@@ -29,6 +39,15 @@ class Home extends Component {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 1, ease: "easeOut" }}
             >
+                {/* <div className='bg-dark container-fluid d-flex flex-column justify-content-center align-items-center p-5 mt-5'>
+
+                    <div>
+                        <h1>{bannerData.Name}</h1>
+                        <p>{bannerData.AltText}</p>
+                        <p>{bannerData.Image}</p>
+                        <img src={`${bannerData.Image}`} alt={bannerData.AltText} />
+                    </div>
+                </div> */}
                 <motion.div
                     className='banner'
                     initial={{ x: "100%" }}
@@ -36,7 +55,7 @@ class Home extends Component {
                     exit={{ x: "-100%" }}
                     transition={{ duration: 1, ease: "easeOut" }}
                 >
-                    <div className='img-banner' alt="Bannière de la page d'accueil avec un tartare de saumon joliement présenté"></div>
+                    <img className='img-banner' src={`${bannerData.Image}`} alt={bannerData.AltText} />
                     <div className='text-banner'>
                         <h1 className='title-banner'>Le Quai Antique</h1>
                         <p className='under-text-banner'>Spécialités savoyardes </p>

@@ -34,7 +34,7 @@ const Login = () => {
             }, 300000);
             return;
         }
-        // if user has not reached max login attempts, try to log in
+        // if user has not reached max login attempts, try to login
         try {
             const response = await fetch(`${hostname}front/userLogin`, {
                 method: "POST",
